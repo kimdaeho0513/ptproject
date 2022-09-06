@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="mypageMapper">
+	<select id="selectData" resultType="MypageDto">
+		SELECT * FROM TOTAL 
+		WHERE ID = 'khadmin1'
+	</select>
+	<update id="updateData" parameterType="MypageDto">
+	UPDATE TOTAL
+		   SET PASSWORD = #{password}
+		     , NAME = #{name}
+		     , BRITH = #{birth}
+		     , PHONENUMBER = #{phonenumber}
+		     , EMAIL = #{email}
+		     , GENDER = #{gender}
+		 WHERE ID = #{id}
+	</update>
+	<delete id="deleteData">
+		DELETE FROM TOTAL
+		 WHERE ID = #{id}
+	</delete>
+</mapper>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL"/>
+	</settings>
+	<typeAliases>
+		
+		<typeAlias type="com.project.pt.mypage.model.MypageDTO" alias="mypageDto" />
+	<!-- 	<typeAlias type="com.myhome.web.emp.model.EmpDTO" alias="empDto" />
+		<typeAlias type="com.myhome.web.board.model.BoardDTO" alias="boardDto" />
+		<typeAlias type="com.myhome.web.board.model.BoardStaticsDTO" alias="boardStaticsDto" /> -->
+		
+	</typeAliases>
+</configuration>
