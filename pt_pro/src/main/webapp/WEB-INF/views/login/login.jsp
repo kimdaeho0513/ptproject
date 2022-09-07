@@ -24,7 +24,7 @@
 		<a href="./signup">회원가입</a>
 	</c:if>
 	<c:if test="${not empty sessionScope.loginData}">
-		${sessionScope.loginData.id} 님 환영합니다.
+		${sessionScope.loginData.userid} 님 환영합니다.
 		<br><a href="./logout">로그아웃</a>
 	</c:if>
 </body>

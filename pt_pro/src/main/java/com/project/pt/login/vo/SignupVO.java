@@ -2,7 +2,7 @@ package com.project.pt.login.vo;
 
 public class SignupVO {
 	private String name;
-	private String id;
+	private String userid;
 	private String pw;
 	private String email;
 	private String phone;
@@ -14,11 +14,11 @@ public class SignupVO {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getId() {
-		return id;
+	public String getUserid() {
+		return userid;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setId(String userid) {
+		this.userid = userid;
 	}
 	public String getPw() {
 		return pw;
@@ -52,7 +52,7 @@ public class SignupVO {
 	}
 	@Override
 	public String toString() {
-		return "SignupVO [name=" + name + ", id=" + id + ", pw=" + pw + ", email=" + email + ", phone=" + phone
+		return "SignupVO [name=" + name + ", userid=" + userid + ", pw=" + pw + ", email=" + email + ", phone=" + phone
 				+ ", birth=" + birth + ", gender=" + gender + "]";
 	}
 }

@@ -11,7 +11,7 @@
 </head>
 <body>
 	<c:if test="${not empty sessionScope.findId}">
-		${sessionScope.findId.name}님의 아이디는 ${sessionScope.findId.id} 입니다.
+		${sessionScope.findId.name}님의 아이디는 ${sessionScope.findId.userid} 입니다.
 		<br><a href="./login">로그인</a>
 	</c:if>
 </body>

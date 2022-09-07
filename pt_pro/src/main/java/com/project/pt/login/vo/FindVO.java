@@ -1,10 +1,10 @@
 package com.project.pt.login.vo;
 
 public class FindVO {
-	String name;
-	String phone;
-	String email;
-	String id;
+	private String name;
+	private String phone;
+	private String email;
+	private String userid;
 	public String getName() {
 		return name;
 	}
@@ -23,14 +23,14 @@ public class FindVO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getId() {
-		return id;
+	public String getUserid() {
+		return userid;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setUserid(String userid) {
+		this.userid = userid;
 	}
 	@Override
 	public String toString() {
-		return "FindVO [name=" + name + ", phone=" + phone + ", email=" + email + ", id=" + id + "]";
+		return "FindVO [name=" + name + ", phone=" + phone + ", email=" + email + ", userid=" + userid + "]";
 	}
 }

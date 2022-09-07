@@ -5,40 +5,40 @@
 <mapper namespace="loginMapper">
 	<select id="selectLogin" parameterType="memDto"
 		resultType="memDto">
-		SELECT num,id,password as pw
-		      ,name,birth,phonenumber as phone
-		      ,email,gender,role,hidden,deleted
-		FROM total
-		WHERE id = #{id}
+		SELECT USERSCODE,USERID,password as pw
+		      ,name,birth,phone as phone
+		      ,email,gender,roles,hidden,deleted
+		FROM USERS
+		WHERE USERID = #{userid}
 		AND password = #{pw}
 		AND deleted = 'N'
 	</select>
 	<select id="selectId" parameterType="memDto" resultType="memDto">
 		SELECT
-		id, name, phonenumber as phone
-		FROM total
+		USERID, name, phone as phone
+		FROM USERS
 		WHERE name = #{name}
-		AND phonenumber = #{phone}
+		AND phone = #{phone}
 		AND deleted = 'N'
 	</select>
 	<select id="selectPw" parameterType="memDto" resultType="memDto">
 		SELECT
-		name,id,email,password as pw
-		FROM total
+		name,USERID,email,password as pw
+		FROM USERS
 		WHERE name = #{name}
 		AND email = #{email}
-		AND id = #{id}
+		AND USERID = #{userid}
 		AND deleted = 'N'
 	</select>
 	<update id="updatePw" parameterType="memDto">
-		 UPDATE total
+		 UPDATE USERS
     		SET password = #{pw}
-  		  WHERE id = #{id}
+  		  WHERE userid = #{userid}
 	</update>
 	<insert id="insertMem" parameterType="memDto">
-		INSERT INTO TOTAL
-		(ID,PASSWORD,NAME,BIRTH,PHONENUMBER,EMAIL,GENDER)
+		INSERT INTO USERS
+		(USERID,PASSWORD,NAME,BIRTH,phone,EMAIL,GENDER)
 		VALUES
-		(#{id},#{pw},#{name},#{birth},#{phone},#{email},#{gender})
+		(#{userid},#{pw},#{name},#{birth},#{phone},#{email},#{gender})
 	</insert>
 </mapper>

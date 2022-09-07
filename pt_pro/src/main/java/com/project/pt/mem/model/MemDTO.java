@@ -3,28 +3,28 @@ package com.project.pt.mem.model;
 import java.util.Date;
 
 public class MemDTO {
-	int num;
-	String id;
-	String pw;
-	String name;
-	Date birth;
-	String phone;
-	String email;
-	String gender;
-	String role;
-	String hidden;
-	String deleted;
-	public int getNum() {
-		return num;
+	private int userscode;
+	private String userid;
+	private String pw;
+	private String name;
+	private Date birth;
+	private String phone;
+	private String email;
+	private String gender;
+	private String roles;
+	private String hidden;
+	private String deleted;
+	public int getUserscode() {
+		return userscode;
 	}
-	public void setNum(int num) {
-		this.num = num;
+	public void setUserscode(int userscode) {
+		this.userscode = userscode;
 	}
-	public String getId() {
-		return id;
+	public String getUserid() {
+		return userid;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setUserid(String userid) {
+		this.userid = userid;
 	}
 	public String getPw() {
 		return pw;
@@ -62,11 +62,11 @@ public class MemDTO {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	public String getRole() {
-		return role;
+	public String getRoles() {
+		return roles;
 	}
-	public void setRole(String role) {
-		this.role = role;
+	public void setRoles(String role) {
+		this.roles = role;
 	}
 	public String getHidden() {
 		return hidden;
@@ -82,8 +82,8 @@ public class MemDTO {
 	}
 	@Override
 	public String toString() {
-		return "MemDTO [num=" + num + ", id=" + id + ", pw=" + pw + ", name=" + name + ", birth=" + birth + ", phone="
-				+ phone + ", email=" + email + ", gender=" + gender + ", role=" + role + ", hidden=" + hidden
+		return "MemDTO [userscode=" + userscode + ", userid=" + userid + ", pw=" + pw + ", name=" + name + ", birth=" + birth + ", phone="
+				+ phone + ", email=" + email + ", gender=" + gender + ", role=" + roles + ", hidden=" + hidden
 				+ ", deleted=" + deleted + "]";
 	}
 }

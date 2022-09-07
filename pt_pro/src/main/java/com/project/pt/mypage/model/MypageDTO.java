@@ -4,30 +4,29 @@ import java.sql.Date;
 
 public class MypageDTO {
 
-	private int num;
-	private String id;
+	private int userscode;
+	private String userid;
 	private String password;
 	private String name;
 	private Date birth;
-	private String phonenumber;
+	private String phone;
 	private String email;
 	private String gender;
-	private String role;
+	private String roles;
 	private String hidden;
 	private String deleted;
 	private Date datelog;
-	
-	public int getNum() {
-		return num;
+	public int getUserscode() {
+		return userscode;
 	}
-	public void setNum(int num) {
-		this.num = num;
+	public void setUserscode(int userscode) {
+		this.userscode = userscode;
 	}
-	public String getId() {
-		return id;
+	public String getUserid() {
+		return userid;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setUserid(String userid) {
+		this.userid = userid;
 	}
 	public String getPassword() {
 		return password;
@@ -47,11 +46,11 @@ public class MypageDTO {
 	public void setBirth(Date birth) {
 		this.birth = birth;
 	}
-	public String getPhonenumber() {
-		return phonenumber;
+	public String getPhone() {
+		return phone;
 	}
-	public void setPhonenumber(String phonenumber) {
-		this.phonenumber = phonenumber;
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 	public String getEmail() {
 		return email;
@@ -65,11 +64,11 @@ public class MypageDTO {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	public String getRole() {
-		return role;
+	public String getRoles() {
+		return roles;
 	}
-	public void setRole(String role) {
-		this.role = role;
+	public void setRoles(String roles) {
+		this.roles = roles;
 	}
 	public String getHidden() {
 		return hidden;
@@ -89,4 +88,11 @@ public class MypageDTO {
 	public void setDatelog(Date datelog) {
 		this.datelog = datelog;
 	}
+	@Override
+	public String toString() {
+		return "MypageDTO [userscode=" + userscode + ", userid=" + userid + ", password=" + password + ", name=" + name
+				+ ", birth=" + birth + ", phone=" + phone + ", email=" + email + ", gender=" + gender + ", roles="
+				+ roles + ", hidden=" + hidden + ", deleted=" + deleted + ", datelog=" + datelog + "]";
+	}
+	
 }

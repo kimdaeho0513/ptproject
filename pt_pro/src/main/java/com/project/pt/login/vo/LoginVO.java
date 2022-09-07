@@ -1,14 +1,14 @@
 package com.project.pt.login.vo;
 
 public class LoginVO {
-	String id;
-	String pw;
-	String role;
-	public String getId() {
-		return id;
+	private String userid;
+	private String pw;
+	private String roles;
+	public String getUserid() {
+		return userid;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setId(String userid) {
+		this.userid = userid;
 	}
 	public String getPw() {
 		return pw;
@@ -16,14 +16,14 @@ public class LoginVO {
 	public void setPw(String pw) {
 		this.pw = pw;
 	}
-	public String getRole() {
-		return role;
+	public String getRoles() {
+		return roles;
 	}
-	public void setRole(String role) {
-		this.role = role;
+	public void setRole(String roles) {
+		this.roles = roles;
 	}
 	@Override
 	public String toString() {
-		return "LoginVO [id=" + id + ", pw=" + pw + ", role=" + role + "]";
+		return "LoginVO [userid=" + userid + ", pw=" + pw + ", roles=" + roles + "]";
 	}
 }

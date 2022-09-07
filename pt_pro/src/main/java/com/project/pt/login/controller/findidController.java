@@ -13,8 +13,8 @@ import com.project.pt.login.service.LoginService;
 import com.project.pt.login.vo.FindVO;
 
 @Controller
-public class FindidController {
-	private static final Logger logger = LoggerFactory.getLogger(FindidController.class);
+public class findidController {
+	private static final Logger logger = LoggerFactory.getLogger(findidController.class);
 
 	@Autowired
 	private LoginService service;

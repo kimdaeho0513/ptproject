@@ -8,55 +8,55 @@
 		SELECT * FROM TOTAL WHERE num = #{num}
 	</select>
 	<select id="totalSelectAll" resultType="managementDto">
-		SELECT ID AS mngId
+		SELECT USERID AS mngId
 		     , NAME AS mngName
-		     , PHONENUMBER AS mngNumber 
+		     , PHONE AS mngNumber 
 		  FROM TOTAL
 	</select>-->
 	<select id="totalSelectAll" resultType="managementDto">
-		SELECT NUM AS mngNum 
-			 , ID AS mngId
+		SELECT USERSCODE AS mngNum 
+			 , USERID AS mngId
 			 , PASSWORD AS mngPass
 			 , NAME AS mngName
 			 , BIRTH AS mngBirth
-			 , PHONENUMBER AS mngPhon
+			 , PHONE AS mngPhon
 			 , EMAIL AS mngEmail
 			 , GENDER AS mngGender
-			 , ROLE AS mngRole
-		FROM TOTAL 
+			 , ROLES AS mngRole
+		FROM USERS 
 	</select>
 	<select id="selectData" resultType="managementDto">
-		SELECT NUM AS mngNum 
-			 , ID AS mngId
+		SELECT USERSCODE AS mngNum 
+			 , USERID AS mngId
 			 , NAME AS mngName
-			 , PHONENUMBER AS mngPhon
-			 , ROLE AS mngRole
-		FROM TOTAL 
+			 , PHONE AS mngPhon
+			 , ROLES AS mngRole
+		FROM USERS 
 		WHERE NUM = #{mngNum}
 	</select>
 	
 	<select id="detailDatas" resultType="managementDto">
-		SELECT NUM AS mngNum 
-			 , ID AS mngId
+		SELECT USERSCODE AS mngNum 
+			 , USERID AS mngId
 			 , PASSWORD AS mngPass
 			 , NAME AS mngName
 			 , BIRTH AS mngBirth
-			 , PHONENUMBER AS mngPhon
+			 , PHONE AS mngPhon
 			 , EMAIL AS mngEmail
 			 , GENDER AS mngGender
-			 , ROLE AS mngRole
-		FROM TOTAL 
+			 , ROLES AS mngRole
+		FROM USERS 
 		WHERE NUM = #{mngNum}
 	</select>
 	
 	<select id="selectMember" resultType="managementDto">
-		SELECT ROLE AS mngRole
-		FROM TOTAL 
+		SELECT ROLES AS mngRole
+		FROM USERS 
 		WHERE IN (M)
 	</select>
 	<select id="selectTrainer" resultType="managementDto">
-		SELECT ROLE AS mngRole
-		FROM TOTAL 
+		SELECT ROLES AS mngRole
+		FROM USERS 
 		WHERE IN (T) = ${trainer}
 	</select>
 </mapper>

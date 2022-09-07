@@ -4,21 +4,21 @@
   
 <mapper namespace="mypageMapper">
 	<select id="selectData" resultType="MypageDto">
-		SELECT * FROM TOTAL 
+		SELECT * FROM USERS 
 		WHERE ID = 'khadmin1'
 	</select>
 	<update id="updateData" parameterType="MypageDto">
-	UPDATE TOTAL
+	UPDATE USERS
 		   SET PASSWORD = #{password}
 		     , NAME = #{name}
 		     , BRITH = #{birth}
-		     , PHONENUMBER = #{phonenumber}
+		     , phone = #{phone}
 		     , EMAIL = #{email}
 		     , GENDER = #{gender}
-		 WHERE ID = #{id}
+		 WHERE USERID = #{userid}
 	</update>
 	<delete id="deleteData">
-		DELETE FROM TOTAL
-		 WHERE ID = #{id}
+		DELETE FROM USERS
+		 WHERE USERID = #{userid}
 	</delete>
 </mapper>

@@ -32,7 +32,7 @@ public class LoginController {
 	
 	@RequestMapping(value="/login",method=RequestMethod.POST)
 	public String login(LoginVO loginVo,HttpSession session) {
-		logger.info("login({}, {}, {})",loginVo.getId(),loginVo.getPw(),loginVo.getRole());
+		logger.info("login({}, {}, {})",loginVo.getUserid(),loginVo.getPw(),loginVo.getRoles());
 		
 		boolean result = service.getLogin(session,loginVo);
 		

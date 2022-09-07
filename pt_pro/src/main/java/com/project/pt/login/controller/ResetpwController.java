@@ -29,7 +29,7 @@ public class ResetpwController {
 	
 	@RequestMapping(value="/resetpw",method=RequestMethod.POST)
 	public String resetpw(LoginVO lv, HttpSession session) {
-		logger.info("resetpw({},{})",lv.getId(),lv.getPw());
+		logger.info("resetpw({},{})",lv.getUserid(),lv.getPw());
 		
 		boolean result = service.modifyPw(lv);
 		

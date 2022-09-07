@@ -29,9 +29,9 @@ public class LoginService {
 		logger.info("getLogin({},{})",session,loginVo);
 		
 		MemDTO data = new MemDTO();
-		data.setId(loginVo.getId());
+		data.setUserid(loginVo.getUserid());
 		data.setPw(loginVo.getPw());
-		data.setRole(loginVo.getRole());
+		data.setRoles(loginVo.getRoles());
 		data = dao.selectLogin(data);
 		
 		if(data == null) {
@@ -68,7 +68,7 @@ public class LoginService {
 		
 		MemDTO data = new MemDTO();
 		data.setName(fv.getName());
-		data.setId(fv.getId());
+		data.setUserid(fv.getUserid());
 		data.setEmail(fv.getEmail());
 		data = dao.selectPw(data);
 		
@@ -85,7 +85,7 @@ public class LoginService {
 		logger.info("modifyPw({})",lv);
 		
 		MemDTO data = new MemDTO();
-		data.setId(lv.getId());
+		data.setUserid(lv.getUserid());
 		data.setPw(lv.getPw());
 		
 		boolean result = dao.updatePw(data);
@@ -105,7 +105,7 @@ public class LoginService {
 		
 		MemDTO data = new MemDTO();
 		data.setName(sv.getName());
-		data.setId(sv.getId());
+		data.setUserid(sv.getUserid());
 		data.setPw(sv.getPw());
 		data.setEmail(sv.getEmail());
 		data.setPhone(sv.getPhone());

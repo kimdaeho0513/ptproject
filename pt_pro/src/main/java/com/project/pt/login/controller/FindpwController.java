@@ -27,7 +27,7 @@ public class FindpwController {
 	
 	@RequestMapping(value="/findpw",method=RequestMethod.POST)
 	public String login(FindVO fv, HttpSession session) {
-		logger.info("findpw({},{},{})",fv.getName(),fv.getId(),fv.getEmail());
+		logger.info("findpw({},{},{})",fv.getName(),fv.getUserid(),fv.getEmail());
 		
 		boolean result = service.getPw(session,fv);
 		

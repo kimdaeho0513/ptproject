@@ -11,11 +11,11 @@
 </head>
 <body>
 <form action="/update">
-	<span>아이디 :</span> <input type="text" id="id" value="${data.id}" readonly><br>
+	<span>아이디 :</span> <input type="text" id="id" value="${data.userid}" readonly><br>
 	<span>비밀번호 : </span> <input type="text" id="password" value="${data.password}"><br>
 	<span>이름 : </span> <input type="text" id="name" value="${data.name}"><br>
 	<span>생년월일 : </span><input type="text" id="name" value="${data.birth}"><br>
-	<span>핸드폰번호 : </span><input type="text" id="name" value="${data.phonenumber}"><br>
+	<span>핸드폰번호 : </span><input type="text" id="name" value="${data.phone}"><br>
 	<span>이메일 : </span><input type="text" id="name" value="${data.email}"><br>
 	<span>성별 : </span><input type="text" id="name" value="${data.gender}"><br>
 	<button type="submit">수정</button><br>

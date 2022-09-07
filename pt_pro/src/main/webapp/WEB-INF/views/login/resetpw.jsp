@@ -16,7 +16,7 @@
 		새 비밀번호: <input type="text" name="pw" /><br>
 		비밀번호 확인: <input type="text" name="pw_chk" /><br>
 		<button type="submit">확인</button>
-		<input type="hidden" name="id" value="${sessionScope.findPw.id}"/>
+		<input type="hidden" name="id" value="${sessionScope.findPw.userid}"/>
 	</form>
 </body>
 </html>

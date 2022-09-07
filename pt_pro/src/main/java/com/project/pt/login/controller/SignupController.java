@@ -28,7 +28,7 @@ public class SignupController {
 	
 	@RequestMapping(value="/signup",method=RequestMethod.POST)
 	public String Signup(SignupVO sv, HttpSession session) {
-		logger.info("Signup({},{},{},{},{},{},{})",sv.getName(),sv.getId(),sv.getPw(),
+		logger.info("Signup({},{},{},{},{},{},{})",sv.getName(),sv.getUserid(),sv.getPw(),
 				sv.getEmail(),sv.getPhone(),sv.getBirth(),sv.getGender());
 		
 		boolean result = service.addMem(session,sv);
