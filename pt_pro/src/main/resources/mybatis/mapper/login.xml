@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="loginMapper">
+	<select id="selectLogin" parameterType="memDto"
+		resultType="memDto">
+		SELECT num,id,password as pw
+		      ,name,birth,phonenumber as phone
+		      ,email,gender,role,hidden,deleted
+		FROM total
+		WHERE id = #{id}
+		AND password = #{pw}
+		AND deleted = 'N'
+	</select>
+	<select id="selectId" parameterType="memDto" resultType="memDto">
+		SELECT
+		id, name, phonenumber as phone
+		FROM total
+		WHERE name = #{name}
+		AND phonenumber = #{phone}
+		AND deleted = 'N'
+	</select>
+	<select id="selectPw" parameterType="memDto" resultType="memDto">
+		SELECT
+		name,id,email,password as pw
+		FROM total
+		WHERE name = #{name}
+		AND email = #{email}
+		AND id = #{id}
+		AND deleted = 'N'
+	</select>
+	<update id="updatePw" parameterType="memDto">
+		 UPDATE total
+    		SET password = #{pw}
+  		  WHERE id = #{id}
+	</update>
+	<insert id="insertMem" parameterType="memDto">
+		INSERT INTO TOTAL
+		(ID,PASSWORD,NAME,BIRTH,PHONENUMBER,EMAIL,GENDER)
+		VALUES
+		(#{id},#{pw},#{name},#{birth},#{phone},#{email},#{gender})
+	</insert>
+</mapper>
