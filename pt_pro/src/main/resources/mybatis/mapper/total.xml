@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="totalMapper">
+	<!-- 
+	<select id="totalSelectAll" resultType="managementDto">
+		SELECT * FROM TOTAL WHERE num = #{num}
+	</select>
+	<select id="totalSelectAll" resultType="managementDto">
+		SELECT ID AS mngId
+		     , NAME AS mngName
+		     , PHONENUMBER AS mngNumber 
+		  FROM TOTAL
+	</select>-->
+	<select id="totalSelectAll" resultType="managementDto">
+		SELECT NUM AS mngNum 
+			 , ID AS mngId
+			 , PASSWORD AS mngPass
+			 , NAME AS mngName
+			 , BIRTH AS mngBirth
+			 , PHONENUMBER AS mngPhon
+			 , EMAIL AS mngEmail
+			 , GENDER AS mngGender
+			 , ROLE AS mngRole
+		FROM TOTAL 
+	</select>
+	<select id="selectData" resultType="managementDto">
+		SELECT NUM AS mngNum 
+			 , ID AS mngId
+			 , NAME AS mngName
+			 , PHONENUMBER AS mngPhon
+			 , ROLE AS mngRole
+		FROM TOTAL 
+		WHERE NUM = #{mngNum}
+	</select>
+	
+	<select id="detailDatas" resultType="managementDto">
+		SELECT NUM AS mngNum 
+			 , ID AS mngId
+			 , PASSWORD AS mngPass
+			 , NAME AS mngName
+			 , BIRTH AS mngBirth
+			 , PHONENUMBER AS mngPhon
+			 , EMAIL AS mngEmail
+			 , GENDER AS mngGender
+			 , ROLE AS mngRole
+		FROM TOTAL 
+		WHERE NUM = #{mngNum}
+	</select>
+	
+	<select id="selectMember" resultType="managementDto">
+		SELECT ROLE AS mngRole
+		FROM TOTAL 
+		WHERE IN (M)
+	</select>
+	<select id="selectTrainer" resultType="managementDto">
+		SELECT ROLE AS mngRole
+		FROM TOTAL 
+		WHERE IN (T) = ${trainer}
+	</select>
+</mapper>
