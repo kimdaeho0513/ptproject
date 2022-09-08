@@ -19,43 +19,25 @@ import com.project.pt.management.service.ManagementService;
 
 @Controller
 public class HomeController {
-	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
-<<<<<<< HEAD
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-		/*
-		 * logger.info("Welcome home! The client locale is {}.", locale);
-		 * 
-		 * Date date = new Date(); DateFormat dateFormat =
-		 * DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		 * 
-		 * String formattedDate = dateFormat.format(date);
-		 * 
-		 * model.addAttribute("serverTime", formattedDate );
-		 */
-		
-		return "home";
-		
-		/*******/
-	}
-=======
+
 	@Autowired
 	private ManagementService managementService;
->>>>>>> refs/remotes/origin/지재용
-	
+	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+
 	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String home(Locale locale, Model model) {
+		
+		return "index";
+		}
+	
+	/*@RequestMapping(value = "/7", method = RequestMethod.GET)
 	public String home(Model model) {
 		logger.info("home");
 		
 		List<ManagementDTO> Datas = managementService.getAll();
 		model.addAttribute("Datas", Datas);
 		return "index";
-	}
+	}*/
 }
 	
 
