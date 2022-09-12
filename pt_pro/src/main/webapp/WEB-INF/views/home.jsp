@@ -18,6 +18,5 @@
 	<button type="button" onclick="location.href='/pt/management'">회원조회 테스트</button>
 <h1>회원 조회</h1>
 
-</tr>
 </body>
 </html>

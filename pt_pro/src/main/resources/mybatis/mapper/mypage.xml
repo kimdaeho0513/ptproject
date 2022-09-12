@@ -5,13 +5,13 @@
 <mapper namespace="mypageMapper">
 	<select id="selectData" resultType="MypageDto">
 		SELECT * FROM USERS 
-		WHERE ID = 'khadmin1'
+		WHERE USERID = 'khadmin1'
 	</select>
 	<update id="updateData" parameterType="MypageDto">
 	UPDATE USERS
 		   SET PASSWORD = #{password}
 		     , NAME = #{name}
-		     , BRITH = #{birth}
+		     , BIRTH = #{birth}
 		     , phone = #{phone}
 		     , EMAIL = #{email}
 		     , GENDER = #{gender}

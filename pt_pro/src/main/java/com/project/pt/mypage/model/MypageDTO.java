@@ -16,6 +16,7 @@ public class MypageDTO {
 	private String hidden;
 	private String deleted;
 	private Date datelog;
+	private Date deletedate;
 	public int getUserscode() {
 		return userscode;
 	}
@@ -88,11 +89,18 @@ public class MypageDTO {
 	public void setDatelog(Date datelog) {
 		this.datelog = datelog;
 	}
+	
+	public Date getDeletedate() {
+		return deletedate;
+	}
+	public void setDeletedate(Date deletedate) {
+		this.deletedate = deletedate;
+	}
 	@Override
 	public String toString() {
 		return "MypageDTO [userscode=" + userscode + ", userid=" + userid + ", password=" + password + ", name=" + name
 				+ ", birth=" + birth + ", phone=" + phone + ", email=" + email + ", gender=" + gender + ", roles="
-				+ roles + ", hidden=" + hidden + ", deleted=" + deleted + ", datelog=" + datelog + "]";
+				+ roles + ", hidden=" + hidden + ", deleted=" + deleted + ", datelog=" + datelog + ",deletedate=" + deletedate + "]";
 	}
 	
 }
