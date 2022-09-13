@@ -15,23 +15,24 @@
 </head>
 <body>
 	<h1>PT 종류</h1>
-	<ul>
-		<li><input type="checkbox" id="pt10" value="10">10회 5 만원</li>
-		<li><input type="checkbox" id="pt20" value="20">20회 9 만원</li>
-		<li><input type="checkbox" id="pt30" value="30">30회 13 만원</li>
-		<li><input type="checkbox" id="pt50" value="50">50회 20 만원</li>
-	</ul>
+	<ol>
+		<li><input type="radio" id="10" name="pt" value="50000">10회 5 만원</li>
+		<li><input type="radio" id="20" name="pt" value="90000">20회 9 만원</li>
+		<li><input type="radio" id="30" name="pt" value="130000">30회 13 만원</li>
+		<li><input type="radio" id="50" name="pt" value="200000">50회 20 만원</li>
+	</ol>
 	<button type="button" id="btn-kakaopay">카카오페이 결제</button>
 	<script>
 		$("#btn-kakaopay").click(function () {
 			var IMP = window.IMP;
-		IMP.init('imp12720430'); //가맹점식별코드
+			IMP.init('imp12720430'); //가맹점식별코드
+			var money = $('input[name="pt"]:checked').val();
 			IMP.request_pay({
 				pg: 'kakaopay',
 				pay_method: 'card',
 				merchant_uid: 'merchant_' + new Date().getTime(),
 				name: '주문명 : pt 회원권 결제',
-				amount: 5000,
+				amount: money,
 				buyer_name: '테스트',
 				buyer_postcode: '123-456',
 				}, function (rsp) {
