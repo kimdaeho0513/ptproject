@@ -15,14 +15,12 @@
 </head>
 <body>
 	<h1>PT 종류</h1>
-	<button type="button" id="pt10" value="10">10회 5 만원</button>
-	</br>
-	<button type="button" id="pt20"  value="20">20회 9 만원</button>
-	</br>
-	<button type="button" id="pt30"  value="30">30회 13 만원</button>
-	</br>
-	<button type="button" id="pt50"  value="50">50회 20 만원</button>
-	</br>
+	<ul>
+		<li><input type="checkbox" id="pt10" value="10">10회 5 만원</li>
+		<li><input type="checkbox" id="pt20" value="20">20회 9 만원</li>
+		<li><input type="checkbox" id="pt30" value="30">30회 13 만원</li>
+		<li><input type="checkbox" id="pt50" value="50">50회 20 만원</li>
+	</ul>
 	<button type="button" id="btn-kakaopay">카카오페이 결제</button>
 	<script>
 		$("#btn-kakaopay").click(function () {
