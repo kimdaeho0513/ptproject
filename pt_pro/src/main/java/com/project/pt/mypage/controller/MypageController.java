@@ -29,19 +29,18 @@ public class MypageController {
 	@RequestMapping(value="/mypage")
 	public String mypage(Model model, HttpSession session) {
 		
-		
-			
-		MypageDTO data = service.getData();
-		model.addAttribute("data", data);
-		
+		/*
+		 * 
+		 * MypageDTO data = service.getData(); model.addAttribute("data", data);
+		 */
 		return "mypage/mypage";
 	}
 	
 	@RequestMapping(value="/update",method=RequestMethod.GET)
 	public String update(MypageDTO MD, HttpSession session) {
-		logger.info("Update({},{},{},{},{},{})",MD.getPassword(),MD.getName(),
+		logger.info("Update({},{},{},{},{},{})",MD.getPw(),MD.getName(),
 				MD.getBirth(),MD.getPhone(),MD.getEmail(),MD.getGender());
-		
+		System.out.println(MD);
 		boolean result = service.update(session,MD);
 		
 		if(result) {
@@ -49,18 +48,18 @@ public class MypageController {
 		}else {
 			System.out.println("실패");
 		}
-		return "redirect:/mypage";
+		return "redirect:/";
 	}
-	  
-	/*
-	 * @RequestMapping(value="/delete") public String mypagedelete(Model model,
-	 * HttpSession session) {
-	 * 
-	 * 
-	 * 
-	 * MypageDTO data = service.delete(????); model.addAttribute("data", data);
-	 * 
-	 * return "mypage/mypage"; }
-	 */
-	 
+	@RequestMapping(value="/delete",method=RequestMethod.GET)
+	public String delete(MypageDTO MD, HttpSession session) {
+		System.out.println(MD);
+		boolean result = service.delete(session,MD);
+		
+		if(result) {
+			System.out.println("성공");
+		}else {
+			System.out.println("실패");
+		}
+		return "redirect:/";
+	}
 }

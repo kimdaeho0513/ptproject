@@ -36,7 +36,7 @@ public class MypageDAO {
 	}
 	public boolean deleteData(MypageDTO data) {
 		String mapperId = String.format(mapper, "deleteData");
-		int res = session.delete(mapperId, data);
+		int res = session.update(mapperId, data);
 		return res == 1 ? true : false;
 	}
 }

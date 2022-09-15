@@ -5,11 +5,11 @@
 <mapper namespace="mypageMapper">
 	<select id="selectData" resultType="MypageDto">
 		SELECT * FROM USERS 
-		WHERE USERID = 'khadmin1'
+		WHERE USERID = #{userid}
 	</select>
 	<update id="updateData" parameterType="MypageDto">
 	UPDATE USERS
-		   SET PASSWORD = #{password}
+		   SET PASSWORD = #{pw}
 		     , NAME = #{name}
 		     , BIRTH = #{birth}
 		     , phone = #{phone}
@@ -17,8 +17,10 @@
 		     , GENDER = #{gender}
 		 WHERE USERID = #{userid}
 	</update>
-	<delete id="deleteData">
-		DELETE FROM USERS
-		 WHERE USERID = #{userid}
-	</delete>
+	<update id="deleteData" parameterType="MypageDto">
+		UPDATE USERS SET
+			 DELETED = 'Y',
+			 DELETEDATE = SYSDATE 
+			 WHERE USERID = #{userid}
+	</update>
 </mapper>

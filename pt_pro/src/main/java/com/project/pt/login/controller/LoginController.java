@@ -14,6 +14,7 @@ import com.project.pt.login.vo.LoginVO;
 
 
 
+
 @Controller
 public class LoginController {
 	
@@ -37,7 +38,9 @@ public class LoginController {
 		boolean result = service.getLogin(session,loginVo);
 		
 		if(result) {
-			System.out.println("성공");
+			
+			System.out.println("성공"+session.getAttribute("loginData"));
+			
 		}else {
 			System.out.println("실패");
 		}

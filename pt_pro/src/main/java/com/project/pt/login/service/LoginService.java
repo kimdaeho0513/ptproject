@@ -38,6 +38,7 @@ public class LoginService {
 			return false;
 		} else {
 			session.setAttribute("loginData", data);
+			System.out.println(session.getAttribute("loginData"));
 			return true;
 		}
 		

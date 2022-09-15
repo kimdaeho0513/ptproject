@@ -14,7 +14,7 @@
 		<h1>login</h1>
 		<form action="./login" method="post">
 			아이디 <input type="text" name="id" /><br>
-			비밀번호 <input type="text" name="pw" /><br>
+			비밀번호 <input type="password" name="pw" /><br>
 			<input type="radio" name="role" value="T"> trainer 
 			<input type="radio" name="role" value="M"> member<br>
 			<button type="submit">login</button>

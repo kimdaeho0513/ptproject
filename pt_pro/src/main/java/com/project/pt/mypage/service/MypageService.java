@@ -22,33 +22,41 @@ public class MypageService {
 	private static final Logger logger = LoggerFactory.getLogger(MypageService.class);
 	@Autowired
 	private MypageDAO dao;
+
 	public List<MypageDTO> getAll() {
 		List<MypageDTO> datas = dao.selectAll();
 		return datas;
 	}
+
 	public MypageDTO getData() {
 		MypageDTO data = dao.selectData();
 		return data;
 	}
+
 	public boolean update(HttpSession session, MypageDTO MD) {
-		logger.info("update({},{})",session,MD);
+		logger.info("update({},{})", session, MD);
 		
-		
-		
-		MypageDTO data = new MypageDTO();
-		data.setPassword(MD.getPassword());
-		data.setName(MD.getName());
-		data.setEmail(MD.getEmail());
-		data.setPhone(MD.getPhone());
-		data.setBirth(MD.getBirth());
-		data.setGender(MD.getGender());
-		
-		boolean result=dao.updateData(data);
-		if(result) {
+		boolean result = dao.updateData(MD);
+		if (result) {
 			System.out.println("회원정보 수정완료");
+			session.setAttribute("loginData", MD);
 			return true;
-		}else {
+		} else {
 			System.out.println("회원정보 수정실패");
+			return false;
+		}
+	}
+	public boolean delete(HttpSession session, MypageDTO MD) {
+		
+		
+		boolean result = dao.deleteData(MD);
+		logger.info("delete({},{})", session, MD);
+		if (result) {
+			System.out.println("회원탈퇴 완료");
+			session.removeAttribute("loginData");
+			return true;
+		} else {
+			System.out.println("회원탈퇴 실패");
 			return false;
 		}
 	}
