@@ -3,60 +3,146 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="totalMapper">
-	<!-- 
-	<select id="totalSelectAll" resultType="managementDto">
-		SELECT * FROM TOTAL WHERE num = #{num}
-	</select>
-	<select id="totalSelectAll" resultType="managementDto">
-		SELECT ID AS mngId
-		     , NAME AS mngName
-		     , PHONENUMBER AS mngNumber 
-		  FROM TOTAL
-	</select>-->
-	<select id="totalSelectAll" resultType="managementDto">
-		SELECT NUM AS mngNum 
-			 , ID AS mngId
+	<select id="usersSelectAll" resultType="managementDto">
+		SELECT USERSCODE AS mngNum 
+			 , USERID AS mngId
 			 , PASSWORD AS mngPass
 			 , NAME AS mngName
 			 , BIRTH AS mngBirth
-			 , PHONENUMBER AS mngPhon
+			 , PHONE AS mngPhone
 			 , EMAIL AS mngEmail
 			 , GENDER AS mngGender
-			 , ROLE AS mngRole
-		FROM TOTAL 
+			 , ROLES AS mngRole
+			 , HIDDEN AS mngHidden
+			 , DELETEDATE AS mngDeleteDate
+			 , DELETED AS mngDeleted
+			 , DATELOG AS mngLog
+		FROM USERS 
 	</select>
+	
 	<select id="selectData" resultType="managementDto">
-		SELECT NUM AS mngNum 
-			 , ID AS mngId
+		SELECT 
+			USERSCODE AS mngNum 
+			 , USERID AS mngId
+			 , PASSWORD AS mngPass
 			 , NAME AS mngName
-			 , PHONENUMBER AS mngPhon
-			 , ROLE AS mngRole
-		FROM TOTAL 
-		WHERE NUM = #{mngNum}
+			 , BIRTH AS mngBirth
+			 , PHONE AS mngPhone
+			 , EMAIL AS mngEmail
+			 , GENDER AS mngGender
+			 , ROLES AS mngRole
+			 , HIDDEN AS mngHidden
+			 , DELETEDATE AS mngDeleteDate
+			 , DELETED AS mngDeleted
+			 , DATELOG AS mngLog
+		FROM USERS 
+		WHERE USERSCODE = #{mngNum}
 	</select>
 	
 	<select id="detailDatas" resultType="managementDto">
-		SELECT NUM AS mngNum 
-			 , ID AS mngId
+		SELECT USERSCODE AS mngNum 
+			 , USERID AS mngId
 			 , PASSWORD AS mngPass
 			 , NAME AS mngName
 			 , BIRTH AS mngBirth
-			 , PHONENUMBER AS mngPhon
+			 , PHONE AS mngPhone
 			 , EMAIL AS mngEmail
 			 , GENDER AS mngGender
-			 , ROLE AS mngRole
-		FROM TOTAL 
-		WHERE NUM = #{mngNum}
+			 , ROLES AS mngRole
+			 , HIDDEN AS mngHidden
+			 , DELETEDATE AS mngDeleteDate
+			 , DELETED AS mngDeleted
+			 , DATELOG AS mngLog
+		FROM USERS 
+		WHERE USERSCODE = #{mngNum}
 	</select>
 	
-	<select id="selectMember" resultType="managementDto">
-		SELECT ROLE AS mngRole
-		FROM TOTAL 
-		WHERE IN (M)
+	<!-- PT카운트 PT선생  -->
+	<select id="memberDatas" resultType="memberDto">
+		SELECT m.MEM_COUNT AS memCount
+		, m.MEM_PT	AS memPt
+		, m.MEM_USER  AS memUser
+		FROM MEMBERS m 
+		JOIN USERS u 
+		ON m.MEM_USER = u.USERSCODE
+		WHERE u.USERSCODE = #{mngNum}
 	</select>
+	
+	<!-- 수정 -->
+	<update id="modify">
+	UPDATE USERSCODE AS U, MEMBERS AS M
+		   SET U.USERID = #{mngId}
+			 , U.USERID = #{mngId}
+			 , U.PASSWORD = #{mngPass}
+			 , U.NAME = #{mngName}
+			 , U.BIRTH = #{mngBirth}
+			 , U.PHONE = #{mngPhone}
+			 , U.EMAIL = #{mngEmail}
+			 , U.GENDER = #{mngGender}
+			 , U.ROLES = #{mngRole}
+			 , M.MEM_COUNT = #{memCount}
+			 , M.MEM_PT	= #{memPt}
+			 , M.MEM_USER  = #{memUser}
+			WHERE U.USERSCODE = #{mngNum}
+			AND M.MEMBERS = #{mngNum}	  
+	</update>
+	
+	<!-- 멤버만 -->
+	<select id="selectMember" resultType="managementDto">
+		SELECT USERSCODE AS mngNum 
+			 , USERID AS mngId
+			 , PASSWORD AS mngPass
+			 , NAME AS mngName
+			 , BIRTH AS mngBirth
+			 , PHONE AS mngPhone
+			 , EMAIL AS mngEmail
+			 , GENDER AS mngGender
+			 , ROLES AS mngRole
+			 , HIDDEN AS mngHidden
+			 , DELETEDATE AS mngDeleteDate
+			 , DELETED AS mngDeleted
+			 , DATELOG AS mngLog
+		FROM USERS 
+		WHERE ROLES = 'M'
+	</select>
+	
+	<!-- 트레이너만 -->
 	<select id="selectTrainer" resultType="managementDto">
-		SELECT ROLE AS mngRole
-		FROM TOTAL 
-		WHERE IN (T) = ${trainer}
+		SELECT USERSCODE AS mngNum 
+			 , USERID AS mngId
+			 , PASSWORD AS mngPass
+			 , NAME AS mngName
+			 , BIRTH AS mngBirth
+			 , PHONE AS mngPhone
+			 , EMAIL AS mngEmail
+			 , GENDER AS mngGender
+			 , ROLES AS mngRole
+			 , HIDDEN AS mngHidden
+			 , DELETEDATE AS mngDeleteDate
+			 , DELETED AS mngDeleted
+			 , DATELOG AS mngLog
+		FROM USERS 
+		WHERE ROLES = 'T'
+	</select>
+	
+	<!-- 검색 -->
+	<select id="search" resultType="managementDto">
+		SELECT NAME, USERID, PHONE
+		FROM USERS
+		WHERE (NAME LIKE '%검색%' OR USERID LIKE '%검색%' OR PHONE LIKE '%검색%')
+	</select>
+	
+	<!-- 삭제 -->
+	<delete id="deleteMember">
+		DELETE FROM USERS
+		WHERE USERSCODE = #{mngNum}
+	</delete>
+	
+	<!-- 비밀번호 체크 -->
+	<select id="check" resultType="int">
+		SELECT 
+			COUNT(*)
+			FROM USERS
+			WHERE  USERID = ${mngId} AND PASSWORD = #{mngPass}
 	</select>
 </mapper>

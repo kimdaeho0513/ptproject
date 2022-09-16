@@ -7,6 +7,7 @@
 	</settings>
 	<typeAliases>
 		<typeAlias type="com.project.pt.management.model.ManagementDTO" alias="managementDto" />
+		<typeAlias type="com.project.pt.management.model.MemberDTO" alias="memberDto" />
 	</typeAliases>
 </configuration>
 

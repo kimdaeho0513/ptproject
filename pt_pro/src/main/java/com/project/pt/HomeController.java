@@ -28,9 +28,7 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model) {
 		logger.info("home");
-		
-		List<ManagementDTO> Datas = managementService.getAll();
-		model.addAttribute("Datas", Datas);
+
 		return "index";
 	}
 }
