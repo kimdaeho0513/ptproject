@@ -29,7 +29,7 @@
 			var money = $('input[name="pt"]:checked').val();
 			IMP.request_pay({
 				pg: 'kakaopay',
-				pay_method: 'card',
+				pay_method: 'kakaopay',
 				merchant_uid: 'merchant_' + new Date().getTime(),
 				name: '주문명 : pt 회원권 결제',
 				amount: money,
@@ -40,7 +40,7 @@
 				if (rsp.success) {
 					var msg = '결제가 완료되었습니다.';
 					msg += '결제 금액 : ' + rsp.paid_amount;
-					// success.submit();.
+					 
 				} else {
 					var msg = '결제에 실패하였습니다.';
 					msg += '에러내용 : ' + rsp.error_msg;

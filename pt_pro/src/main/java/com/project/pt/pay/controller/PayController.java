@@ -17,6 +17,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -30,68 +31,55 @@ public class PayController {
 
 	@Autowired
 	private PayService service;
+	private PayVO data;
 
 	@RequestMapping(value="/pay", method=RequestMethod.GET)
-	public String pay(HttpSession session) {
+	public String pay(Model model, HttpSession session) {
 
 		return "/pay";
 
 	}
 
-	@RequestMapping(value="/pay", method=RequestMethod.POST)
-	public String pay(PayVO pv, HttpSession session) {
-		boolean result = service.modify(pv);
+	//결제 성공시
+	@RequestMapping(value="/update", method=RequestMethod.GET)
+	public String update(PayVO data, HttpSession session) {
+		logger.info("update({},{})",data.getMem_count(), data.getMem_num());
+		
+		boolean result = service.modify(session, data);
 
 		if(result) {
-			return "/pay";
+			System.out.println("성공" );
 		} else {
-			return "redirect:/";
+			System.out.println("실패");
 		}
+		return "redirect:/";
 	}
+	
+	/*
+	@GetMapping("/update")
+	public @ResponseBody void ptCount(Long amount) {
+		System.out.println(amount);
+		int pt = 0;
+		if(amount == 50000) {
+			pt = 10;
+		} else if(amount == 90000) {
+			pt = 20;
+		} else if(amount == 130000) {
+			pt = 30; 
+		} else if(amount == 200000) {
+			pt = 50;
+		}
+		int ptCount = data.getMem_count() + pt;
+		data.setMem_count(ptCount);
+		/*
+		int mem_mem = data.getMem_num();
+		int ptCount = data.getMem_count() + pt;
+		data.setMem_count(ptCount);
+		
+	}
+	*/
 
-	@RequestMapping(value="/kakaopay")
-	@ResponseBody
-	public String kakaopay() {
-		try {
-			URL address = new URL("https://kapi.kakao.com//v1/payment/ready");
-			HttpURLConnection serverConnection = (HttpURLConnection) address.openConnection();
-			serverConnection.setRequestMethod("POST");
-			serverConnection.setRequestProperty("Authorization", " KakaoAK 	972abc86e272474955b5831e6ceb361b");
-			serverConnection.setRequestProperty("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
-			serverConnection.setDoOutput(true); //연결을 통해서 서버에게 전달해줄게 있으면 true
-			String param = "cid=TC0ONETIME"
-					  + "partner_order_id=partner_order_id"
-					  + "partner_user_id=partner_user_id"
-					  + "item_name=pt결제&quantity=1"
-					  + "total_amount=5000"
-					  + "vat_amount=200"
-					  + "tax_free_amount=0"
-					  + "approval_url=https://localhost8080/pt/pay.jsp"
-					  + "fail_url=https://localhost8080/pt/pay.jsp"
-					  + "&cancel_url=https://localhost8080/pt/pay.jsp";
-			OutputStream outputStream = serverConnection.getOutputStream();
-			DataOutputStream dataOutputStream = new DataOutputStream(outputStream);
-			dataOutputStream.writeBytes(param);
-			dataOutputStream.close();
-			
-			int result = serverConnection.getResponseCode();
-			
-			InputStream inputStream;
-			if(result == 200) {
-				inputStream = serverConnection.getInputStream();
-			} else {
-				inputStream = serverConnection.getErrorStream();
-			}
-			InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-			BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-			return bufferedReader.readLine();
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return "/kakaopay";
-	}
+	
 
 
 }

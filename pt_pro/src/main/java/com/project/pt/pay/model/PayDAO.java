@@ -8,6 +8,7 @@ import com.project.pt.pay.vo.PayVO;
 
 @Repository
 public class PayDAO {
+
 	
 	@Autowired
 	private SqlSession session;
