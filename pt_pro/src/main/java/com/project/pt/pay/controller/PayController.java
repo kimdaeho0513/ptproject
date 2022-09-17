@@ -41,7 +41,7 @@ public class PayController {
 	}
 
 	//결제 성공시
-	@RequestMapping(value="/update", method=RequestMethod.GET)
+	@RequestMapping(value="/payupdate", method=RequestMethod.GET)
 	public String update(PayVO data, HttpSession session) {
 		logger.info("update({},{})",data.getMem_count(), data.getMem_num());
 		
