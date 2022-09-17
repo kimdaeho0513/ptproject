@@ -5,12 +5,12 @@ import java.util.List;
 
 public class Paging {
 
-	private int offset;
-	private int limit;
-	private int currentPageNumber;
-	private int nextPageNumber;
-	private int prevPageNumber;
-	private List<Integer> pageNumberList;
+	private int offset;		//기준주소에서 다음페이지로 갈때 추가로 더해진 값
+	private int limit;		//~까지
+	private int currentPageNumber;  //현재페이지 넘버
+	private int nextPageNumber; 	//다음페이지 넘버 
+	private int prevPageNumber;		//이전 페이지 넘버
+	private List<Integer> pageNumberList;	
 	private List<Object> pageData;
 	
 	public Paging(List<Object> datas, int currentPageNumber, int limit) {
