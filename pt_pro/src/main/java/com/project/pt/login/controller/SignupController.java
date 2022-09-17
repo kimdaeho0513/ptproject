@@ -28,11 +28,8 @@ public class SignupController {
 	
 	@RequestMapping(value="/signup",method=RequestMethod.POST)
 	public String Signup(SignupVO sv, HttpSession session) {
-<<<<<<< HEAD
+		
 		logger.info("Signup({},{},{},{},{},{},{})",sv.getName(),sv.getUserid(),sv.getPw(),
-=======
-		logger.info("Signup({},{},{},{},{},{},{})",sv.getName(),sv.getId(),sv.getPw(),
->>>>>>> refs/remotes/origin/양효진
 				sv.getEmail(),sv.getPhone(),sv.getBirth(),sv.getGender());
 		
 		boolean result = service.addMem(session,sv);

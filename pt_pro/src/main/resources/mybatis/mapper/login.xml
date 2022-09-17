@@ -5,7 +5,6 @@
 <mapper namespace="loginMapper">
 	<select id="selectLogin" parameterType="memDto"
 		resultType="memDto">
-<<<<<<< HEAD
 		SELECT USERSCODE,USERID,password as pw
 		      ,name,birth,phone as phone
 		      ,email,gender,roles,hidden,deleted
@@ -13,6 +12,7 @@
 		WHERE USERID = #{userid}
 		AND password = #{pw}
 		AND deleted = 'N'
+		AND roles = #{roles}
 	</select>
 	<select id="selectId" parameterType="memDto" resultType="memDto">
 		SELECT
@@ -41,42 +41,6 @@
 		(USERID,PASSWORD,NAME,BIRTH,phone,EMAIL,GENDER)
 		VALUES
 		(#{userid},#{pw},#{name},#{birth},#{phone},#{email},#{gender})
-=======
-		SELECT userscode as num,userid as id,password as pw
-		      ,name,birth,phone
-		      ,email,gender,roles as role,hidden,deleted
-		FROM users
-		WHERE userid = #{id}
-		AND password = #{pw}
-		AND deleted = 'N'
-	</select>
-	<select id="selectId" parameterType="memDto" resultType="memDto">
-		SELECT
-		userid as id, name, phone
-		FROM users
-		WHERE name = #{name}
-		AND phone = #{phone}
-		AND deleted = 'N'
-	</select>
-	<select id="selectPw" parameterType="memDto" resultType="memDto">
-		SELECT
-		name,userid as id,email,password as pw
-		FROM users
-		WHERE name = #{name}
-		AND email = #{email}
-		AND userid = #{id}
-		AND deleted = 'N'
-	</select>
-	<update id="updatePw" parameterType="memDto">
-		 UPDATE users
-    		SET password = #{pw}
-  		  WHERE userid = #{id}
-	</update>
-	<insert id="insertMem" parameterType="memDto">
-		INSERT INTO users
-		(USERID,PASSWORD,NAME,BIRTH,PHONE,EMAIL,GENDER)
-		VALUES
-		(#{id},#{pw},#{name},#{birth},#{phone},#{email},#{gender})
->>>>>>> refs/remotes/origin/양효진
+
 	</insert>
 </mapper>

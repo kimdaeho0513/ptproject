@@ -29,11 +29,7 @@ public class ResetpwController {
 	
 	@RequestMapping(value="/resetpw",method=RequestMethod.POST)
 	public String resetpw(LoginVO lv, HttpSession session) {
-<<<<<<< HEAD
 		logger.info("resetpw({},{})",lv.getUserid(),lv.getPw());
-=======
-		logger.info("resetpw({},{})",lv.getId(),lv.getPw());
->>>>>>> refs/remotes/origin/양효진
 		
 		boolean result = service.modifyPw(lv);
 		

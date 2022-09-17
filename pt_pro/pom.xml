@@ -40,18 +40,12 @@
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjrt</artifactId>
 			<version>${org.aspectj-version}</version>
-<<<<<<< HEAD
 		</dependency>	
 		<!-- <dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjweaver</artifactId>
 			<version>${org.aspectj-version}</version>
 		</dependency> -->
-		
-=======
-		</dependency>
-
->>>>>>> refs/remotes/origin/양효진
 		<!-- Logging -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -175,8 +169,7 @@
 			<artifactId>osdt_core</artifactId>
 			<version>${com.oracle.database.security}</version>
 		</dependency>
-<<<<<<< HEAD
-		
+
 		<!-- JSON -->
 		<!-- https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple -->
 		<dependency>
@@ -200,30 +193,6 @@
 		    <version>1.4</version>
 		</dependency>
 		
-=======
-
-		<!-- JSON -->
-		<!-- https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple -->
-		<dependency>
-			<groupId>com.googlecode.json-simple</groupId>
-			<artifactId>json-simple</artifactId>
-			<version>1.1.1</version>
-		</dependency>
-
-		<!-- FileUpload -->
-		<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
-		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-			<version>2.11.0</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
-		<dependency>
-			<groupId>commons-fileupload</groupId>
-			<artifactId>commons-fileupload</artifactId>
-			<version>1.4</version>
-		</dependency>
->>>>>>> refs/remotes/origin/양효진
 	</dependencies>
 	<build>
 		<plugins>
