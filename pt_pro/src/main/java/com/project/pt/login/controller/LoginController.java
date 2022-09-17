@@ -14,6 +14,7 @@ import com.project.pt.login.vo.LoginVO;
 
 
 
+<<<<<<< HEAD
 
 @Controller
 public class LoginController {
@@ -41,6 +42,32 @@ public class LoginController {
 			
 			System.out.println("성공"+session.getAttribute("loginData"));
 			
+=======
+@Controller
+public class LoginController {
+	
+	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
+
+	
+	@Autowired
+	private LoginService service;
+	
+	@RequestMapping(value="/login",method=RequestMethod.GET)
+	public String login(HttpSession session) {
+		logger.info("login()");
+		
+		return "login/login";
+	}
+	
+	@RequestMapping(value="/login",method=RequestMethod.POST)
+	public String login(LoginVO loginVo,HttpSession session) {
+		logger.info("login({}, {}, {})",loginVo.getId(),loginVo.getPw(),loginVo.getRole());
+		
+		boolean result = service.getLogin(session,loginVo);
+		
+		if(result) {
+			System.out.println("성공");
+>>>>>>> refs/remotes/origin/양효진
 		}else {
 			System.out.println("실패");
 		}

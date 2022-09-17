@@ -16,7 +16,11 @@
 		새 비밀번호: <input type="text" name="pw" /><br>
 		비밀번호 확인: <input type="text" name="pw_chk" /><br>
 		<button type="submit">확인</button>
+<<<<<<< HEAD
 		<input type="hidden" name="id" value="${sessionScope.findPw.userid}"/>
+=======
+		<input type="hidden" name="id" value="${sessionScope.findPw.id}"/>
+>>>>>>> refs/remotes/origin/양효진
 	</form>
 </body>
 </html>

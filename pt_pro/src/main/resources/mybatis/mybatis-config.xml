@@ -3,6 +3,7 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<settings>
+<<<<<<< HEAD
 		<setting name="jdbcTypeForNull" value="NULL"/>
 	</settings>
 	<typeAliases>
@@ -10,5 +11,11 @@
 		<typeAlias type="com.project.pt.mem.model.MemDTO" alias="memDto" />
 		<typeAlias type="com.project.pt.management.model.ManagementDTO" alias="managementDto" />
 		
+=======
+		<setting name="jdbcTypeForNull" value="NULL" />
+	</settings>
+	<typeAliases>
+		<typeAlias type="com.project.pt.mem.model.MemDTO" alias="memDto" />
+>>>>>>> refs/remotes/origin/양효진
 	</typeAliases>
 </configuration>

@@ -27,7 +27,11 @@ public class FindpwController {
 	
 	@RequestMapping(value="/findpw",method=RequestMethod.POST)
 	public String login(FindVO fv, HttpSession session) {
+<<<<<<< HEAD
 		logger.info("findpw({},{},{})",fv.getName(),fv.getUserid(),fv.getEmail());
+=======
+		logger.info("findpw({},{},{})",fv.getName(),fv.getId(),fv.getEmail());
+>>>>>>> refs/remotes/origin/양효진
 		
 		boolean result = service.getPw(session,fv);
 		

@@ -29,6 +29,7 @@ public class LoginService {
 		logger.info("getLogin({},{})",session,loginVo);
 		
 		MemDTO data = new MemDTO();
+<<<<<<< HEAD
 		data.setUserid(loginVo.getUserid());
 		data.setPw(loginVo.getPw());
 		data.setRoles(loginVo.getRoles());
@@ -107,6 +108,85 @@ public class LoginService {
 		MemDTO data = new MemDTO();
 		data.setName(sv.getName());
 		data.setUserid(sv.getUserid());
+=======
+		data.setId(loginVo.getId());
+		data.setPw(loginVo.getPw());
+		data.setRole(loginVo.getRole());
+		data = dao.selectLogin(data);
+		
+		if(data == null) {
+			return false;
+		} else {
+			session.setAttribute("loginData", data);
+			return true;
+		}
+		
+	}
+
+	public boolean getId(HttpSession session, FindVO fv) {
+		logger.info("getid({},{})",session,fv);
+		
+		MemDTO data = new MemDTO();
+		data.setName(fv.getName());
+		data.setPhone(fv.getPhone());
+		data = dao.selectId(data);
+		
+		if(data == null) {
+			System.out.println("실패");
+			return false;
+			
+			
+		} else {
+			session.setAttribute("findId", data);
+			System.out.println("성공");
+			return true;
+		}
+	}
+
+	public boolean getPw(HttpSession session, FindVO fv) {
+		logger.info("getpw({},{})",session,fv);
+		
+		MemDTO data = new MemDTO();
+		data.setName(fv.getName());
+		data.setId(fv.getId());
+		data.setEmail(fv.getEmail());
+		data = dao.selectPw(data);
+		
+		if(data == null) {
+			return false;
+			
+		} else {
+			session.setAttribute("findPw", data);
+			return true;
+		}
+	}
+
+	public boolean modifyPw(LoginVO lv) {
+		logger.info("modifyPw({})",lv);
+		
+		MemDTO data = new MemDTO();
+		data.setId(lv.getId());
+		data.setPw(lv.getPw());
+		
+		boolean result = dao.updatePw(data);
+		return result;
+	}
+
+	public boolean addMem(HttpSession session, SignupVO sv) {
+		logger.info("addMem({},{})",session,sv);
+		
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = null;
+		try {
+			date = format.parse(sv.getBirth());
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		MemDTO data = new MemDTO();
+		data.setName(sv.getName());
+		data.setId(sv.getId());
+>>>>>>> refs/remotes/origin/양효진
 		data.setPw(sv.getPw());
 		data.setEmail(sv.getEmail());
 		data.setPhone(sv.getPhone());

@@ -14,6 +14,7 @@
 		<h1>login</h1>
 		<form action="./login" method="post">
 			아이디 <input type="text" name="id" /><br>
+<<<<<<< HEAD
 			비밀번호 <input type="password" name="pw" /><br>
 			<input type="radio" name="role" value="T"> trainer 
 			<input type="radio" name="role" value="M"> member<br>
@@ -25,6 +26,19 @@
 	</c:if>
 	<c:if test="${not empty sessionScope.loginData}">
 		${sessionScope.loginData.userid} 님 환영합니다.
+=======
+			비밀번호 <input type="text" name="pw" /><br>
+			<input type="radio" name="role" value="T"> trainer 
+			<input type="radio" name="role" value="M"> member<br>
+			<button type="submit">login</button>
+		</form>
+		<a href="./findid">아이디 찾기</a> | 
+		<a href="./findpw">비밀번호 찾기</a> | 
+		<a href="./signup">회원가입</a>
+	</c:if>
+	<c:if test="${not empty sessionScope.loginData}">
+		${sessionScope.loginData.id} 님 환영합니다.
+>>>>>>> refs/remotes/origin/양효진
 		<br><a href="./logout">로그아웃</a>
 	</c:if>
 </body>
