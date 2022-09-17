@@ -39,8 +39,8 @@
 					</div>
 					<div class="col-1">
 						<select class="form-select" onchange="location.href='${managementUrl}?mngRole=' + this.value">
-							<option value="M" ${sessionScope.mngRole == T ? 'selected' : ''}>트레이너</option>
-							<option value="T" ${sessionScope.mngRole == M ? 'selected' : ''}>회원</option>
+							<option value="T" ${sessionScope.mngRole eq 'T' ? 'selected' : ''}>트레이너</option>
+							<option value="M" ${sessionScope.mngRole eq 'M' ? 'selected' : ''}>회원</option>
 						</select>
 					</div>
 				</div>
@@ -66,12 +66,12 @@
 				<c:if test="${not empty datas}">
 					<c:forEach items="${datas}" var="data">
 						<c:url var="managementDetailUrl" value="/management/detail">
-							<c:param name="id">${data.mngNum}</c:param>
+							<c:param name="mngNum">${data.mngNum}</c:param>
 						</c:url>
 						<tr onclick="location.href='${managementDetailUrl}'">
 							<td>${data.mngName}</td>
 							<td>${data.mngId}</td>
-							<td>${data.mngPhon}</td>
+							<td>${data.mngPhone}</td>
 						</tr>
 					</c:forEach>
 				</c:if>

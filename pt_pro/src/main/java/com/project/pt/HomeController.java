@@ -35,6 +35,7 @@ public class HomeController {
 	//url 주소와 메서드를 매핑해오는 것 : home이라는 메서드가 /라는 url 주소를 GET으로 요청해왔을 때 동작하는 메서드라는 뜻 
 >>>>>>> refs/remotes/origin/임지은
 	@RequestMapping(value = "/", method = RequestMethod.GET)
+<<<<<<< HEAD
 	public String home(Locale locale, Model model) {
 		
 <<<<<<< HEAD
@@ -63,6 +64,12 @@ public class HomeController {
 		return "home";
 		
 		/*******/
+=======
+	public String home(Model model) {
+		logger.info("home");
+
+		return "index";
+>>>>>>> refs/remotes/origin/지재용
 	}
 	/*
 	 * @Autowired private ManagementService managementService;
