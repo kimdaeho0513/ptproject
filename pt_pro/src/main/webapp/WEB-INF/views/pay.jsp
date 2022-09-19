@@ -40,7 +40,13 @@
 				if (rsp.success) {
 					var msg = '결제가 완료되었습니다.';
 					msg += '결제 금액 : ' + rsp.paid_amount;
-					 
+					 $.ajax({
+		                    type: "GET", 
+		                    url: "./chargept", //충전 금액값을 보낼 url 설정
+		                    data: {
+		                        "amount" : money
+		                    },
+					 });
 				} else {
 					var msg = '결제에 실패하였습니다.';
 					msg += '에러내용 : ' + rsp.error_msg;

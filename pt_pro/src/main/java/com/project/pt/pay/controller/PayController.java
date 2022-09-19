@@ -35,14 +35,15 @@ public class PayController {
 
 	@RequestMapping(value="/pay", method=RequestMethod.GET)
 	public String pay(Model model, HttpSession session) {
-
+		
 		return "/pay";
 
 	}
-
-	//결제 성공시
-	@RequestMapping(value="/update", method=RequestMethod.GET)
+	//결제
+	@RequestMapping(value="/payupdate", method=RequestMethod.GET)
 	public String update(PayVO data, HttpSession session) {
+		
+		
 		logger.info("update({},{})",data.getMem_count(), data.getMem_num());
 		
 		boolean result = service.modify(session, data);
@@ -55,11 +56,13 @@ public class PayController {
 		return "redirect:/";
 	}
 	
-	/*
-	@GetMapping("/update")
-	public @ResponseBody void ptCount(Long amount) {
+	
+	//결제 성공시
+	@GetMapping(value="/chargept")
+	public @ResponseBody void ptCount(HttpSession session, Long amount) {
+		
 		System.out.println(amount);
-		int pt = 0;
+		int pt = 0; 
 		if(amount == 50000) {
 			pt = 10;
 		} else if(amount == 90000) {
@@ -69,15 +72,25 @@ public class PayController {
 		} else if(amount == 200000) {
 			pt = 50;
 		}
-		int ptCount = data.getMem_count() + pt;
-		data.setMem_count(ptCount);
-		/*
-		int mem_mem = data.getMem_num();
-		int ptCount = data.getMem_count() + pt;
-		data.setMem_count(ptCount);
 		
+		int ptCount = 0;
+		System.out.println("전 : " + ptCount);
+		System.out.println(pt);
+		/*
+		ptCount = data.getMem_count() + pt;
+		data.setMem_count(ptCount);
+		*/
+		System.out.println("후 : " + ptCount);
+		boolean result = service.modify(session, data);
+		
+		if(result) {
+			System.out.println("성공" );
+		} else {
+			System.out.println("실패");
+		}
+
 	}
-	*/
+	
 
 	
 
