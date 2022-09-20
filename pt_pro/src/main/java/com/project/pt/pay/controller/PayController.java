@@ -41,8 +41,8 @@ public class PayController {
 		logger.info("loginData({})",session.getAttribute("loginData"));
 		
 		return "pay/pay";
-
 	}
+
 	
 	@RequestMapping(value="/pay", method=RequestMethod.POST)
 	public String pay(HttpSession session) {
@@ -52,24 +52,7 @@ public class PayController {
 		return "pay/pay";
 
 	}
-	/*
-	//결제
-	@RequestMapping(value="/payupdate", method=RequestMethod.GET)
-	public String update(PayVO data, HttpSession session) {
-		
-		logger.info("update({})",data);
-		
-		boolean result = service.modify(session, data);
 
-		if(result) {
-			System.out.println("성공" );
-		} else {
-			System.out.println("실패");
-		}
-		return "redirect:/";
-	}
-	*/
-	
 	
 	//결제 성공시
 	@GetMapping(value="/chargept")
@@ -102,10 +85,7 @@ public class PayController {
 		} else {
 			System.out.println("pt 횟수 입력 실패");
 		}
-
 	}
-	
-
 	
 
 
