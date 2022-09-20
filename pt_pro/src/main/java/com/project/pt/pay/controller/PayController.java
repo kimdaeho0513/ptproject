@@ -22,6 +22,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.project.pt.login.vo.LoginVO;
+import com.project.pt.mem.model.MemDTO;
+import com.project.pt.mypage.model.MypageDTO;
 import com.project.pt.pay.service.PayService;
 import com.project.pt.pay.vo.PayVO;
 
@@ -31,19 +34,30 @@ public class PayController {
 
 	@Autowired
 	private PayService service;
-	private PayVO data;
 
 	@RequestMapping(value="/pay", method=RequestMethod.GET)
-	public String pay(Model model, HttpSession session) {
-
-		return "/pay";
+	public String pay(HttpSession session, PayVO data) {
+		session.getAttribute("loginData");
+		logger.info("loginData({})",session.getAttribute("loginData"));
+		
+		return "pay/pay";
 
 	}
+	
+	@RequestMapping(value="/pay", method=RequestMethod.POST)
+	public String pay(HttpSession session) {
+		session.getAttribute("loginData");
+		logger.info("loginData({})",session.getAttribute("loginData"));
+		
+		return "pay/pay";
 
-	//결제 성공시
+	}
+	/*
+	//결제
 	@RequestMapping(value="/payupdate", method=RequestMethod.GET)
 	public String update(PayVO data, HttpSession session) {
-		logger.info("update({},{})",data.getMem_count(), data.getMem_num());
+		
+		logger.info("update({})",data);
 		
 		boolean result = service.modify(session, data);
 
@@ -54,12 +68,15 @@ public class PayController {
 		}
 		return "redirect:/";
 	}
+	*/
 	
-	/*
-	@GetMapping("/update")
-	public @ResponseBody void ptCount(Long amount) {
+	
+	//결제 성공시
+	@GetMapping(value="/chargept")
+	public @ResponseBody void ptCount(HttpSession session, Long amount) {
+		
 		System.out.println(amount);
-		int pt = 0;
+		int pt = 0; 
 		if(amount == 50000) {
 			pt = 10;
 		} else if(amount == 90000) {
@@ -69,15 +86,25 @@ public class PayController {
 		} else if(amount == 200000) {
 			pt = 50;
 		}
-		int ptCount = data.getMem_count() + pt;
-		data.setMem_count(ptCount);
-		/*
-		int mem_mem = data.getMem_num();
-		int ptCount = data.getMem_count() + pt;
-		data.setMem_count(ptCount);
 		
+		System.out.println(pt);
+		
+		MemDTO memdto = (MemDTO)session.getAttribute("loginData");
+		
+		int ptCount = service.getData(memdto.getUserscode()) + pt;
+
+
+		System.out.println("후 : " + ptCount);
+		boolean result = service.modify(memdto.getUserscode(), ptCount);
+		
+		if(result) {
+			System.out.println("pt 횟수 입력 성공" );
+		} else {
+			System.out.println("pt 횟수 입력 실패");
+		}
+
 	}
-	*/
+	
 
 	
 

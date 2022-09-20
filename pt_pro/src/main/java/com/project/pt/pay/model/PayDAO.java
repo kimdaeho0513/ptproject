@@ -20,5 +20,11 @@ public class PayDAO {
 		int res = session.update(mapperId, data);
 		return res == 1 ? true : false;
 	}
+	
+	public int selectData(int mem_user) {
+		String mapperId = String.format(mapper, "selectPtCount");
+		int res = session.selectOne(mapperId, mem_user);
+		return res;
+	}
 
 }
