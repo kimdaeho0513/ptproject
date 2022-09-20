@@ -26,6 +26,12 @@ public class LoginService {
 	@Autowired
 	private LoginDAO dao;
 	
+	public int idChk(SignupVO vo) throws Exception{
+		logger.info("service.idChk()");
+		int result = dao.idChk(vo);
+		return result;
+	}
+	
 	public String getAuthCode() {
 		//6자리코드생성
 		Random r = new Random();

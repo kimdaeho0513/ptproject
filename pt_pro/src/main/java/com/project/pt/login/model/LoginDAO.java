@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.project.pt.login.vo.SignupVO;
 import com.project.pt.mem.model.MemDTO;
 
 @Repository
@@ -14,6 +15,12 @@ public class LoginDAO {
 	
 	@Autowired
 	private SqlSession session;
+	
+	public int idChk(SignupVO vo) throws Exception{
+		logger.info("dao.idChk()");
+		int result = session.selectOne("loginMapper.idChk",vo);
+		return result;
+	}
 	
 	public MemDTO selectLogin(MemDTO data) {
 		logger.info("selectLogin({})",data);
