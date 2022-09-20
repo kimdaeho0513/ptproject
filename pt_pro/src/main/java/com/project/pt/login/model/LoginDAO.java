@@ -32,7 +32,7 @@ public class LoginDAO {
 	public MemDTO selectPw(MemDTO data) {
 		logger.info("selectpw({})",data);
 		MemDTO result = session.selectOne("loginMapper.selectPw", data);
-		logger.info("selectpw({})",result);
+		logger.info("selectpw_after({})",result);
 		return result;
 	}
 

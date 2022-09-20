@@ -24,7 +24,7 @@
 	</select>
 	<select id="selectPw" parameterType="memDto" resultType="memDto">
 		SELECT
-		name,USERID,email,password as pw
+		userscode,name,USERID,email,password as pw
 		FROM USERS
 		WHERE name = #{name}
 		AND email = #{email}

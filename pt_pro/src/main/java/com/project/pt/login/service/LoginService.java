@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
 
 import javax.servlet.http.HttpSession;
 
@@ -24,6 +25,19 @@ public class LoginService {
 	
 	@Autowired
 	private LoginDAO dao;
+	
+	public String getAuthCode() {
+		//6자리코드생성
+		Random r = new Random();
+		StringBuffer b = new StringBuffer();
+		int num = 0;
+		
+		while(b.length() < 6) {
+			num = r.nextInt(10);
+			b.append(num);
+		}
+		return b.toString();
+	}
 	
 	public boolean getLogin(HttpSession session, LoginVO loginVo) {
 		logger.info("getLogin({},{})",session,loginVo);

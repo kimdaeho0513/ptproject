@@ -31,8 +31,10 @@ public class FindpwController {
 		
 		boolean result = service.getPw(session,fv);
 		
+		System.out.println(session.getAttribute("findPw"));
+		
 		if(result) {
-			return "/login/resetpw";
+			return "redirect:/cert";
 		}else {
 			return "redirect:/";
 		}
