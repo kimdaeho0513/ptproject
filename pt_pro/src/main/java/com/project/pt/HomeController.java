@@ -21,10 +21,7 @@ import com.project.pt.management.service.ManagementService;
 
 public class HomeController {
 
-<<<<<<< HEAD
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-<<<<<<< HEAD
-	
 
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
@@ -48,37 +45,7 @@ public class HomeController {
 		/*******/
 
 	}
-	/*
-	 * @Autowired private ManagementService managementService;
-	 * 
-	 * @RequestMapping(value = "/", method = RequestMethod.GET) public String
-	 * home(Model model) { logger.info("home");
-	 * 
-	 * List<ManagementDTO> Datas = managementService.getAll();
-	 * model.addAttribute("Datas", Datas); return "index"; }
-	 */
-=======
-	@Autowired
-	private ManagementService managementService;
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-=======
->>>>>>> refs/remotes/origin/지재용
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-		
-		return "index";
-		}
-	
-	/*@RequestMapping(value = "/7", method = RequestMethod.GET)
-	public String home(Model model) {
-		logger.info("home");
-		
-		List<ManagementDTO> Datas = managementService.getAll();
-		model.addAttribute("Datas", Datas);
-		return "index";
-	}*/
->>>>>>> refs/remotes/origin/이재윤
 }
 	
 

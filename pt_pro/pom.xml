@@ -41,15 +41,13 @@
 			<artifactId>aspectjrt</artifactId>
 			<version>${org.aspectj-version}</version>
 		</dependency>	
-<<<<<<< HEAD
+
 		<!-- <dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjweaver</artifactId>
 			<version>${org.aspectj-version}</version>
 		</dependency> -->
-=======
-		
->>>>>>> refs/remotes/origin/이재윤
+
 		<!-- Logging -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -174,10 +172,7 @@
 			<artifactId>osdt_core</artifactId>
 			<version>${com.oracle.database.security}</version>
 		</dependency>
-<<<<<<< HEAD
 
-=======
->>>>>>> refs/remotes/origin/이재윤
 		<!-- JSON -->
 		<!-- https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple -->
 		<dependency>

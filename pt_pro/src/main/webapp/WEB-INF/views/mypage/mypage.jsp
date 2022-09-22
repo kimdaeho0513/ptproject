@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<%@ include file="../module/head.jsp" %>
+
 <style>
 input{
 	width:100%;
