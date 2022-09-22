@@ -18,14 +18,13 @@ import com.project.pt.management.service.ManagementService;
 
 
 @Controller
-
 public class HomeController {
 
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	
 
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-
+	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 
 		  logger.info("Welcome home! The client locale is {}.", locale);
@@ -45,7 +44,14 @@ public class HomeController {
 		/*******/
 
 	}
-
+	/*
+	 * @Autowired private ManagementService managementService;
+	 * 
+	 * @RequestMapping(value = "/", method = RequestMethod.GET) public String
+	 * home(Model model) { logger.info("home");
+	 * 
+	 * List<ManagementDTO> Datas = managementService.getAll();
+	 * model.addAttribute("Datas", Datas); return "index"; }
+	 */
 }
 	
-
