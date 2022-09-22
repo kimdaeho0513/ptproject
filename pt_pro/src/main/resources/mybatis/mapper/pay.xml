@@ -6,7 +6,12 @@
 	<update id="updatePtCount" parameterType="payDto">
 		UPDATE MEMBERS
 		   SET MEM_COUNT = #{mem_count}
-		 WHERE MEM_NUM = #{mem_num}
+		 WHERE MEM_USER = #{mem_user}
 	</update>
+	<select id="selectPtCount" parameterType="payDto" resultType="_int">
+		SELECT MEM_COUNT
+		  FROM MEMBERS
+		 WHERE MEM_USER = #{mem_user}
+	</select>
 </mapper>
 

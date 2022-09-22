@@ -18,18 +18,28 @@ public class PayService {
 	@Autowired
 	private PayDAO dao;
 	
-	public boolean modify(HttpSession session, PayVO data) {
-		logger.info("update({}, {})",session, data);
+	public boolean modify(int mem_user, int mem_count) {
+		logger.info("update({}, {})", mem_user, mem_count);
 		
+		PayVO data = new PayVO();
+		data.setMem_user(mem_user);
+		data.setMem_count(mem_count);
 		boolean result = dao.updateData(data);
 		if(result) {
 			System.out.println("pt 결제 완료");
-			session.setAttribute("loginData", data);
 			return true;
 		} else {
 			System.out.println("pt 결제 실패");
 			return false;
 		}
+	}
+	
+	public int getData(int mem_user) {
+		logger.info("update({})", mem_user);
+		
+		int ptCount = dao.selectData(mem_user);
+		
+		return ptCount;
 	}
 	
 

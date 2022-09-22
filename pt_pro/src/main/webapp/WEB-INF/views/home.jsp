@@ -19,6 +19,9 @@
 		<button type="button" onclick="location.href='/pt/mypage'">마이페이지</button>
 		<button type="button" onclick="location.href='/pt/logout'">로그아웃</button>
 	</c:if>
+	<c:if test="${not empty sessionScope.loginData}">
+		<button type="button" onclick="location.href='/pt/pay'">pt결제</button>
+	</c:if>
 	<c:if test="${empty sessionScope.loginData}">
 		<button type="button" onclick="location.href='/pt/login'">로그인</button>
 	</c:if>

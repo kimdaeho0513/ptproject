@@ -11,7 +11,11 @@
 		<typeAlias type="com.project.pt.management.model.ManagementDTO" alias="managementDto" />
 		<typeAlias type="com.project.pt.pay.model.PayDTO" alias="payDto"/>
 		<typeAlias type="com.project.pt.management.model.MemberDTO" alias="memberDto" />
+<<<<<<< HEAD
 		<typeAlias type="com.project.pt.board.model.BoardDTO" alias="boardDto" />
 		<typeAlias type="com.project.pt.board.model.BoardStaticsDTO" alias="boardStaticsDto" />
+=======
+		<typeAlias type="com.project.pt.schedule.model.ScheDTO" alias="scheDto" />
+>>>>>>> refs/remotes/origin/임지은
 	</typeAliases>
 </configuration>
