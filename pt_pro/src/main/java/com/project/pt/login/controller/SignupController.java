@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.pt.login.service.LoginService;
 import com.project.pt.login.vo.SignupVO;
@@ -37,7 +38,16 @@ public class SignupController {
 		if(result) {
 			return "/login/suc_signup";
 		}else {
-			return "redirect:/";
+			return "redirect:/login";
 		}
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/idChk", method=RequestMethod.POST)
+	public int idChk(SignupVO vo) throws Exception{
+		logger.info("idChk({})",vo.getUserid());
+		int result = service.idChk(vo);
+		logger.info("after_idChk({})",result);
+		return result;
 	}
 }

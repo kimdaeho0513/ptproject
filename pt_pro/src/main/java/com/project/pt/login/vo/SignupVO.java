@@ -17,7 +17,7 @@ public class SignupVO {
 	public String getUserid() {
 		return userid;
 	}
-	public void setId(String userid) {
+	public void setUserid(String userid) {
 		this.userid = userid;
 	}
 	public String getPw() {

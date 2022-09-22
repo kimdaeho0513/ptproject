@@ -3,6 +3,11 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="loginMapper">
+	<select id="idChk" resultType="int">
+		SELECT count(*) FROM users
+		WHERE userid = #{userid}
+	</select>
+
 	<select id="selectLogin" parameterType="memDto"
 		resultType="memDto">
 		SELECT USERSCODE,USERID,password as pw
@@ -24,7 +29,7 @@
 	</select>
 	<select id="selectPw" parameterType="memDto" resultType="memDto">
 		SELECT
-		name,USERID,email,password as pw
+		userscode,name,USERID,email,password as pw
 		FROM USERS
 		WHERE name = #{name}
 		AND email = #{email}

@@ -17,6 +17,7 @@
 	<P>  The time on the server is ${serverTime}. 확인중</P>
 	<c:if test="${not empty sessionScope.loginData}">
 		<button type="button" onclick="location.href='/pt/mypage'">마이페이지</button>
+		<button type="button" onclick="location.href='/pt/logout'">로그아웃</button>
 	</c:if>
 	<c:if test="${empty sessionScope.loginData}">
 		<button type="button" onclick="location.href='/pt/login'">로그인</button>

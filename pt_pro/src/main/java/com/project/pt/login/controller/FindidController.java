@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -26,7 +27,7 @@ public class FindidController {
 	}
 	
 	@RequestMapping(value="/findid",method=RequestMethod.POST)
-	public String findid(FindVO fv, HttpSession session) {
+	public String findid(FindVO fv, HttpSession session,Model model) {
 		logger.info("findid({},{})",fv.getName(),fv.getPhone());
 		
 		boolean result = service.getId(session, fv);
@@ -34,7 +35,8 @@ public class FindidController {
 		if(result) {
 			return "login/suc_findid";
 		}else {
-			return "redirect:/";
+			model.addAttribute("msg","회원이 존재하지 않습니다.");
+			return "/login/findid";
 		}
 		
 	}
