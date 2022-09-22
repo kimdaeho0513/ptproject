@@ -20,20 +20,17 @@
 	<h1>회원 조회</h1>
 	<section class="container">
 		<div class="mb-1">
-			<c:url var="managementSearchUrl" value="/management/search" />
-			<form name="form2" action="${managementSearchUrl}" method="get">
-			<div class="row g-1">
+			<c:url var="managementsearchUrl" value="/management/search" />
+			<form action="${managementsearchUrl}/search" method="get">
+				<div class="row g-1">
 					<div class="col-3">
 						<div class="input-group">
-							<input class="form-control" type="text" name="keyword" id="keyword" value="${keyword}">
+							<input class="form-control" type="text" name="search" >
 							<button class="btn btn-secondary" name="btnSearch" value="search" type="submit">조회</button>
 						</div>
 					</div>
-				</form>
-			<c:url var="managementUrl" value="/management" />
-			<form action="${managementUrl}" method="get">
 					<div class="col-1">
-						<select class="form-select" onchange="location.href='${managementUrl}?pageCount=' + this.value">
+						<select class="form-select" onchange="location.href='${managementsearchUrl}?pageCount=' + this.value">
 							<option value="5" ${sessionScope.pageCount == 5 ? 'selected' : ''}>5 개</option>
 							<option value="10" ${sessionScope.pageCount == 10 ? 'selected' : ''}>10 개</option>
 							<option value="15" ${sessionScope.pageCount == 15 ? 'selected' : ''}>15 개</option>
@@ -61,15 +58,15 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:if test="${not empty datas}">
-					<c:forEach items="${datas}" var="data">
+				<c:if test="${not empty listSearch}">
+					<c:forEach items="${listSearch}" var="data">
 						<c:url var="managementDetailUrl" value="/management/detail">
-							<c:param name="mngNum">${data.mngNum}</c:param>
+							<c:param name="mngNum">${datas.mngNum}</c:param>
 						</c:url>
 						<tr onclick="location.href='${managementDetailUrl}'">
-							<td>${data.mngName}</td>
-							<td>${data.mngId}</td>
-							<td>${data.mngPhone}</td>
+							<td>${listSearch.mngName}</td>
+							<td>${listSearch.mngId}</td>
+							<td>${listSearch.mngPhone}</td>
 						</tr>
 					</c:forEach>
 				</c:if>
@@ -80,28 +77,32 @@
 				<ul class="pagination justify-content-center">
 					<c:if test="${pageData.hasPrevPage()}">
 						<li class="page-item">
-							<a class="page-link" href="${managementUrl}?page=${pageData.prevPageNumber}">Prev</a>
+							<a class="page-link" href="${managementsearchUrl}?page=${pageData.prevPageNumber}">Prev</a>
 						</li>
 					</c:if>
 					<c:forEach items="${pageData.getPageNumberList(pageData.currentPageNumber - 2, pageData.currentPageNumber + 2)}" var="num">
 						<li class="page-item ${pageData.currentPageNumber eq num ? 'active' : ''}">
-							<a class="page-link" href="${managementUrl}?page=${num}">${num}</a>
+							<a class="page-link" href="${managementsearchUrl}?page=${num}">${num}</a>
 						</li>
 					</c:forEach>
 					<c:if test="${pageData.hasNextPage()}">
 						<li class="page-item">
-							<a class="page-link" href="${managementUrl}?page=${pageData.nextPageNumber}">Next</a>
+							<a class="page-link" href="${managementsearchUrl}?page=${pageData.nextPageNumber}">Next</a>
 						</li>
 					</c:if>
 				</ul>
 			</div>
 		</nav>
 	</section>
-	<script>   		
+	<script>  
 	$(function(){
 		$("#btnSearch").click(function(){
-			document.form2.action ="${path}/pt/management/search";
-			document.form2.submit();
+			if(search.value.trim() === ""){
+				return;
+			}
+				//document.form1.action ="${path}/pt/management/search?keyword=" + keyword + "&btnSearch=" + btnSearch;
+				document.form1.action = "${path}/pt/management/search"
+				document.form1.submit();
 		});
 	});
 	</script>

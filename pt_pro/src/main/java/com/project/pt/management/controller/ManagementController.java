@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.project.pt.common.util.Paging;
+import com.project.pt.common.util.Search;
 import com.project.pt.management.model.ManagementDTO;
 import com.project.pt.management.model.MemberDTO;
 import com.project.pt.management.service.ManagementService;
@@ -33,33 +34,16 @@ import com.project.pt.management.service.ManagementService;
 @RequestMapping(value="/management")
 public class ManagementController {
 	
+	
 	@Autowired
 	private ManagementService service;
 	
 	@RequestMapping(value="", method=RequestMethod.GET)
 	public String getList(Model model, HttpSession session
 			, @RequestParam(defaultValue="1", required=false) int page
-			, @RequestParam(defaultValue="0", required=false) int pageCount
-			, @RequestParam(required=false) String mngRole) {
+			, @RequestParam(defaultValue="0", required=false) int pageCount ) {
+			
 		List datas = service.getAll();
-		List trainer = service.getTrainers();
-		List member = service.getMembers();
-		
-//		if(session.getAttribute(mngRole) == null) {
-//			datas = service.getAll();
-//		}	
-//		if(session.getAttribute("mngRole") == "T" ) {
-//			//data = service.getTrainer(mngRole);
-//			session.setAttribute("datas", trainer);
-//		}	
-//		if(session.getAttribute("mngRole") == "M") {
-//				//data = service.getMember(mngRole);	
-//			session.setAttribute("datas", member);
-//		}
-	
-
-		
-	
 		
 		if(session.getAttribute("pageCount") == null) {
 			session.setAttribute("pageCount", 5);
@@ -69,67 +53,112 @@ public class ManagementController {
 			session.setAttribute("pageCount", pageCount);
 		}
 		
+
 		pageCount = Integer.parseInt(session.getAttribute("pageCount").toString());
 		Paging paging = new Paging(datas, page, pageCount);
 		
 		model.addAttribute("datas", paging.getPageData());
-		model.addAttribute("trainer", paging.getPageData());
-		model.addAttribute("member", paging.getPageData());
 		model.addAttribute("pageData", paging);
-		//model.addAttribute("mngRole", mngRole);
-		//model.addAttribute("data", data);
-
+		
 		return "management/list";	
 		}
+	
+	@RequestMapping(value="/search", method=RequestMethod.GET)
+	public String searchs(Model model, HttpSession session
+			, @RequestParam(required = false) String keyword
+		    , @RequestParam(defaultValue="1", required=false) int page
+		    , @RequestParam(defaultValue="0", required=false) int pageCount
+			, @RequestParam(defaultValue="0", required=false) int mngNum) {
+		
+		List datas = service.getAll();
+		Search search = new Search(datas, page, pageCount);		
+		search.setKeyword(keyword);
+		
+		
+		pageCount = Integer.parseInt(session.getAttribute("pageCount").toString());
+		Paging paging = new Paging(datas, page, pageCount);
+		
+		model.addAttribute("paging", search);
+		model.addAttribute("datas", paging.getPageData(search));
+		
+		
+//			if(search == null) {
+//				List<ManagementDTO> datas = service.getAll();
+// 			}else {
+//				if(search !=null) {
+//					List<ManagementDTO> listSearch = service.listSearch(search);
+//					model.addAttribute("listSearch", listSearch);
+//
+//					return "management/search";
+//				}
+//			}
+//			
+		
+//			List datas = service.getAll();
+//			model.addAttribute("datas", datas);
+//		
+
+		
+//		if(keyword.getkeyword() != null) {
+//			//service.listSearch();
+//			return "redirect:/management/search";
+//		} else {
+//			return "redirect:";
+//			
+//		}		
+		return "redirect:";
+	}
 	
 	@GetMapping(value="/detail")
 	public String getDetail(Model model
 			, HttpSession session
 			, @RequestParam(defaultValue="0", required=false) int mngNum) {
-		ManagementDTO data = service.getData(mngNum);
-		model.addAttribute("data", data); //users데이터를 모델에 저장
- 		MemberDTO datas = service.memberDatas(mngNum);
-		model.addAttribute("datas", datas); //pt카운트 pt선생 정보를 모델에 저장
 		
-		if(data != null) {
+		//트레이너만 조회
+		List<ManagementDTO> listTrainer = service.selectTrainer();
+		model.addAttribute("listTrainer", listTrainer); //트레이너를 모델에 저장
+		
+		ManagementDTO All = service.getAllData(mngNum); //모든데이터 조회
+		model.addAttribute("All", All);	//모든데이터를 ALL에 저장 -> JSTL 사용
+		
+		if(All != null) {
 			return "management/detail";
 		} else {
 			return "management/list";
 		}
 	}
-	@PostMapping
-	@RequestMapping(value = "/modify", method = RequestMethod.POST)
-	public String modify(Model model,
-		@ModelAttribute ManagementDTO dto) {
+	
+	@PostMapping(value = "/modify")
+	public String modify(
+		 Model model
+		, @RequestParam (defaultValue="0", required=false) int mngNum
+		, @ModelAttribute ManagementDTO dto
+		, HttpSession session) {
 		
-		boolean result = service.check(dto.getMngId(), dto.getMngPass());
-		if(result) { //비밀번호 일치시 수정 처리후 회원목록으로 리다이렉트
-			service.updateMember(dto);
-			return "redirect:/management/list";
-		} else { //비밀번호 불일치시 메세지 출력
-			model.addAttribute("data", dto);
-			model.addAttribute("mesage", "비밀번호 불일치");
+		//dto에 detail.jsp에서 submit으로 데이터를 보냄	
+		if(dto != null) { //dto 값이 널이 아니면
+			service.updateMember(dto);  //dto의 Member를 업데이트 해라
+			System.out.println("if문 업데이트 확인용 " + dto);
+			service.updatePt(dto); //dto의 Pt를 업데이트 해라
+			System.out.println("if문 업데이트 확인용 " + dto);
+		return "redirect:/management";
 		}
-		
-		return "management/detail";
+		return "management/list";
 	}
 	
 	@PostMapping("/delete")
-	public String memberDelete(ManagementDTO dto
-			 , @RequestParam (defaultValue="0", required=false) int mngNum
+	public String memberDelete(
+			  @RequestParam (defaultValue="0", required=false) int mngNum
 			 , HttpSession session
 			 , Model model) {
 		
 		ManagementDTO data = service.getData(mngNum);
 		
-		session.getAttribute("mngNum");
-		//비밀번호 체크
-		//boolean result = service.check(mngId, mngPass);
 		if(data == null) { //삭제할 데이터 없음
 			return "management/null";
-		} else {
+		} else {//삭제할 데이터가 있으면 데이터 삭제를 실행하고
 			boolean result = service.remove(data);
-			if(result) {
+			if(result) {//실행했다면 리다이렉트를 실행해라
 				return "redirect:/management";
 			}
 		}

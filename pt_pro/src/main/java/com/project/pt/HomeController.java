@@ -21,10 +21,7 @@ import com.project.pt.management.service.ManagementService;
 public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
-	@Autowired
-	private ManagementService managementService;
-	
+
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model) {
 		logger.info("home");

@@ -1,10 +1,13 @@
 package com.project.pt.management.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.project.pt.common.util.Search;
 import com.project.pt.management.model.ManagementDAO;
 import com.project.pt.management.model.ManagementDTO;
 import com.project.pt.management.model.MemberDTO;
@@ -15,9 +18,14 @@ public class ManagementService {
 	@Autowired
 	private ManagementDAO dao;
 	
-	
+	//전체데이터 조회
 	public List<ManagementDTO> getAll() {
 		List<ManagementDTO> datas = dao.selectAll();
+		return datas;
+	}
+	//검색용
+	public List<ManagementDTO> listSearch(Search Search) {
+		List<ManagementDTO> datas = dao.searchAll(Search);
 		return datas;
 	}
 
@@ -26,25 +34,11 @@ public class ManagementService {
 		return data;
 	}
 	
-	public List<ManagementDTO> getTrainers() {
-		List<ManagementDTO> datas = dao.selectTrainers();
-		return datas;
+	public ManagementDTO getAllData(int mngNum) {
+		ManagementDTO data = dao.AllData(mngNum);
+		return data;
 	}
-	
-	public List<ManagementDTO> getMembers() {
-		List<ManagementDTO> datas = dao.selectMembers();
-		return datas;
-	}
-	
-//	public ManagementDTO getTrainer(String mngRole) {
-//		ManagementDTO data = dao.selectTrainer(mngRole);
-//		return data;
-//	}
-//	
-//	public ManagementDTO getMember(String mngRole) {
-//		ManagementDTO data = dao.selectMember(mngRole);
-//		return data;
-//	}
+
 	
 	public List<ManagementDTO> getMember(){
 		List<ManagementDTO> member = dao.selectMember();
@@ -52,13 +46,8 @@ public class ManagementService {
 	}
 
 	
-	public ManagementDTO detailData(int mngNum){
-		ManagementDTO data = dao.selectData(mngNum);
-		return data;
-	}
-
-	public List<ManagementDTO> detailDatas() {
-		List<ManagementDTO> datas = dao.detailAll();
+	public List<ManagementDTO> selectTrainer() {
+		List<ManagementDTO> datas = dao.selectTrainer();
 		return datas;
 	}
 	
@@ -67,23 +56,33 @@ public class ManagementService {
 		return datas;
 	}
 	
-	 //아이디 비밀번호 체크	
-	public boolean check(String mngId, String mngPass) {
-		return dao.check(mngId, mngPass);
-	}
+
+	
 	
 	//회원 정보 수정
-	public boolean updateMember(ManagementDTO dto) {
-		boolean result = dao.updateMember(dto);
-		return result;
-	}
+		public void updateMember(ManagementDTO data) {
+			dao.updateMember(data);
+			System.out.println("서비스 mem data 확인 " + data);
+		}
+		
+	//회원 정보 수정
+		public void updatePt(ManagementDTO data) {
+			dao.updatePt(data);
+			System.out.println("서비스 Pt data 확인 " + data);
+		}
+		
 
 	//회원 정보 삭제
 	public boolean remove(ManagementDTO data) {
-		ManagementDTO memberData = new ManagementDTO();
-		
+		//삭제예정
+		//ManagementDTO memberData = new ManagementDTO();
 		//dao.deleteMemberData(memberData);
 		boolean result = dao.deleteData(data);
+		System.out.println("서비스 딜리트확인" + result);
 		return result;
 	}
+//	 //아이디 비밀번호 체크	
+//	public boolean check(String mngId, String mngPass) {
+//		return dao.check(mngId, mngPass);
+//	}
 }
