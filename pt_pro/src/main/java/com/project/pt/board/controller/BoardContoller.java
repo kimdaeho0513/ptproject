@@ -37,17 +37,14 @@ public class BoardContoller {
 	private BoardService service;
 
 	@GetMapping(value = "")
-	public String getList(Model model, HttpSession session, @RequestParam(required = false) String category,
+	public String getList(Model model, HttpSession session, 
+			@RequestParam(required = false) String category,
+			@SessionAttribute("loginData")MemDTO memDto,
 			@RequestParam(required = false) Integer usersCode,
 			@RequestParam(defaultValue = "1", required = false) int page) {
 		logger.info("CONTROLgetList(category={},page={},sd={})", category, page, session.getAttribute("userid"));
 		List datas;
-		// session.setAttribute("userid","khadmin1"); //어드민 세션
-		// session.setAttribute("roles","A");//
-
-		session.setAttribute("userid", "thebibi"); // 유저 세션
-		session.setAttribute("roles", "M");
-
+		
 		if (category.equals("R")) {
 			List Tdata = service.getTrainer();
 			model.addAttribute("Tdata", Tdata);
@@ -86,7 +83,7 @@ public class BoardContoller {
 	@GetMapping(value = "/modify")
 	public String modify(Model model, @RequestParam(required = false) int dataNum,
 			@RequestParam(required = false) String category,
-			/* ,@SessionAttribute("loginData")MemDTO memDto */
+			@SessionAttribute("loginData")MemDTO memDto,
 			@ModelAttribute BoardVO boardVo) {
 		logger.info("CONTROLmodify(boardVo={})", boardVo);
 
@@ -103,7 +100,7 @@ public class BoardContoller {
 
 	@PostMapping(value = "/modify")
 	public String modify(Model model
-	// , @SessionAttribute("loginData") EmpDTO empDto
+			, @SessionAttribute("loginData") MemDTO memDto
 			, @ModelAttribute BoardVO boardVo, @RequestParam(required = false) int dataNum,
 			@RequestParam(required = false) String category) {
 		BoardDTO data = service.getDetail(dataNum);
@@ -169,7 +166,7 @@ public class BoardContoller {
 
 	@PostMapping(value = "/delete", produces = "application/json; charset=utf-8")
 	@ResponseBody
-	public String delete(/* @SessionAttribute("loginData") MemDTO memDto, */
+	public String delete(@SessionAttribute("loginData") MemDTO memDto,
 			@RequestParam int dataNum) {
 		BoardDTO data = service.getDetail(dataNum);
 
@@ -213,19 +210,17 @@ public class BoardContoller {
 
 	@PostMapping(value = "/add")
 	public String add(HttpServletRequest request,
-			// @SessionAttribute("loginData") MemDTO memDto,
+			@SessionAttribute("loginData") MemDTO memDto,
 			@RequestParam(required = false) String category, @ModelAttribute BoardVO boardVo) {
 		logger.info("adddd(boardVo={})", boardVo);
 
-		MemDTO memDto = new MemDTO();
+		
 		memDto = service.Tname(boardVo.getBtrainer());
 
 		BoardDTO data = new BoardDTO();
-		// MemDTO memDto = new MemDTO();
 		data.setTitle(boardVo.getTitle());
 		data.setContents(boardVo.getContent());
-		// data.setWriter(memDto.getUserid());
-		data.setWriter("thebibi");//
+		data.setWriter(memDto.getId());
 		data.setCategory(boardVo.getCategory());
 
 		if (boardVo.getBtrainer() > 0) {
@@ -253,7 +248,7 @@ public class BoardContoller {
 
 	@PostMapping(value = "/comment/add")
 	public String commnet(HttpServletRequest request,
-			// @SessionAttribute("loginData") MemDTO memDto,
+			@SessionAttribute("loginData") MemDTO memDto,
 			@RequestParam String content,
 			@RequestParam(required = false) int dataNum,
 			@RequestParam(required = false) String category
@@ -264,7 +259,7 @@ public class BoardContoller {
 		System.out.println(datas);
 		data.setCommentContents(content);
 		data.setDateNum(dataNum);
-		data.setCommentWriter("thebibi");
+		data.setCommentWriter(memDto.getId());
 		
 		
 		boolean result = service.comment(data);
