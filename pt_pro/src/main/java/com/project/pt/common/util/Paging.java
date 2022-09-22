@@ -11,10 +11,14 @@ public class Paging {
 	private int nextPageNumber; 	//다음페이지 넘버 
 	private int prevPageNumber;		//이전 페이지 넘버
 	private List<Integer> pageNumberList;	
+
 	private List<Object> pageData;
+	private int lastPage;
+	private int lastPageMinus;
 	
+
 	public Paging(List<Object> datas, int currentPageNumber, int limit) {
-		this.offset = limit * (currentPageNumber - 1);
+		this.offset = limit * (currentPageNumber - 1); //1페이지 0 2페이지 10 3페이지 20 4페이지 30
 		this.limit = limit;
 		this.currentPageNumber = currentPageNumber;
 		this.nextPageNumber = currentPageNumber + 1;
@@ -27,8 +31,20 @@ public class Paging {
 		int max = this.offset + this.limit;
 		max = max < datas.size() ? max : datas.size();
 		this.pageData = datas.subList(this.offset, max);
+		int page2=datas.size()%10;
+		if(page2 == 0) {
+			this.lastPage = (datas.size())/10;
+		} else {
+			this.lastPage = ((datas.size())/10)+1;
+
+		}
+		this.lastPageMinus=lastPage-1;
 	}
 	
+	
+	public int getLastPage() {
+		return lastPage;
+	}
 	public int getOffset() {
 		return offset;
 	}
