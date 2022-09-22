@@ -38,7 +38,7 @@ public class SignupController {
 		if(result) {
 			return "/login/suc_signup";
 		}else {
-			return "redirect:/";
+			return "redirect:/login";
 		}
 	}
 	

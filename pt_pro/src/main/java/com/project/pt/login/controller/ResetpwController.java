@@ -36,7 +36,7 @@ public class ResetpwController {
 		if(result) {
 			return "/login/suc_resetpw";
 		}else {
-			return "redirect:/";
+			return "redirect:/login";
 		}
 	}
 }

@@ -7,11 +7,38 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+		
 <title>로그인</title>
 <%@ include file="./resources/login_header.jsp"%>
 <style>
 <%@ include file="./resources/signin.css"%>
 </style>
+<script type="text/javascript">
+		$(document).ready(function(){
+			let message = "${msg}";
+	        if (message != "") {
+	            alert(message);
+	        }
+	        
+			$("#submit").on("click", function(){
+				if($("#floatingInput").val()==""){
+					alert("아이디를 입력해주세요.");
+					$("#floatingInput").focus();
+					return false;
+				}
+				if($("#floatingPassword").val()==""){
+					alert("비밀번호를 입력해주세요.");
+					$("#floatingPassword").focus();
+					return false;
+				}
+				if($("input[name=role]:radio:checked").length < 1){
+					alert("사용자 선택을 해주세요.");
+					return false;
+				}
+			});
+		})
+</script>
 </head>
 <body class="text-center">
 	<main class="form-signin">
@@ -32,7 +59,7 @@
 			        <input type="radio" value="T" name="role"> trainer <input type="radio" value="M" name="role"> member
 			      </label>
 			    </div>
-			    <button class="w-100 btn btn-lg btn-primary" type="submit">로그인</button>
+			    <button class="w-100 btn btn-lg btn-primary" type="submit" id="submit">로그인</button>
 			    <p class="mt-5 mb-3 text-muted">&copy; 2017–2022</p>
 				
 			</form>

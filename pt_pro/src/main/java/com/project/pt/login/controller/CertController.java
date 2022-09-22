@@ -64,7 +64,8 @@ private static final Logger logger = LoggerFactory.getLogger(CertController.clas
 		if(session.getAttribute("cert").equals(usercert)) {
 			return "login/resetpw";
 		}else {
-			return "redirect:/";
+			model.addAttribute("msg","잘못된 인증번호입니다.");
+			return "/login/cert";
 		}
 		
 		
