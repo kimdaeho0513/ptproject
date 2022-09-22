@@ -17,6 +17,10 @@ public class ManagementDTO {
 	private Date mngDeleteDate;
 	private String mngDeleted;
 	private Date mngLog;
+	
+	private int memCount;
+	private int memPt;
+	private int memUser;
 	public int getMngNum() {
 		return mngNum;
 	}
@@ -95,16 +99,33 @@ public class ManagementDTO {
 	public void setMngLog(Date mngLog) {
 		this.mngLog = mngLog;
 	}
+	public int getMemCount() {
+		return memCount;
+	}
+	public void setMemCount(int memCount) {
+		this.memCount = memCount;
+	}
+	public int getMemPt() {
+		return memPt;
+	}
+	public void setMemPt(int memPt) {
+		this.memPt = memPt;
+	}
+	public int getMemUser() {
+		return memUser;
+	}
+	public void setMemUser(int memUser) {
+		this.memUser = memUser;
+	}
 	@Override
 	public String toString() {
 		return "ManagementDTO [mngNum=" + mngNum + ", mngId=" + mngId + ", mngPass=" + mngPass + ", mngName=" + mngName
 				+ ", mngBirth=" + mngBirth + ", mngPhone=" + mngPhone + ", mngEmail=" + mngEmail + ", mngGender="
 				+ mngGender + ", mngRole=" + mngRole + ", mngHidden=" + mngHidden + ", mngDeleteDate=" + mngDeleteDate
-				+ ", mngDeleted=" + mngDeleted + ", mngLog=" + mngLog + "]";
+				+ ", mngDeleted=" + mngDeleted + ", mngLog=" + mngLog + ", memCount=" + memCount + ", memPt=" + memPt
+				+ ", memUser=" + memUser + "]";
 	}
-	
-	
-	
+
 	
 	
 }

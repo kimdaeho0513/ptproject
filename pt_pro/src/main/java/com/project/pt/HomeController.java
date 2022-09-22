@@ -23,6 +23,7 @@ public class HomeController {
 
 <<<<<<< HEAD
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+<<<<<<< HEAD
 	
 
 
@@ -60,6 +61,8 @@ public class HomeController {
 	@Autowired
 	private ManagementService managementService;
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+=======
+>>>>>>> refs/remotes/origin/지재용
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {

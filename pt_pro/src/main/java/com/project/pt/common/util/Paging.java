@@ -15,6 +15,7 @@ public class Paging {
 	private List<Object> pageData;
 	private int lastPage;
 	private int lastPageMinus;
+	private String keyword;
 	
 
 	public Paging(List<Object> datas, int currentPageNumber, int limit) {
@@ -40,7 +41,16 @@ public class Paging {
 		}
 		this.lastPageMinus=lastPage-1;
 	}
-	
+	public String getkeyword() {
+		return keyword;
+	}
+
+
+
+
+	public void setkeyword(String keyword) {
+		this.keyword = keyword;
+	}
 	
 	public int getLastPage() {
 		return lastPage;
@@ -79,6 +89,11 @@ public class Paging {
 		return pageData;
 	}
 	
+
+	public Object getPageData(Search search) {
+		return pageData;
+	}
+	
 	public boolean hasNextPage() {
 		return this.pageNumberList.contains(this.nextPageNumber);
 	}
@@ -86,5 +101,20 @@ public class Paging {
 	public boolean hasPrevPage() {
 		return this.pageNumberList.contains(this.prevPageNumber);
 	}
+
+
+
+
+	@Override
+	public String toString() {
+		return "Paging [offset=" + offset + ", limit=" + limit + ", currentPageNumber=" + currentPageNumber
+				+ ", nextPageNumber=" + nextPageNumber + ", prevPageNumber=" + prevPageNumber + ", pageNumberList="
+				+ pageNumberList + ", pageData=" + pageData + ", keyword=" + keyword + "]";
+	}
+
+
+
+
 	
+		
 }

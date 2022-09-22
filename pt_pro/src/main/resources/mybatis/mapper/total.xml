@@ -3,6 +3,28 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="totalMapper">
+		<select id="usersSelectAll" resultType="managementDto">
+			SELECT u.USERSCODE AS mngNum 
+			 , u.USERID AS mngId
+			 , u.PASSWORD AS mngPass
+			 , u.NAME AS mngName
+			 , u.BIRTH AS mngBirth
+			 , u.PHONE AS mngPhone
+			 , u.EMAIL AS mngEmail
+			 , u.GENDER AS mngGender
+			 , u.ROLES AS mngRole
+			 , u.HIDDEN AS mngHidden
+			 , u.DELETEDATE AS mngDeleteDate
+			 , u.DELETED AS mngDeleted
+			 , u.DATELOG AS mngLog
+			 , m.MEM_COUNT AS memCount
+			 , m.MEM_PT	AS memPt
+			 , m.MEM_USER  AS memUser
+			 FROM USERS u 
+			 FULL JOIN MEMBERS m 
+			 ON u.USERSCODE = m.MEM_USER
+	</select>
+	<!-- 수정전
 	<select id="usersSelectAll" resultType="managementDto">
 		SELECT USERSCODE AS mngNum 
 			 , USERID AS mngId
@@ -19,7 +41,7 @@
 			 , DATELOG AS mngLog
 		FROM USERS 
 	</select>
-	
+	-->
 	<select id="selectData" resultType="managementDto">
 		SELECT 
 			USERSCODE AS mngNum 
@@ -39,22 +61,27 @@
 		WHERE USERSCODE = #{mngNum}
 	</select>
 	
-	<select id="detailDatas" resultType="managementDto">
-		SELECT USERSCODE AS mngNum 
-			 , USERID AS mngId
-			 , PASSWORD AS mngPass
-			 , NAME AS mngName
-			 , BIRTH AS mngBirth
-			 , PHONE AS mngPhone
-			 , EMAIL AS mngEmail
-			 , GENDER AS mngGender
-			 , ROLES AS mngRole
-			 , HIDDEN AS mngHidden
-			 , DELETEDATE AS mngDeleteDate
-			 , DELETED AS mngDeleted
-			 , DATELOG AS mngLog
-		FROM USERS 
-		WHERE USERSCODE = #{mngNum}
+	<select id="AllData" resultType="managementDto">
+			SELECT u.USERSCODE AS mngNum 
+			 , u.USERID AS mngId
+			 , u.PASSWORD AS mngPass
+			 , u.NAME AS mngName
+			 , u.BIRTH AS mngBirth
+			 , u.PHONE AS mngPhone
+			 , u.EMAIL AS mngEmail
+			 , u.GENDER AS mngGender
+			 , u.ROLES AS mngRole
+			 , u.HIDDEN AS mngHidden
+			 , u.DELETEDATE AS mngDeleteDate
+			 , u.DELETED AS mngDeleted
+			 , u.DATELOG AS mngLog
+			 , m.MEM_COUNT AS memCount
+			 , m.MEM_PT	AS memPt
+			 , m.MEM_USER  AS memUser
+			 FROM USERS u 
+			 FULL JOIN MEMBERS m 
+			 ON u.USERSCODE = m.MEM_USER
+			 WHERE USERSCODE = #{mngNum}
 	</select>
 	
 	<!-- PT카운트 PT선생  -->
@@ -68,24 +95,7 @@
 		WHERE u.USERSCODE = #{mngNum}
 	</select>
 	
-	<!-- 수정 -->
-	<update id="modify">
-	UPDATE USERSCODE AS U, MEMBERS AS M
-		   SET U.USERID = #{mngId}
-			 , U.USERID = #{mngId}
-			 , U.PASSWORD = #{mngPass}
-			 , U.NAME = #{mngName}
-			 , U.BIRTH = #{mngBirth}
-			 , U.PHONE = #{mngPhone}
-			 , U.EMAIL = #{mngEmail}
-			 , U.GENDER = #{mngGender}
-			 , U.ROLES = #{mngRole}
-			 , M.MEM_COUNT = #{memCount}
-			 , M.MEM_PT	= #{memPt}
-			 , M.MEM_USER  = #{memUser}
-			WHERE U.USERSCODE = #{mngNum}
-			AND M.MEMBERS = #{mngNum}	  
-	</update>
+	
 	
 	<!-- 멤버만 -->
 	<select id="selectMember" resultType="managementDto">
@@ -129,8 +139,28 @@
 	<select id="search" resultType="managementDto">
 		SELECT NAME, USERID, PHONE
 		FROM USERS
-		WHERE (NAME LIKE '%검색%' OR USERID LIKE '%검색%' OR PHONE LIKE '%검색%')
+		WHERE (NAME LIKE '%'||#{keyword}||'%' OR USERID LIKE '%'||#{keyword}||'%' OR PHONE LIKE '%'||#{keyword}||'%')
 	</select>
+	
+	<!-- 수정 맴버데이터-->
+	<update id="updateMember" parameterType="managementDto">
+ 	 UPDATE USERS
+ 		SET  PASSWORD = #{mngPass}
+			 , BIRTH = #{mngBirth}
+			 , PHONE = #{mngPhone}
+			 , EMAIL = #{mngEmail}
+			 , GENDER = #{mngGender}
+		WHERE USERSCODE = #{mngNum}
+	</update>
+	
+	<!-- 수정 pt데이터 -->
+	<update id="updatePt" parameterType="managementDto">
+	UPDATE MEMBERS
+	   SET MEM_COUNT = #{memCount}
+		 , MEM_PT = #{memPt}
+		WHERE MEM_USER = #{mngNum}
+	</update>
+	
 	
 	<!-- 삭제 -->
 	<delete id="deleteMember">
@@ -138,11 +168,12 @@
 		WHERE USERSCODE = #{mngNum}
 	</delete>
 	
-	<!-- 비밀번호 체크 -->
+	<!-- 비밀번호 체크 
 	<select id="check" resultType="int">
 		SELECT 
 			COUNT(*)
 			FROM USERS
 			WHERE  USERID = ${mngId} AND PASSWORD = #{mngPass}
 	</select>
+	-->
 </mapper>

@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.conn.db.DBConn;
+import com.project.pt.common.util.Paging;
+import com.project.pt.common.util.Search;
 
 @Repository
 public class ManagementDAO {
@@ -28,15 +30,28 @@ public class ManagementDAO {
 		List<ManagementDTO> res = session.selectList(mapperId);
 		return res;
 	}
+	//검색용
+	public List<ManagementDTO> searchAll(Search search) {
+		String mapperId = String.format(mapper, "search");
+		List<ManagementDTO> res = session.selectList(mapperId, search);
+		System.out.println("dao res값 확인" + res);
+		return res;
+	}
 	
-	public List<ManagementDTO> selectAllDelete() {
-		String mapperId = String.format(mapper, "deleteMember");
+	public ManagementDTO selectData(int mngNum) {
+		String mapperId = String.format(mapper, "selectData");
+		ManagementDTO res = session.selectOne(mapperId, mngNum);
+		return res;
+	}
+	
+	public List<ManagementDTO> selectTrainer() {
+		String mapperId = String.format(mapper, "selectTrainer");
 		List<ManagementDTO> res = session.selectList(mapperId);
 		return res;
 	}
-
-	public ManagementDTO selectData(int mngNum) {
-		String mapperId = String.format(mapper, "selectData");
+	
+	public ManagementDTO AllData(int mngNum) {
+		String mapperId = String.format(mapper, "AllData");
 		ManagementDTO res = session.selectOne(mapperId, mngNum);
 		return res;
 	}
@@ -62,78 +77,29 @@ public class ManagementDAO {
 		return res;
 	}
 
-	//트레이너 셀렉
-		public List<ManagementDTO> selectTrainers() {
-			String mapperId = String.format(mapper, "selectTrainer");
-			List<ManagementDTO> res = session.selectList(mapperId);
-			return res;
-		}
-	//멤버 셀렉
-		public List<ManagementDTO> selectMembers() {
-			String mapperId = String.format(mapper, "selectMember");
-			List<ManagementDTO> res = session.selectList(mapperId);
-			return res;
-		}
-		
-		//회원정보 수정용 비밀번호 체크
-		public boolean check(String mngId, String mngPass) {
-			boolean result = false;
-			Map<String, String> map = new HashMap<String, String>();
-			map.put("mngId", mngId);
-			map.put("mngPass", mngPass);
-			
-			if(map.containsKey(mngId)) {
-				if(!map.get(mngId).equals(mngPass)) {
-					System.out.println("비밀번호가 틀렸습니다.");
-				} else {
-					System.out.println("확인되었습니다.");
-					result = true;
-				}
-			}
-			return result;
-			
-//			int count = Session("totalMapper.check", map);
-//			if(count == 1) {
-//				result = true;
-//			}
-//			return result;
-		}
-		
-		public boolean updateMember(ManagementDTO dto) {
-			String mapperId = String.format(mapper, "updateMember");
-			int res = session.update(mapperId, dto);
-			return res == 1 ? true : false;
-		}
+	
+	//멤버정보 수정
+	public void updateMember(ManagementDTO data) {
+		String mapperId = String.format(mapper, "updateMember");
+		session.update(mapperId, data);
+		System.out.println("실험용 mem dao "+ data);
+	}
+	//pt,pt선생 수정
+	public void updatePt(ManagementDTO data) {
+		String mapperId = String.format(mapper, "updatePt");
+		session.update(mapperId, data);
+		System.out.println("실험용 pt dao "+ data);
+	}
 
-		
-		//멤버 삭제 
-//		public boolean deleteMemberData(ManagementDTO data) {
-//			String mapperId = String.format(mapper, "deleteMember");
-//			int res = session.delete(mapperId, data);
-//			return res >= 0 ? true : false;
-//		}
+
 		//멤버 삭제
 		public boolean deleteData(ManagementDTO data) {
 			String mapperId = String.format(mapper, "deleteMember");
 			int res = session.delete(mapperId, data);
+			System.out.println("삭제 확인" +res);
 			return res == 1 ? true : false;
 		}
-	
 		
-		
-//	//트레이너 셀렉
-//	public ManagementDTO selectTrainer(String mngRole) {
-//		String mapperId = String.format(mapper, "selectTrainer");
-//		ManagementDTO res = session.selectOne(mapperId, mngRole);
-//		return res;
-//	}
-//	//멤버 셀렉
-//		public ManagementDTO selectMember(String mngRole) {
-//			String mapperId = String.format(mapper, "selectMember");
-//			ManagementDTO res = session.selectOne(mapperId, mngRole);
-//			return res;
-//		}
-	
 	}	
 
  
