@@ -6,9 +6,9 @@
 		<setting name="jdbcTypeForNull" value="NULL"/>
 	</settings>
 	<typeAliases>
-		<!--typeAlias type="com.project.pt.mypage.model.MypageDTO" alias="mypageDto" />
+		<typeAlias type="com.project.pt.mypage.model.MypageDTO" alias="mypageDto" />
+		<typeAlias type="com.project.pt.management.model.ManagementDTO" alias="managementDto" />
 		<typeAlias type="com.project.pt.mem.model.MemDTO" alias="memDto" />
-		<typeAlias type="com.project.pt.management.model.ManagementDTO" alias="managementDto" /-->
 		<typeAlias type="com.project.pt.board.model.BoardDTO" alias="boardDto" />
 		<typeAlias type="com.project.pt.board.model.BoardStaticsDTO" alias="boardStaticsDto" />
 	</typeAliases>
