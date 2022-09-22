@@ -1,17 +1,33 @@
 package com.project.pt.board.vo;
 
+
 public class BoardVO {
+	
 	private int dataNum;
 	private String title;
 	private String content;
 	private String category;
 	private String keyword;
 	private String type;
+	private String name;
+	private int btrainer;
+	private int usersCode;
+
 	
 	
-	
-	
-	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}	
+
+	public int getBtrainer() {
+		return btrainer;
+	}
+	public void setBtrainer(int btrainer) {
+		this.btrainer = btrainer;
+	}
 	public String getType() {
 		return type;
 	}
@@ -50,10 +66,17 @@ public class BoardVO {
 	}
 	
 	
+	public int getUsersCode() {
+		return usersCode;
+	}
+	public void setUsersCode(int usersCode) {
+		this.usersCode = usersCode;
+	}
 	@Override
 	public String toString() {
 		return "BoardVO [dataNum=" + dataNum + ", title=" + title + ", content=" + content + ", category=" + category
-				+ ", keyword=" + keyword + ", type=" + type + "]";
+				+ ", keyword=" + keyword + ", type=" + type + ", name=" + name + ", btrainer=" + btrainer
+				+ ", usersCode=" + usersCode + "]";
 	}
 	
 	

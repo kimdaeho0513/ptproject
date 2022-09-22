@@ -1,8 +1,9 @@
-package com.project.pt.board.model;
+package com.project.pt.board.vo;
 
 import java.sql.Date;
 
-public class BoardStaticsDTO {
+public class BoardCommentVO {
+
 
 	private int commentNum;
 	private int dateNum;
@@ -10,7 +11,7 @@ public class BoardStaticsDTO {
 	private String commentWriter;
 	private String deleted;
 	private String hidden;
-	private Date commentDate;
+
 	
 	
 	public int getCommentNum() {
@@ -49,19 +50,14 @@ public class BoardStaticsDTO {
 	public void setHidden(String hidden) {
 		this.hidden = hidden;
 	}
-	public Date getCommentDate() {
-		return commentDate;
-	}
-	public void setCommentDate(Date commentDate) {
-		this.commentDate = commentDate;
-	}
-	
-	
 	@Override
 	public String toString() {
-		return "BoardStaticsDTO [commentNum=" + commentNum + ", dateNum=" + dateNum + ", commentContents="
+		return "BoardCommentVO [commentNum=" + commentNum + ", dateNum=" + dateNum + ", commentContents="
 				+ commentContents + ", commentWriter=" + commentWriter + ", deleted=" + deleted + ", hidden=" + hidden
-				+ ", commentDate=" + commentDate + "]";
+				+ "]";
 	}
+
+	
+
 
 }

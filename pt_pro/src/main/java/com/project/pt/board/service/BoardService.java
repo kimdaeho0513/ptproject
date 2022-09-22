@@ -11,11 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.project.pt.board.vo.BoardVO;
-import com.project.pt.mem.model.MemDTO;
 import com.project.pt.board.model.BoardDAO;
 import com.project.pt.board.model.BoardDTO;
 import com.project.pt.board.model.BoardStaticsDTO;
+import com.project.pt.board.vo.BoardVO;
+import com.project.pt.mem.model.MemDTO;
+
 
 @Service
 public class BoardService {
@@ -29,107 +30,88 @@ public class BoardService {
 		List<BoardDTO> board = dao.selectBoard(category);
 		return board;
 	}	
+	
+	
 	public BoardDTO getDetail(int dataNum) {
 		logger.info("getDetail(dataNum={}",dataNum);
+		
 		BoardDTO detail = dao.dataDetail(dataNum);
-
+		dao.countPlus(dataNum);
 		return detail;
+		
 	}
 	
 	
 	
 	public List<BoardDTO> searchKeyword(BoardVO boardVo) {
 		logger.info("searchKeyword(boardVo.getType={},boardVo.getKeyword()={})",boardVo.getType(),boardVo.getKeyword());
-		
+		List<BoardDTO> searchReslt;
 		if(boardVo.getType().equals("title")) {	
-			List<BoardDTO> searchReslt = dao.searchKeyword(boardVo);
-			return searchReslt;
-		} else{
-			List<BoardDTO> searchReslt = dao.searchWriter(boardVo);
-
-		return searchReslt;
+			searchReslt = dao.searchKeyword(boardVo);
+		} else if(boardVo.getType().equals("id")){
+			searchReslt = dao.searchWriter(boardVo);
+		} else {
+			searchReslt = dao.searchWriter(boardVo);
 		}
+		return searchReslt;
+	}
+	
+
+	public List<BoardDTO> searchAll(BoardVO boardVo) {
+		logger.info("searchKeyword(boardVo.getType={},boardVo.getKeyword()={})",boardVo.getType(),boardVo.getKeyword());
+		List<BoardDTO> searchReslt;
+		if(boardVo.getType().equals("title")) {	
+			searchReslt = dao.searchAllKeyword(boardVo);
+		} else if(boardVo.getType().equals("id")){
+			searchReslt = dao.searchAllWriter(boardVo);
+		} else {
+			searchReslt = dao.searchAllWriter(boardVo);
+		}
+		return searchReslt;
 	}
 	
 	
-	public boolean remove(BoardDTO data) {
-		logger.info("searchWriter(BoardVO={}",data);
+
+	public boolean modify(BoardDTO data) {
+		boolean result = dao.updateData(data);
+		return result;
+	}
+
+	public boolean modifyTag(BoardDTO data) {
+		boolean result = dao.updateDataTag(data);
+		return result;
+	}
+	
+	
+	
+	
+	public boolean delete(int dataNum) {
+		logger.info("delete(BoardVO={}",dataNum);
 
 		BoardStaticsDTO staticsData = new BoardStaticsDTO();
-		staticsData.setDateNum(data.getDataNum());
+		staticsData.setDateNum(dataNum);
 		
-		dao.deleteStaticsData(staticsData);
-		boolean result = dao.deleteData(data);
+		dao.deleteStaticsData(dataNum);
+		boolean result = dao.deleteData(dataNum);
 		
 		return result;
 	}
 
 	@Transactional
 	public void incViewCnt(HttpSession session, BoardDTO data) {
-		BoardStaticsDTO staticsData = new BoardStaticsDTO();
-		staticsData.setbId(data.getWriter());
-		//staticsData.setEmpId(((EmpDTO)session.getAttribute("loginData")).getEmpId());
+		data.setConut(data.getConut() + 1);
 		
-		staticsData = dao.selectStatics(staticsData);
-		
-		boolean result = false;
-		if(staticsData == null) {
-			result = dao.updateViewCnt(data);
-			if(!result) {
-				throw new RuntimeException("조회수 통계 업데이트 처리에 문제가 발생 하였습니다.");
-			}
-			
-			staticsData = new BoardStaticsDTO();
-			staticsData.setbId(data.getWriter());
-			//staticsData.setEmpId(((EmpDTO)session.getAttribute("loginData")).getEmpId());
-			result = dao.insertStatics(staticsData);
-			if(!result) {
-				throw new RuntimeException("조회수 통계 추가 처리에 문제가 발생 하였습니다.");
-			}
-		} else {
-			long timeDiff = new Date().getTime() - staticsData.getLatestViewDate().getTime();
-			if(timeDiff / (1000 * 60 * 60 * 24) >= 7) {
-				result = dao.updateViewCnt(data);
-				if(!result) {
-					throw new RuntimeException("조회수 업데이트 처리에 문제가 발생 하였습니다.");
-				}
-				result = dao.updateStatics(staticsData);
-				if(!result) {
-					throw new RuntimeException("조회수 통계 업데이트 처리에 문제가 발생 하였습니다.");
-				}
-			}
-		}
-		
-		if(result) {
-			data.setConut(data.getConut() + 1);
-		}
 	}
 	
-	public void incLike(HttpSession session, BoardDTO data) {
-		MemDTO memData = new MemDTO(); //(MemDTO)session.getAttribute("loginData");
-		
-		BoardStaticsDTO staticsData = new BoardStaticsDTO();
-		staticsData.setbId(data.getWriter());
-		staticsData.setUserId(memData.getId());
-		
-		staticsData = dao.selectStatics(staticsData);
-		
-		if(staticsData.isLiked()) {
-			staticsData.setLiked(false);
-			data.setLiked(data.getLiked() - 1);
-		} else {
-			staticsData.setLiked(true);
-			data.setLiked(data.getLiked() + 1);
-		}
-		
-		dao.updateStaticsLike(staticsData);
-		boolean result = dao.updateLike(data);
-	}
 	public List<BoardDTO> getBoards(String category) {
 		logger.info("getBoard(category={})",category);
 		List<BoardDTO> boards = dao.selectBoard(category);
 		return boards;
 	}
+	
+	
+	
+	
 	public int add(BoardDTO data) {
 		int seq = dao.getNextSeq();
 		data.setDataNum(seq);
@@ -140,6 +122,68 @@ public class BoardService {
 			return data.getDataNum();
 		}
 		return -1;
-	}	
+	}
+	
+	
+	
+	
+	public List getTrainer() {
 
+		List<BoardDTO> tData = dao.getTrainer();
+		logger.info("tData(tData={})",tData);
+
+		return tData;
+	}
+	public MemDTO Tname(int btrainer) {
+		MemDTO namedata = dao.getTranerNum(btrainer); 
+		return namedata;
+	}
+
+
+	
+	public int addTag(BoardDTO data) {
+		int seq = dao.getNextSeq();
+		data.setDataNum(seq);
+		
+		boolean result = dao.dataAddTag(data);
+		
+		if(result) {
+			return data.getDataNum();
+		}
+		return -1;
+	}
+
+
+	public List getRBoard(int name) {
+		List<BoardDTO> nameBoard = dao.getRborad(name);
+		return nameBoard;
+	}
+
+
+	public List<BoardStaticsDTO> getComents(int dataNum) {
+		List<BoardStaticsDTO> commnets = dao.getComments(dataNum);
+		return commnets;
+	}
+
+
+	public boolean comment(BoardStaticsDTO data) {
+		boolean result = dao.commentAdd(data);
+		return result;
+	}
+
+
+	public int comCnt(int dataNum) {
+		int commentCount = dao.comCnt(dataNum);
+		return commentCount;
+	}
+
+	public int setComCnt(BoardDTO datas) {
+		boolean result = dao.setComCnt(datas);
+		if(result) {
+			return datas.getDataNum();
+		}
+		return -1;
+		
+
+	}
 }
