@@ -35,7 +35,7 @@ public class BoardContoller {
 
 	@Autowired
 	private BoardService service;
-
+	
 	@GetMapping(value = "")
 	public String getList(Model model, HttpSession session, 
 			@RequestParam(required = false) String category,
@@ -44,6 +44,8 @@ public class BoardContoller {
 			@RequestParam(defaultValue = "1", required = false) int page) {
 		logger.info("CONTROLgetList(category={},page={},sd={})", category, page, session.getAttribute("userid"));
 		List datas;
+		
+		
 		
 		if (category.equals("R")) {
 			List Tdata = service.getTrainer();

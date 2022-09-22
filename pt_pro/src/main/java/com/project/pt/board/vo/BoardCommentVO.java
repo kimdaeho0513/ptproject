@@ -14,6 +14,7 @@ public class BoardCommentVO {
 
 	
 	
+	
 	public int getCommentNum() {
 		return commentNum;
 	}

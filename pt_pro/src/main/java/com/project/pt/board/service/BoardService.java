@@ -32,6 +32,7 @@ public class BoardService {
 	}	
 	
 	
+	
 	public BoardDTO getDetail(int dataNum) {
 		logger.info("getDetail(dataNum={}",dataNum);
 		

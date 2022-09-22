@@ -13,6 +13,7 @@ public class BoardStaticsDTO {
 	private Date commentDate;
 	
 	
+	
 	public int getCommentNum() {
 		return commentNum;
 	}

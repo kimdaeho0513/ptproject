@@ -28,6 +28,7 @@ public class BoardDAO {
 			List<BoardDTO> review =session.selectList(mapperId,category);
 			return review;
 		}
+		
 		public BoardDTO dataDetail(int dateNum) {
 			logger.info("dataDetail(dataNum={})",dateNum);
 			String mapperId =String.format(mapper,"dataDetail");
