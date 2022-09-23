@@ -39,16 +39,22 @@ public class BoardContoller {
 	@GetMapping(value = "")
 	public String getList(Model model, HttpSession session, 
 			@RequestParam(required = false) String category,
-			@SessionAttribute("loginData")MemDTO memDto,
+			//@SessionAttribute("loginData")MemDTO memDto,
 			@RequestParam(required = false) Integer usersCode,
 			@RequestParam(defaultValue = "1", required = false) int page) {
 		logger.info("CONTROLgetList(category={},page={},sd={})", category, page, session.getAttribute("userid"));
 		List datas;
 		
+
+		session.setAttribute("userid", "thebibi");
+		session.setAttribute("roles", "m");
 		
+		MemDTO tDataName = new MemDTO();
 		
 		if (category.equals("R")) {
 			List Tdata = service.getTrainer();
+			logger.info("Tdata(Tdata={}", Tdata);
+
 			model.addAttribute("Tdata", Tdata);
 		}
 		if (usersCode != null) { // 리뷰게시판에 트레이너 태그
@@ -67,6 +73,7 @@ public class BoardContoller {
 
 	}
 
+	
 	@GetMapping(value = "/detail")
 	public String getDetail(Model model, HttpSession session, @RequestParam(required = false) int dataNum,
 			@RequestParam(required = false) String category) {
@@ -85,7 +92,7 @@ public class BoardContoller {
 	@GetMapping(value = "/modify")
 	public String modify(Model model, @RequestParam(required = false) int dataNum,
 			@RequestParam(required = false) String category,
-			@SessionAttribute("loginData")MemDTO memDto,
+			//@SessionAttribute("loginData")MemDTO memDto,
 			@ModelAttribute BoardVO boardVo) {
 		logger.info("CONTROLmodify(boardVo={})", boardVo);
 
@@ -102,7 +109,7 @@ public class BoardContoller {
 
 	@PostMapping(value = "/modify")
 	public String modify(Model model
-			, @SessionAttribute("loginData") MemDTO memDto
+			//, @SessionAttribute("loginData") MemDTO memDto
 			, @ModelAttribute BoardVO boardVo, @RequestParam(required = false) int dataNum,
 			@RequestParam(required = false) String category) {
 		BoardDTO data = service.getDetail(dataNum);
@@ -110,6 +117,9 @@ public class BoardContoller {
 
 		data.setTitle(boardVo.getTitle());
 		data.setContents(boardVo.getContent());
+		data.setWriter("thebibi");
+		logger.info("data(dataNum={})", data);
+
 		if (category.equals("R")) {
 
 			if (boardVo.getBtrainer() > 0) {
@@ -155,9 +165,9 @@ public class BoardContoller {
 		}else {
 			datas = service.searchKeyword(boardVo);
 		}
+		model.addAttribute("category", category);
 		model.addAttribute("type", type);
 		model.addAttribute("keyword", keyword);
-		model.addAttribute("category", category);
 		Paging paging = new Paging(datas, page, 10);// 생성자로 게시판 리스트와 현재페이지 게시판 출력제한을 보내준다
 		model.addAttribute("datas", paging.getPageData());// 모델객체 데이터 부분에 출력제한된게시판을 넣어준다
 		model.addAttribute("pageData", paging);
@@ -168,7 +178,7 @@ public class BoardContoller {
 
 	@PostMapping(value = "/delete", produces = "application/json; charset=utf-8")
 	@ResponseBody
-	public String delete(@SessionAttribute("loginData") MemDTO memDto,
+	public String delete(//@SessionAttribute("loginData") MemDTO memDto,
 			@RequestParam int dataNum) {
 		BoardDTO data = service.getDetail(dataNum);
 
@@ -197,8 +207,7 @@ public class BoardContoller {
 	}
 
 	@GetMapping(value = "/add")
-	public String add(Model model, @RequestParam String category, @ModelAttribute BoardVO boardVo) {
-		System.out.println(boardVo);
+	public String add(Model model, @RequestParam String category) {
 		model.addAttribute("category", category);
 
 		if (category.equals("R")) { /** 리뷰게시판에 트레이너 선택 카테고리를 위함이다 */
@@ -212,17 +221,20 @@ public class BoardContoller {
 
 	@PostMapping(value = "/add")
 	public String add(HttpServletRequest request,
-			@SessionAttribute("loginData") MemDTO memDto,
-			@RequestParam(required = false) String category, @ModelAttribute BoardVO boardVo) {
+//			@SessionAttribute("loginData") MemDTO memDto,
+			@ModelAttribute BoardVO boardVo) {
 		logger.info("adddd(boardVo={})", boardVo);
 
-		
-		memDto = service.Tname(boardVo.getBtrainer());
+		HttpSession session = request.getSession();
+		//MemDTO memDto = session.getAttribute("loginData")==null?new MemDTO():(MemDTO) session.getAttribute("loginData");
+		MemDTO nameData = service.Tname(boardVo.getBtrainer());
 
 		BoardDTO data = new BoardDTO();
 		data.setTitle(boardVo.getTitle());
 		data.setContents(boardVo.getContent());
-		data.setWriter(memDto.getId());
+		//data.setWriter(memDto.getId());
+
+		data.setWriter("thebibi");
 		data.setCategory(boardVo.getCategory());
 
 		if (boardVo.getBtrainer() > 0) {
@@ -250,7 +262,7 @@ public class BoardContoller {
 
 	@PostMapping(value = "/comment/add")
 	public String commnet(HttpServletRequest request,
-			@SessionAttribute("loginData") MemDTO memDto,
+			//@SessionAttribute("loginData") MemDTO memDto,
 			@RequestParam String content,
 			@RequestParam(required = false) int dataNum,
 			@RequestParam(required = false) String category
@@ -260,16 +272,19 @@ public class BoardContoller {
 
 		System.out.println(datas);
 		data.setCommentContents(content);
-		data.setDateNum(dataNum);
-		data.setCommentWriter(memDto.getId());
+		data.setDataNum(dataNum);
+		data.setCommentWriter("thebibi");
 		
-		
+		logger.info("xf(data={})", data);
+
 		boolean result = service.comment(data);
 		
 		int commentCount = service.comCnt(dataNum);
 		datas.setDataNum(dataNum);
 		datas.setRecommend(commentCount);
 		System.out.println(datas);
+		logger.info("grgr(datas={})", datas.getRecommend());
+
 		service.setComCnt(datas);
 		return "redirect:/board/detail?category=" + category + "&dataNum=" + dataNum;
 
@@ -286,7 +301,7 @@ public class BoardContoller {
 
 		System.out.println(datas);
 		data.setCommentContents(content);
-		data.setDateNum(dataNum);
+		data.setdataNum(dataNum);
 		data.setCommentWriter("thebibi");
 		
 		
@@ -313,7 +328,7 @@ public class BoardContoller {
 
 		System.out.println(datas);
 		data.setCommentContents(content);
-		data.setDateNum(dataNum);
+		data.setdataNum(dataNum);
 		data.setCommentWriter("thebibi");
 		
 		

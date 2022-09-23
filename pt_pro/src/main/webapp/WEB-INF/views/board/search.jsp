@@ -99,6 +99,11 @@
 							<c:param name="category">${category}</c:param>
 							<c:param name="dataNum">${data.dataNum}</c:param>
 						</c:url>
+						<c:url var="userBoard" value="/board/search">
+							<c:param name="category">ALL</c:param>
+							<c:param name="type">id</c:param>
+							<c:param name="keyword">${data.writer}</c:param>
+						</c:url>
 						<tr>
 							<td>${data.dataNum}</td>
 							<td onclick="location.href='${boardListUrl}'">
@@ -107,7 +112,7 @@
 									<i>[${data.recommend}]<i></i>
 								</c:if>
 							</td>
-							<td>${data.writer}</td>
+							<td onclick="location.href='${userBoard}'">${data.writer}</td>
 							<td>${data.conut}</td>
 							<td>${data.liked}</td>
 							<td>${data.writedate}</td>
@@ -135,41 +140,133 @@
 			</tbody>
 		</table>
 		<nav>
-			<div>
-				<ul class="pagination justify-content-center">
-					<c:if test="${pageData.hasPrevPage()}">
-						<c:url var="boardPagingUrl" value="./search">
-							<c:param name="category">${category}</c:param>
-							<c:param name="type">${type}</c:param>
-							<c:param name="keyword">${keyword}</c:param>
-						</c:url>
-						<li class="page-item">
-							<a class="page-link" href="${boardPagingUrl}&page=${pageData.prevPageNumber}">Prev</a>
-						</li>
-					</c:if>
-					<c:forEach items="${pageData.getPageNumberList(pageData.currentPageNumber - 2, pageData.currentPageNumber + 2)}" var="num">
-						<c:url var="boardPagingUrl" value="./search">
-							<c:param name="category">${category}</c:param>
-							<c:param name="type">${type}</c:param>
-							<c:param name="keyword">${keyword}</c:param>
-							<c:param name="page">${num}</c:param>
-						</c:url>
-						<c:url var="boardPagingUrl" value="./search">
-							<c:param name="category">${category}</c:param>
-							<c:param name="type">${type}</c:param>
-							<c:param name="keyword">${keyword}</c:param>
-						</c:url>
-						<li class="page-item ${pageData.currentPageNumber eq num ? 'active' : ''}">
-							<a class="page-link" href="${boardPagingUrl}&page=${num}">${num}</a>
-						</li>
-					</c:forEach>
-					<c:if test="${pageData.hasNextPage()}">
-						<li class="page-item">
-							<a class="page-link" href="${boardPagingUrl}&page=${pageData.nextPageNumber}">Next</a>
-						</li>
-					</c:if>
-				</ul>
-			</div>
-		</nav>
+		<div>
+			<ul class="pagination justify-content-center">
+				<c:if test="${pageData.hasPrevPage()}">
+					<c:url var="boardPagingUrl" value="/board/search">
+						<c:param name="category">${category}</c:param>
+						<c:param name="type">${type}</c:param>
+						<c:param name="keyword">${keyword}</c:param>
+						<c:if test="${not empty usersCode}">
+							<c:param name="usersCode">${usersCode}</c:param>
+						</c:if>							
+					</c:url>
+					<li class="page-item">
+						<a class="page-link" href="${boardPagingUrl}&page=1"><<</a>
+					</li>
+					<li class="page-item"><a class="page-link"
+						href="${boardPagingUrl}&page=${pageData.prevPageNumber}">Prev</a>
+					</li>
+				</c:if>
+				<c:choose>
+					<c:when test="${pageData.currentPageNumber eq 1}">
+						<c:forEach
+							items="${pageData.getPageNumberList(pageData.currentPageNumber - 3, pageData.currentPageNumber + 4)}"
+							var="num">
+							<c:url var="boardPagingUrl" value="/board/search">>
+								<c:param name="category">${category}</c:param>
+								<c:param name="type">${type}</c:param>
+								<c:param name="keyword">${keyword}</c:param>
+								<c:if test="${not empty usersCode}">
+									<c:param name="usersCode">${usersCode}</c:param>
+								</c:if>						
+							</c:url>
+		
+							<li
+								class="page-item ${pageData.currentPageNumber eq num ? 'active' : ''}">
+								<a class="page-link" href="${boardPagingUrl}&page=${num}">${num}</a>
+							</li>
+						</c:forEach>
+					</c:when>
+					
+					
+					<c:when test="${pageData.currentPageNumber eq 2}">
+						<c:forEach
+							items="${pageData.getPageNumberList(pageData.currentPageNumber - 3, pageData.currentPageNumber + 3)}"
+							var="num">
+							<c:url var="boardPagingUrl" value="/board/search">>
+								<c:param name="category">${category}</c:param>
+								<c:param name="type">${type}</c:param>
+								<c:param name="keyword">${keyword}</c:param>	
+								<c:if test="${not empty usersCode}">
+									<c:param name="usersCode">${usersCode}</c:param>
+								</c:if>						
+							</c:url>
+							<li
+								class="page-item ${pageData.currentPageNumber eq num ? 'active' : ''}">
+								<a class="page-link" href="${boardPagingUrl}&page=${num}">${num}</a>
+							</li>
+						</c:forEach>
+					</c:when>
+					
+					<c:when test="${pageData.currentPageNumber eq pageData.lastPage}">
+							<c:forEach
+								items="${pageData.getPageNumberList(pageData.currentPageNumber - 4, pageData.currentPageNumber + 2)}"
+								var="num">								
+								<c:url var="boardPagingUrl" value="/board/search">>
+								<c:param name="category">${category}</c:param>
+								<c:param name="type">${type}</c:param>
+								<c:param name="keyword">${keyword}</c:param>
+								<c:if test="${not empty usersCode}">
+									<c:param name="usersCode">${usersCode}</c:param>
+								</c:if>						
+							</c:url>
+								<li
+									class="page-item ${pageData.currentPageNumber eq num ? 'active' : ''}">
+									<a class="page-link" href="${boardPagingUrl}&page=${num}">${num}</a>
+								</li>
+							</c:forEach>
+						</c:when>
+					
+						<c:when test="${pageData.currentPageNumber eq pageData.lastPage-1}">
+							<c:forEach
+								items="${pageData.getPageNumberList(pageData.currentPageNumber - 3, pageData.currentPageNumber + 2)}"
+								var="num">			
+								<c:url var="boardPagingUrl" value="/board/search">>
+									<c:param name="category">${category}</c:param>
+									<c:param name="type">${type}</c:param>
+									<c:param name="keyword">${keyword}</c:param>
+									<c:if test="${not empty usersCode}">
+										<c:param name="usersCode">${usersCode}</c:param>
+									</c:if>						
+								</c:url>
+								<li
+									class="page-item ${pageData.currentPageNumber eq num ? 'active' : ''}">
+									<a class="page-link" href="${boardPagingUrl}&page=${num}">${num}</a>
+								</li>
+							</c:forEach>
+						</c:when>
+						<c:otherwise>
+							<c:forEach
+								items="${pageData.getPageNumberList(pageData.currentPageNumber - 2, pageData.currentPageNumber + 2)}"
+								var="num">
+								<c:url var="boardPagingUrl" value="/board/search">>
+								<c:param name="category">${category}</c:param>
+								<c:if test="${category eq 'ALL'}">
+									<c:param name="type">${type}</c:param>
+									<c:param name="keyword">${keyword}</c:param>
+								</c:if>	
+								<c:if test="${not empty usersCode}">
+									<c:param name="usersCode">${usersCode}</c:param>
+								</c:if>						
+							</c:url>
+								<li
+									class="page-item ${pageData.currentPageNumber eq num ? 'active' : ''}">
+									<a class="page-link" href="${boardPagingUrl}&page=${num}">${num}</a>
+								</li>
+							</c:forEach>
+						</c:otherwise>			
+					</c:choose>
+				<c:if test="${pageData.hasNextPage()}">
+					<li class="page-item"><a class="page-link"
+						href="${boardPagingUrl}&page=${pageData.nextPageNumber}">Next</a>
+					</li>
+					<li class="page-item"><a class="page-link"
+						href="${boardPagingUrl}&page=${pageData.lastPage}">>>></a>
+					</li>
+				</c:if>
+			</ul>
+		</div>
+	</nav>
 	</section>
 </body>

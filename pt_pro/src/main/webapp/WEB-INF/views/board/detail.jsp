@@ -16,13 +16,22 @@
 		<div>
 			<div>
 				<h1>${data.title}<c:if test="${not empty data.btrainer}">
-						<h6>관련 트레이너 : ${data.btrainer}</h6>
+					<c:url var="boardTranerUrl" value="/board">
+						<c:param name="category">R</c:param>
+						<c:param name="usersCode">${data.usersCode} </c:param>
+					</c:url>
+					<h6 onclick="location.href='${boardTranerUrl}'">관련 트레이너 : ${data.btrainer}</h6>
 					</c:if>
 				</h1>
 
 			</div>
 			<div>
-				> <label>작성자 ${data.writer}</label> <label>작성일자
+				<c:url var="userBoard" value="/board/search">
+					<c:param name="category">ALL</c:param>
+					<c:param name="type">id</c:param>
+					<c:param name="keyword">${data.writer}</c:param>
+				</c:url>
+				 <label onclick="location.href='${userBoard}'">작성자 ${data.writer}</label> <label>작성일자
 					${data.writedate}</label> <label">조회수: ${data.conut+1}</label>
 			</div>
 			<div>
@@ -37,12 +46,12 @@
 			<c:url var="boardUrl" value="/board" />
 			<form action="./delete" method="post">
 				<c:if
-					test="${(data.writer eq sessionScope.loginData.id) or sessionScope.loginData.roles == 'A'}">
+					test="${(data.writer eq sessionScope.userid) or sessionScope.roles == 'A'}">
 					<!-- 병합시 sessionScope.roles->sessionScope.loginData.roles -->
 					<button type="button"
 						onclick="location.href='${boardUrl}/modify?category=${data.category}&dataNum=${data.dataNum}'">수정</button>
 					<input name="dataNum" type="hidden" value="${data.dataNum}">
-					<button class="btn btn-danger" type="button" data-bs-toggle="modal"
+					<button type="button" data-bs-toggle="modal"
 						data-bs-target="#removeModal">삭제</button>
 				</c:if>
 				<button type="button"
