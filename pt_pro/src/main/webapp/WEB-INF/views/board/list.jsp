@@ -63,7 +63,7 @@
 								<c:forEach items="${Tdata}" var="Tdata">							
 									<c:url var="boardTranerUrl" value="/board">
 										<c:param name="category">${category}</c:param>
-										<c:param name="usersCode">${Tdata.usersCode} </c:param>
+										<c:param name="usersCode">${Tdata.userscode} </c:param>
 									</c:url>
 									<td onclick="location.href='${boardTranerUrl}'">${Tdata.name}</td>
 								</c:forEach>								
@@ -164,7 +164,7 @@
 								<c:forEach items="${Tdata}" var="Tdata">							
 									<c:url var="boardTranerUrl" value="/board">
 										<c:param name="category">${category}</c:param>
-										<c:param name="usersCode">${Tdata.usersCode}</c:param>
+										<c:param name="usersCode">${Tdata.userscode}</c:param>
 									</c:url>
 									<td onclick="location.href='${boardTranerUrl}'">${Tdata.name}</td>
 								</c:forEach>								
