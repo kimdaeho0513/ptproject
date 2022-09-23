@@ -26,25 +26,22 @@ public class BoardDAO {
 			logger.info("selectBoard(category={})",category);
 			String mapperId =String.format(mapper,"selectBoard");
 			List<BoardDTO> review =session.selectList(mapperId,category);
-			return review;
+			return review;//
 		}
-		public BoardDTO dataDetail(int dateNum) {
-			logger.info("dataDetail(dataNum={})",dateNum);
+		
+		public BoardDTO dataDetail(int dataNum) {
+			logger.info("dataDetail(dataNum={})",dataNum);
 			String mapperId =String.format(mapper,"dataDetail");
-			BoardDTO detail = session.selectOne(mapperId, dateNum);
-			return detail;
+			BoardDTO detail = session.selectOne(mapperId, dataNum);
+			return detail;//
 		}
 		public boolean dataModify(BoardDTO data) {
 			logger.info("dataModify(data={})",data);
 			String mapperId =String.format(mapper,"dataModify");
 			
 			int modify = session.update(mapperId, data);
-			return modify == 1 ? true : false;
-		}/*
-		public List<BoardDTO> searchDatas(vo data){
-			
+			return modify == 1 ? true : false;//
 		}
-		 */
 		
 		
 		public List<BoardDTO> searchKeyword(BoardVO boardVo) {
@@ -52,14 +49,14 @@ public class BoardDAO {
 			logger.info("searchKeyword(BoardDTO={},mapperId={})",boardVo,mapperId);
 			List<BoardDTO> result =session.selectList(mapperId,boardVo);
 
-			return result;
+			return result;//
 		}
 		public List<BoardDTO> searchWriter(BoardVO boardVo) {
 			String mapperId =String.format(mapper,"searchWriter");
 			logger.info("searchWriter(BoardDTO={},mapperId={})",boardVo,mapperId);
 			List<BoardDTO> result =session.selectList(mapperId,boardVo);
 
-			return result;
+			return result;//
 		}
 		
 		
@@ -67,58 +64,17 @@ public class BoardDAO {
 			logger.info("data={}",dataNum);
 			String mapperId = String.format(mapper, "deleteData");
 			int res = session.delete(mapperId, dataNum);
-			return res == 1 ? true : false;
-		}
-		public boolean deleteStaticsData(int dataNum) {
-			String mapperId = String.format(mapper, "deleteStaticsData");
-			int res = session.delete(mapperId, dataNum);
-			return res >= 0 ? true : false;
-	}
-		
-		
-		public BoardStaticsDTO selectStatics(BoardStaticsDTO data) {
-			String mapperId = String.format(mapper, "selectStatics");
-			BoardStaticsDTO res = session.selectOne(mapperId, data);
-			return res;
-		}
-		
-		
-		public boolean insertStatics(BoardStaticsDTO data) {
-			String mapperId = String.format(mapper, "insertStatics");
-			int res = session.insert(mapperId, data);
-			return res == 1 ? true : false;
-		}
-		
-		
-		public boolean updateStaticsLike(BoardStaticsDTO data) {
-			String mapperId = String.format(mapper, "updateStaticsLike");
-			int res = session.update(mapperId, data);
-			return res == 1 ? true : false;
+			return res == 1 ? true : false;//
 		}
 		
 		
 		
 		
-		public boolean updateLike(BoardDTO data) {
-			String mapperId = String.format(mapper, "updateLike");
-			int res = session.update(mapperId, data);
-			return res == 1 ? true : false;
-		}
-		public boolean updateViewCnt(BoardDTO data) {
-			String mapperId = String.format(mapper, "updateViewCnt");
-			int res = session.update(mapperId, data);
-			return res == 1 ? true : false;
-		}
-		public boolean updateStatics(BoardStaticsDTO data) {
-			String mapperId = String.format(mapper, "updateStatics");
-			int res = session.update(mapperId, data);
-			return res == 1 ? true : false;
-		}
 		public boolean dataAdd(BoardDTO data) {
 			String mapperId = String.format(mapper, "dataAdd");
 			int detail = session.insert(mapperId, data);
 		
-			return detail == 1 ? true : false;
+			return detail == 1 ? true : false;//
 		}
 		public boolean dataAddTag(BoardDTO data) {
 			String mapperId = String.format(mapper, "dataAddTag");
@@ -130,11 +86,11 @@ public class BoardDAO {
 		public int getNextSeq() {
 			String mapperId = String.format(mapper, "getNextSeq");
 			int seq = session.selectOne(mapperId);
-			return seq;
+			return seq;//
 		}
-		public List<BoardDTO> getTrainer() {
+		public List<MemDTO> getTrainer() {
 			String mapperId = String.format(mapper, "getTrainer");
-			List<BoardDTO> tName = session.selectList(mapperId);
+			List<MemDTO> tName = session.selectList(mapperId);
 			return tName;
 		}
 		public MemDTO getTranerNum(int btrainer) {
@@ -157,33 +113,33 @@ public class BoardDAO {
 			String mapperId = String.format(mapper, "countPlus");
 			int res = session.update(mapperId, dataNum);
 
-			return res;
+			return res;//
 		}
 		public List<BoardDTO> getRborad(int name) {
 			String mapperId =String.format(mapper,"getRborad");
 			List<BoardDTO> review =session.selectList(mapperId,name);
-			return review;
+			return review;//
 		}
 		public List<BoardStaticsDTO> getComments(int dataNum) {
 			String mapperId =String.format(mapper,"getComments");
 			List<BoardStaticsDTO> review =session.selectList(mapperId,dataNum);
 
-			return review;
+			return review;//
 		}
 		public boolean commentAdd(BoardStaticsDTO data) {
 			String mapperId =String.format(mapper,"commentAdd");
 			int res = session.insert(mapperId, data);
-			return res==1 ? true : false;
+			return res==1 ? true : false;//
 		}
 		public int comCnt(int dataNum) {
 			String mapperId =String.format(mapper,"comCnt");
 			int commentCount = session.selectOne(mapperId, dataNum);
-			return commentCount;
+			return commentCount;//
 		}
 		public boolean setComCnt(BoardDTO datas) {
 			String mapperId =String.format(mapper,"setComCnt");
 			int res = session.update(mapperId, datas);
-			return res==1 ? true : false;
+			return res==1 ? true : false;//
 		}
 		
 		public List<BoardDTO> searchAllKeyword(BoardVO boardVo) {
@@ -191,14 +147,19 @@ public class BoardDAO {
 			logger.info("searchKeyword(BoardDTO={},mapperId={})",boardVo,mapperId);
 			List<BoardDTO> result =session.selectList(mapperId,boardVo);
 
-			return result;
+			return result;//
 		}
 		public List<BoardDTO> searchAllWriter(BoardVO boardVo) {
 			String mapperId =String.format(mapper,"searchAllWriter");
 			logger.info("searchWriter(BoardDTO={},mapperId={})",boardVo,mapperId);
 			List<BoardDTO> result =session.selectList(mapperId,boardVo);
 
-			return result;
+			return result;//
+		}
+
+		public void deleteStaticsData(int dataNum) {
+			// TODO Auto-generated method stub
+			
 		}
 		
 }

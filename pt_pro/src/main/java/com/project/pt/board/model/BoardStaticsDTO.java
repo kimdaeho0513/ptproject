@@ -5,12 +5,13 @@ import java.sql.Date;
 public class BoardStaticsDTO {
 
 	private int commentNum;
-	private int dateNum;
+	private int dataNum;
 	private String commentContents;
 	private String commentWriter;
 	private String deleted;
 	private String hidden;
 	private Date commentDate;
+	
 	
 	
 	public int getCommentNum() {
@@ -19,11 +20,11 @@ public class BoardStaticsDTO {
 	public void setCommentNum(int commentNum) {
 		this.commentNum = commentNum;
 	}
-	public int getDateNum() {
-		return dateNum;
+	public int getDataNum() {
+		return dataNum;
 	}
-	public void setDateNum(int dateNum) {
-		this.dateNum = dateNum;
+	public void setDataNum(int dataNum) {
+		this.dataNum = dataNum;
 	}
 	public String getCommentContents() {
 		return commentContents;
@@ -59,7 +60,7 @@ public class BoardStaticsDTO {
 	
 	@Override
 	public String toString() {
-		return "BoardStaticsDTO [commentNum=" + commentNum + ", dateNum=" + dateNum + ", commentContents="
+		return "BoardStaticsDTO [commentNum=" + commentNum + ", dataNum=" + dataNum + ", commentContents="
 				+ commentContents + ", commentWriter=" + commentWriter + ", deleted=" + deleted + ", hidden=" + hidden
 				+ ", commentDate=" + commentDate + "]";
 	}

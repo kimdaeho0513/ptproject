@@ -32,6 +32,7 @@ public class BoardService {
 	}	
 	
 	
+	
 	public BoardDTO getDetail(int dataNum) {
 		logger.info("getDetail(dataNum={}",dataNum);
 		
@@ -89,7 +90,7 @@ public class BoardService {
 		logger.info("delete(BoardVO={}",dataNum);
 
 		BoardStaticsDTO staticsData = new BoardStaticsDTO();
-		staticsData.setDateNum(dataNum);
+		staticsData.setDataNum(dataNum);
 		
 		dao.deleteStaticsData(dataNum);
 		boolean result = dao.deleteData(dataNum);
@@ -129,7 +130,7 @@ public class BoardService {
 	
 	public List getTrainer() {
 
-		List<BoardDTO> tData = dao.getTrainer();
+		List<MemDTO> tData = dao.getTrainer();
 		logger.info("tData(tData={})",tData);
 
 		return tData;

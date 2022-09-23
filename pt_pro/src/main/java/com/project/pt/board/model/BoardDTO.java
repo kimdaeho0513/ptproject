@@ -15,6 +15,7 @@ public class BoardDTO {
 	private int rn;
 	private int liked;
 	private String writedate;
+	
 	public String getWriter() {
 		return writer;
 	}

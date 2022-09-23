@@ -11,6 +11,15 @@
 </select>
 
 
+ <select id="getRborad" resultType="boardDto">
+SELECT *
+ FROM ttdboard
+ WHERE USERSCODE =#{name}
+  AND deleted='N'
+  AND CATEGORY='R'
+</select>
+
+
  <select id="dataDetail" resultType="boardDto">
 SELECT *
  FROM ttdboard
@@ -26,7 +35,8 @@ SELECT ROWNUM AS rn
       ,contents
       ,writedate
       ,conut
-      ,recommend,liked
+      ,recommend,liked,
+      category
   FROM ttdboard
 WHERE category=#{category}
   AND deleted='N'
@@ -37,35 +47,22 @@ WHERE category=#{category}
 SELECT tt_brd_seq.NEXTVAL FROM DUAL
 </select>
 
-<select id="se" resultType="boardDto">
-SELECT ROWNUM AS RN
-  	  ,writer
-      ,title
-      ,dataNum
-      ,contents
-      ,writedate
-      ,conut
-      ,recommend,liked
-FROM ttdboard
-WHERE UPPER(#{type1}) LIKE UPPER(%#{ID}%) 
-  AND category=#{category}
-  AND deleted='N'
- </select>
-
  
  <update id="dataModify" parameterType="boardDto">
 UPDATE TOTAL_BOARD
-   SET b_CONTENTS = '#{contents}',
-       b_TITLE = '#{title}'
- WHERE b_WRITER = '#{dataNum}'
+   SET b_CONTENTS = #{contents},
+       b_TITLE = #{title}
+ WHERE b_WRITER = #{dataNum}
  </update>
+ 
  <select id="searchKeyword" resultType="boardDto">
- SELECT * 
-FROM ttdboard
-WHERE (lower(title) LIKE lower('%'||#{keyword}||'%')
-   OR lower(contents) LIKE lower('%'||#{keyword}||'%'))
+SELECT * 
+  FROM ttdboard
+ WHERE (lower(title) LIKE lower('%'||#{keyword}||'%')
+    OR lower(contents) LIKE lower('%'||#{keyword}||'%'))
    AND category=#{category}
    AND deleted='N'
+  ORDER BY dataNum DESC
  </select>
  
  
@@ -75,8 +72,26 @@ FROM ttdboard
 WHERE lower(writer) LIKE lower('%'||#{keyword}||'%')
    AND category=#{category}
    AND deleted='N'
+  ORDER BY dataNum DESC
  </select>
  
+ <select id="searchAllKeyword" resultType="boardDto">
+ SELECT * 
+FROM ttdboard
+WHERE (lower(title) LIKE lower('%'||#{keyword}||'%')
+   OR lower(contents) LIKE lower('%'||#{keyword}||'%'))
+   AND deleted='N'
+  ORDER BY dataNum DESC
+ </select>
+ 
+ 
+  <select id="searchAllWriter" resultType="boardDto">
+SELECT * 
+  FROM ttdboard
+ WHERE lower(writer) LIKE lower('%'||#{keyword}||'%')
+   AND deleted='N'
+  ORDER BY dataNum DESC
+ </select>
  
  
 <insert id="dataAdd" parameterType="boardDto">
@@ -92,15 +107,95 @@ INSERT INTO TOTAL_BOARD
 </insert>
  
  
+<insert id="dataAddTag" parameterType="boardDto">
+INSERT INTO TOTAL_BOARD
+ 		(b_NUM,
+ 		b_WRITER,
+ 		 b_TITLE,
+ 		 b_CONTENTS,
+ 		 CATEGORY,
+ 		 b_WRITEDATE,
+ 		 b_trainer
+		 ) 
+	VALUES(#{dataNum},#{writer}, #{title}, #{contents}, #{category},SYSDATE,#{usersCode})
+</insert>
  
+ 
+ 
+ <update id="countPlus">
+ 	update TOTAL_BOARD
+ 	  SET b_COUNT = b_COUNT+1
+ 	 WHERE b_NUM = #{dataNum}
+ </update>
+ 
+ 
+ 
+ <update id="updateData" parameterType="boardDto">
+UPDATE TOTAL_BOARD
+   SET b_CONTENTS = #{contents},
+       b_TITLE = #{title}
+ WHERE b_NUM = #{dataNum}
+</update>
+
+ 
+ <update id="updateDataTag" parameterType="boardDto">
+UPDATE TOTAL_BOARD
+   SET b_CONTENTS = #{contents},
+       b_TITLE = #{title},
+	   b_trainer = #{usersCode}  
+ WHERE b_NUM= #{dataNum}
+ </update>
+ 
+<select id="comCnt" parameterType="boardDto" resultType="int">
+SELECT Count(*)
+ FROM comments
+ WHERE dateNum = #{dataNum}
+  AND deleted='N'
+</select>
+
+
+ <select id="getComments" resultType="boardStaticsDto">
+  SELECT *
+  FROM comments
+  WHERE dateNum = #{dataNum}
+   AND deleted='N'
+   AND hidden='N'
+
+ </select>
+ 
+  
+  
+ <update id="setComCnt" parameterType="boardDto">
+update TOTAL_BOARD
+set recommend= #{recommend}
+WHERE b_NUM = #{dataNum}
+</update>
+
+<insert id="commentAdd" parameterType="boardStaticsDto">
+INSERT INTO comments
+(dateNum,commentContents,commentWriter)
+VALUES
+(#{dataNum},#{commentContents},#{commentWriter})
+</insert>
  
  <update id="deleteData">
 	update FROM TOTAL_BOARD
-	   set deleted='y'
-	 WHERE ID = #{dateNum}
+		   set deleted='y'
+	 WHERE b_NUM = #{dataNum}
 </update>
   	<update id="deleteStaticsData">
-		update FROM TOTAL_BOARD_REPLY
-		 WHERE r_WRITER = #{r_WRITER}
+		update FROM comments
+		 WHERE commentWriter = #{commentWriter}
 	</update>
+	
+<select	id="getTrainer" parameterType="memDto" resultType="memDto">
+Select name,USERSCODE
+From Users
+Where Roles = 'T'
+</select>
+<select	id="getTrainer2" parameterType="memDto" resultType="memDto">
+Select name
+From Users
+Where UsersCode = #{num}
+</select>
 </mapper>

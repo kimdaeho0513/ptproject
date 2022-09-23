@@ -15,6 +15,7 @@ public class BoardVO {
 
 	
 	
+	
 	public String getName() {
 		return name;
 	}

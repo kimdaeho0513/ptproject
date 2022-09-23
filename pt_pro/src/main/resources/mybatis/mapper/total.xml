@@ -24,39 +24,77 @@
 			 FULL JOIN MEMBERS m 
 			 ON u.USERSCODE = m.MEM_USER
 	</select>
+<<<<<<< HEAD
 	<!-- 수정전
 	<select id="usersSelectAll" resultType="managementDto">
+=======
+	<select id="totalSelectAll" resultType="managementDto">
+		SELECT ID AS mngId
+		     , NAME AS mngName
+		     , PHONENUMBER AS mngNumber 
+		  FROM TOTAL
+	</select>-->
+	<select id="totalSelectAll" resultType="managementDto">
+>>>>>>> refs/remotes/origin/이재윤
 		SELECT USERSCODE AS mngNum 
 			 , USERID AS mngId
 			 , PASSWORD AS mngPass
 			 , NAME AS mngName
 			 , BIRTH AS mngBirth
+<<<<<<< HEAD
 			 , PHONE AS mngPhone
+=======
+			 , phone AS mngPhon
+>>>>>>> refs/remotes/origin/이재윤
 			 , EMAIL AS mngEmail
 			 , GENDER AS mngGender
 			 , ROLES AS mngRole
+<<<<<<< HEAD
 			 , HIDDEN AS mngHidden
 			 , DELETEDATE AS mngDeleteDate
 			 , DELETED AS mngDeleted
 			 , DATELOG AS mngLog
+=======
+>>>>>>> refs/remotes/origin/이재윤
 		FROM USERS 
 	</select>
 	-->
 	<select id="selectData" resultType="managementDto">
+<<<<<<< HEAD
 		SELECT 
 			USERSCODE AS mngNum 
+=======
+		SELECT USERSCODE AS mngNum 
+			 , USERID AS mngId
+			 , NAME AS mngName
+			 , phone AS mngPhon
+			 , ROLES AS mngRole
+		FROM USERS 
+		WHERE NUM = #{mngNum}
+	</select>
+	
+	<select id="detailDatas" resultType="managementDto">
+		SELECT USERSCODE AS mngNum 
+>>>>>>> refs/remotes/origin/이재윤
 			 , USERID AS mngId
 			 , PASSWORD AS mngPass
 			 , NAME AS mngName
 			 , BIRTH AS mngBirth
+<<<<<<< HEAD
 			 , PHONE AS mngPhone
+=======
+			 , phone AS mngPhon
+>>>>>>> refs/remotes/origin/이재윤
 			 , EMAIL AS mngEmail
 			 , GENDER AS mngGender
 			 , ROLES AS mngRole
+<<<<<<< HEAD
 			 , HIDDEN AS mngHidden
 			 , DELETEDATE AS mngDeleteDate
 			 , DELETED AS mngDeleted
 			 , DATELOG AS mngLog
+=======
+>>>>>>> refs/remotes/origin/이재윤
 		FROM USERS 
 		WHERE USERSCODE = #{mngNum}
 	</select>
@@ -99,6 +137,7 @@
 	
 	<!-- 멤버만 -->
 	<select id="selectMember" resultType="managementDto">
+<<<<<<< HEAD
 		SELECT USERSCODE AS mngNum 
 			 , USERID AS mngId
 			 , PASSWORD AS mngPass
@@ -114,10 +153,16 @@
 			 , DATELOG AS mngLog
 		FROM USERS 
 		WHERE ROLES = 'M'
+=======
+		SELECT ROLE AS mngRole
+		FROM USERS 
+		WHERE IN (M)
+>>>>>>> refs/remotes/origin/이재윤
 	</select>
 	
 	<!-- 트레이너만 -->
 	<select id="selectTrainer" resultType="managementDto">
+<<<<<<< HEAD
 		SELECT USERSCODE AS mngNum 
 			 , USERID AS mngId
 			 , PASSWORD AS mngPass
@@ -133,6 +178,11 @@
 			 , DATELOG AS mngLog
 		FROM USERS 
 		WHERE ROLES = 'T'
+=======
+		SELECT ROLES AS mngRole
+		FROM USERS 
+		WHERE IN (T) = ${trainer}
+>>>>>>> refs/remotes/origin/이재윤
 	</select>
 	
 	<!-- 검색 -->
