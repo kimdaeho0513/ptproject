@@ -40,10 +40,12 @@ public class ManagementController {
 	
 	@RequestMapping(value="", method=RequestMethod.GET)
 	public String getList(Model model, HttpSession session
+			, @RequestParam(required = false) String search
 			, @RequestParam(defaultValue="1", required=false) int page
 			, @RequestParam(defaultValue="0", required=false) int pageCount ) {
 			
-		List datas = service.getAll();
+		
+		List datas = service.listSearch(search);
 		
 		if(session.getAttribute("pageCount") == null) {
 			session.setAttribute("pageCount", 5);
@@ -53,62 +55,16 @@ public class ManagementController {
 			session.setAttribute("pageCount", pageCount);
 		}
 		
-
 		pageCount = Integer.parseInt(session.getAttribute("pageCount").toString());
 		Paging paging = new Paging(datas, page, pageCount);
 		
 		model.addAttribute("datas", paging.getPageData());
 		model.addAttribute("pageData", paging);
+		model.addAttribute("page", page);
 		
 		return "management/list";	
 		}
-	
-	@RequestMapping(value="/search", method=RequestMethod.GET)
-	public String searchs(Model model, HttpSession session
-			, @RequestParam(required = false) String keyword
-		    , @RequestParam(defaultValue="1", required=false) int page
-		    , @RequestParam(defaultValue="0", required=false) int pageCount
-			, @RequestParam(defaultValue="0", required=false) int mngNum) {
-		
-		List datas = service.getAll();
-		Search search = new Search(datas, page, pageCount);		
-		search.setKeyword(keyword);
-		
-		
-		pageCount = Integer.parseInt(session.getAttribute("pageCount").toString());
-		Paging paging = new Paging(datas, page, pageCount);
-		
-		model.addAttribute("paging", search);
-		model.addAttribute("datas", paging.getPageData(search));
-		
-		
-//			if(search == null) {
-//				List<ManagementDTO> datas = service.getAll();
-// 			}else {
-//				if(search !=null) {
-//					List<ManagementDTO> listSearch = service.listSearch(search);
-//					model.addAttribute("listSearch", listSearch);
-//
-//					return "management/search";
-//				}
-//			}
-//			
-		
-//			List datas = service.getAll();
-//			model.addAttribute("datas", datas);
-//		
 
-		
-//		if(keyword.getkeyword() != null) {
-//			//service.listSearch();
-//			return "redirect:/management/search";
-//		} else {
-//			return "redirect:";
-//			
-//		}		
-		return "redirect:";
-	}
-	
 	@GetMapping(value="/detail")
 	public String getDetail(Model model
 			, HttpSession session

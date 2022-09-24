@@ -30,13 +30,6 @@ public class ManagementDAO {
 		List<ManagementDTO> res = session.selectList(mapperId);
 		return res;
 	}
-	//검색용
-	public List<ManagementDTO> searchAll(Search search) {
-		String mapperId = String.format(mapper, "search");
-		List<ManagementDTO> res = session.selectList(mapperId, search);
-		System.out.println("dao res값 확인" + res);
-		return res;
-	}
 	
 	public ManagementDTO selectData(int mngNum) {
 		String mapperId = String.format(mapper, "selectData");
@@ -68,14 +61,6 @@ public class ManagementDAO {
 		List<ManagementDTO> res = session.selectList(mapperId);
 		return res;
 	}
-	
-
-
-	public MemberDTO memberDatas(int mngNum) {
-		String mapperId = String.format(mapper, "memberDatas");
-		MemberDTO res = session.selectOne(mapperId, mngNum);
-		return res;
-	}
 
 	
 	//멤버정보 수정
@@ -96,10 +81,13 @@ public class ManagementDAO {
 		public boolean deleteData(ManagementDTO data) {
 			String mapperId = String.format(mapper, "deleteMember");
 			int res = session.delete(mapperId, data);
-			System.out.println("삭제 확인" +res);
 			return res == 1 ? true : false;
 		}
-		
+		public List<ManagementDTO> searchAll(String search) {
+			String mapperId = String.format(mapper, "search");
+			List<ManagementDTO> res = session.selectList(mapperId, search);
+			return res;
+		}
 	}	
 
  

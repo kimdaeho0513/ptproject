@@ -12,7 +12,7 @@ public class Paging {
 	private int prevPageNumber;		//이전 페이지 넘버
 	private List<Integer> pageNumberList;	
 	private List<Object> pageData;
-	private String keyword;
+	
 	
 	public Paging(List<Object> datas, int currentPageNumber, int limit) {
 		this.offset = limit * (currentPageNumber - 1);
@@ -29,21 +29,6 @@ public class Paging {
 		max = max < datas.size() ? max : datas.size();
 		this.pageData = datas.subList(this.offset, max);
 	}
-	
-	
-	
-	
-	public String getkeyword() {
-		return keyword;
-	}
-
-
-
-
-	public void setkeyword(String keyword) {
-		this.keyword = keyword;
-	}
-
 
 
 
@@ -93,7 +78,7 @@ public class Paging {
 	public boolean hasPrevPage() {
 		return this.pageNumberList.contains(this.prevPageNumber);
 	}
-
+ 
 
 
 
@@ -101,7 +86,7 @@ public class Paging {
 	public String toString() {
 		return "Paging [offset=" + offset + ", limit=" + limit + ", currentPageNumber=" + currentPageNumber
 				+ ", nextPageNumber=" + nextPageNumber + ", prevPageNumber=" + prevPageNumber + ", pageNumberList="
-				+ pageNumberList + ", pageData=" + pageData + ", keyword=" + keyword + "]";
+				+ pageNumberList + ", pageData=" + pageData + "]";
 	}
 
 
