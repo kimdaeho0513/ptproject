@@ -12,34 +12,36 @@
 
 </head>
 <body>
-	<div>
-		<form action="./board/search" method="get">
-			<div>			전체 게시판 검색
-			
-				<input type="hidden" name="category" value="ALL"> 
-				<select name="type">
-					<option value="title">제목+내용</option>
-					<option value="id">아이디</option>
-					<option value="tag">태그</option>
-				</select>
-				<input type="text" name="keyword">
-				<button type="submit">전송</button>
-			</div>
-		</form>
-	
-	</div>
-	<div>
-		<c:url value="/board?category=" var="boardsURL" />
-		<table>
-			<tr>
-				<td onclick="location.href='${boardsURL}C'">문의</td>
-				<td onclick="location.href='${boardsURL}N'">공지</td>
-				<td onclick="location.href='${boardsURL}I'">정보</td>
-				<td onclick="location.href='${boardsURL}R'">후기</td>
-			
-			</tr>
-		</table>
-	</div>
+	<c:if test="${category eq 'ALL' }">	
+		<div>
+			<form action="./board/search" method="get">
+				<div>			전체 게시판 검색
+				
+					<input type="hidden" name="category" value="ALL"> 
+					<select name="type">
+						<option value="title">제목+내용</option>
+						<option value="id">아이디</option>
+						<option value="tag">태그</option>
+					</select>
+					<input type="text" name="keyword">
+					<button type="submit">전송</button>
+				</div>
+			</form>
+		
+		</div>
+		<div>
+			<c:url value="/board?category=" var="boardsURL" />
+			<table>
+				<tr>
+					<td onclick="location.href='${boardsURL}C'">문의</td>
+					<td onclick="location.href='${boardsURL}N'">공지</td>
+					<td onclick="location.href='${boardsURL}I'">정보</td>
+					<td onclick="location.href='${boardsURL}R'">후기</td>
+				
+				</tr>
+			</table>
+		</div>
+	</c:if>
 	<section>
 		<form action="./board/search" method="get">
 			<div>
@@ -128,12 +130,14 @@
 								<form action="./board/add" method="get">
 									<div>
 										<c:url var="boardUrl" value="./board"/>
+										<c:if test="${not empty sessionScope.loginData.userid}">	
 											<button class="btn btn-secondary" type="submit" onclick="location.href='${boardUrl}/add'"><input type="hidden" name="category" value="${category}">추가</button>
+										</c:if>
 									</div>
 								</form>
 							</c:when>
 						</c:choose>
-					</td>
+					</td> 
 				</tr>
 			</article>
 			</tbody>

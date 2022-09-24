@@ -11,7 +11,7 @@
 <%@ include file="../module/head.jsp" %>
 </head>
 <body>
-	<c:if test="${category ne 'ALL' }">
+	<c:if test="${category eq 'ALL' }">
 		<div>
 			전체 게시판 검색
 			<form action="./search" method="get">
@@ -27,19 +27,19 @@
 				</div>
 			</form>		
 		</div>
+		<div>
+			<c:url value="/board?category=" var="boardsURL" />
+			<table>
+				<tr>
+					<td onclick="location.href='${boardsURL}C'">문의</td>
+					<td onclick="location.href='${boardsURL}N'">공지</td>
+					<td onclick="location.href='${boardsURL}I'">정보</td>
+					<td onclick="location.href='${boardsURL}R'">후기</td>
+				
+				</tr>
+			</table>
+		</div>
 	</c:if> 
-	<div>
-		<c:url value="/board?category=" var="boardsURL" />
-		<table>
-			<tr>
-				<td onclick="location.href='${boardsURL}C'">문의</td>
-				<td onclick="location.href='${boardsURL}N'">공지</td>
-				<td onclick="location.href='${boardsURL}I'">정보</td>
-				<td onclick="location.href='${boardsURL}R'">후기</td>
-			
-			</tr>
-		</table>
-	</div>
 	<section>	
 		<form action="./search" method="get">			
 			<div>

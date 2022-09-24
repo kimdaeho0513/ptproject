@@ -41,16 +41,11 @@ public class BoardContoller {
 	@GetMapping(value = "")
 	public String getList(Model model, HttpSession session, 
 			@RequestParam(required = false) String category,
-			//@SessionAttribute("loginData")MemDTO memDto,
 			@RequestParam(required = false) Integer usersCode,
 			@RequestParam(defaultValue = "1", required = false) int page) {
 		logger.info("CONTROLgetList(category={},page={},sd={})", category, page, session.getAttribute("userid"));
 		List datas;
 		
-		//세션
-
-		session.setAttribute("userid", "thebibi");
-		session.setAttribute("roles", "m");
 		
 		MemDTO tDataName = new MemDTO();
 		
@@ -82,6 +77,10 @@ public class BoardContoller {
 			@RequestParam(required = false) String category) {
 		BoardDTO data = service.getDetail(dataNum);
 		List comment = service.getComents(dataNum);
+		if(session.getAttribute("loginData")==null) {
+			MemDTO memDto = new MemDTO();
+			session.getAttribute("loginData");
+		};
 		logger.info("CONTROLcomment(comment={}", comment);
 
 		model.addAttribute("data", data);
@@ -123,7 +122,6 @@ public class BoardContoller {
 		data.setTitle(boardVo.getTitle());
 		data.setDataNum(boardVo.getDataNum());
 		data.setContents(boardVo.getContent());
-		data.setWriter("thebibi");
 		logger.info("data(dataNum={})", data);
 
 		if (category.equals("R")) {
@@ -229,7 +227,7 @@ public class BoardContoller {
 
 	@PostMapping(value = "/add")
 	public String add(HttpServletRequest request,
-//세			@SessionAttribute("loginData") MemDTO memDto,
+			@SessionAttribute("loginData") MemDTO memDto,
 			@ModelAttribute BoardVO boardVo
 			) {
 		logger.info("adddd(boardVo={})", boardVo);
@@ -241,9 +239,8 @@ public class BoardContoller {
 		BoardDTO data = new BoardDTO();
 		data.setTitle(boardVo.getTitle());
 		data.setContents(boardVo.getContent());
-		//data.setWriter(memDto.getId());
+		data.setWriter(memDto.getUserid());
 
-		data.setWriter("thebibi");
 		data.setCategory(boardVo.getCategory());
 
 		
@@ -274,7 +271,7 @@ public class BoardContoller {
 
 	@PostMapping(value = "/comment/add")
 	public String commnet(HttpServletRequest request,
-			//@SessionAttribute("loginData") MemDTO memDto,
+			@SessionAttribute("loginData") MemDTO memDto,
 			@RequestParam String content,
 			@RequestParam(required = false) int dataNum,
 			@RequestParam(required = false) String category
@@ -283,7 +280,7 @@ public class BoardContoller {
 		BoardDTO datas = new BoardDTO();
 		data.setCommentContents(content);
 		data.setDataNum(dataNum);
-		data.setCommentWriter("thebibi");
+		data.setCommentWriter(memDto.getUserid());
 		boolean result = service.comment(data);
 		int commentCount = service.comCnt(dataNum);
 		datas.setDataNum(dataNum);
