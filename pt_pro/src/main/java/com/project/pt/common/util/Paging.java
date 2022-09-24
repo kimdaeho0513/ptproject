@@ -67,9 +67,9 @@ public class Paging {
 	}
 	
 
-	public Object getPageData(Search search) {
-		return pageData;
-	}
+//	public Object getPageData(Search search) {
+//		return pageData;
+//	}
 	
 	public boolean hasNextPage() {
 		return this.pageNumberList.contains(this.nextPageNumber);
