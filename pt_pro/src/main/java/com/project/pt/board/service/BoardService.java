@@ -115,10 +115,14 @@ public class BoardService {
 	
 	public int add(BoardDTO data) {
 		int seq = dao.getNextSeq();
+		logger.info("seq(seq={})",seq);
+
 		data.setDataNum(seq);
-		
+		logger.info("입력데이터data(data={})",data);
+
 		boolean result = dao.dataAdd(data);
-		
+		logger.info("result(result={})",result);
+
 		if(result) {
 			return data.getDataNum();
 		}
@@ -186,5 +190,13 @@ public class BoardService {
 		return -1;
 		
 
+	}
+
+
+
+	public boolean commentModify(BoardStaticsDTO data) {
+		boolean result = dao.commentModify(data);
+		
+		return result;
 	}
 }

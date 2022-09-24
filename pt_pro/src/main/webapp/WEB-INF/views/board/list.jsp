@@ -63,7 +63,7 @@
 								<c:forEach items="${Tdata}" var="Tdata">							
 									<c:url var="boardTranerUrl" value="/board">
 										<c:param name="category">${category}</c:param>
-										<c:param name="usersCode">${Tdata.usersCode} </c:param>
+										<c:param name="usersCode">${Tdata.userscode} </c:param>
 									</c:url>
 									<td onclick="location.href='${boardTranerUrl}'">${Tdata.name}</td>
 								</c:forEach>								
@@ -83,16 +83,7 @@
 				<col class="col-1">
 				<col class="col-4">
 				<col class="col-2">
-				<c:choose>
-					<c:when test="${category eq 'R' or category eq 'I' }">
-						<col class="col-1">
-						<col class="col-1">
-					</c:when>
-					<c:otherwise>
-						<col class="col-2">
-						
-					</c:otherwise>
-				</c:choose>	
+				<col class="col-1">				
 				<col class="col-3">
 			</colgroup>
 			<thead>
@@ -101,9 +92,6 @@
 					<th>제목</th>
 					<th>작성자</th>
 					<th>조회수</th>
-					<c:if test="${category eq 'R' or category eq 'I' }">
-						<th>추천수</th>
-					</c:if>
 					<th>작성일</th>
 				</tr>
 			</thead>
@@ -129,9 +117,6 @@
 					</td>
 					<td onclick="location.href='${userBoard}'">${Rdata.writer}</td>
 					<td>${Rdata.conut}</td>
-					<c:if test="${category eq 'R' or category eq 'I' }">
-						<td>${Rdata.liked}</td>
-					</c:if>
 					<td>${Rdata.writedate}</td>
 				</tr>
 			</c:forEach>
@@ -164,7 +149,7 @@
 								<c:forEach items="${Tdata}" var="Tdata">							
 									<c:url var="boardTranerUrl" value="/board">
 										<c:param name="category">${category}</c:param>
-										<c:param name="usersCode">${Tdata.usersCode}</c:param>
+										<c:param name="usersCode">${Tdata.userscode}</c:param>
 									</c:url>
 									<td onclick="location.href='${boardTranerUrl}'">${Tdata.name}</td>
 								</c:forEach>								

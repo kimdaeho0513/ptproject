@@ -23,7 +23,8 @@ public class BoardDAO {
 		private String mapper = "boardMapper.%s";
 
 		public List<BoardDTO> selectBoard(String category){//리뷰게시판 리스트 불러옴
-			logger.info("selectBoard(category={})",category);
+			logger.info("selectBoard(category={})",category);			
+
 			String mapperId =String.format(mapper,"selectBoard");
 			List<BoardDTO> review =session.selectList(mapperId,category);
 			return review;//
@@ -157,9 +158,29 @@ public class BoardDAO {
 			return result;//
 		}
 
-		public void deleteStaticsData(int dataNum) {
-			// TODO Auto-generated method stub
+		public boolean deleteStaticsData(int dataNum) {
+			String mapperId =String.format(mapper,"deleteStaticsData");
+
+			int res = session.delete(mapperId, dataNum);
+
+			return res==1 ? true : false;//
+
+		}
+		public boolean deleteStatics(int commentNum) {
+			String mapperId =String.format(mapper,"deleteStatics");
+
+			int res = session.delete(mapperId, commentNum);
+
+			return res==1 ? true : false;//
+
+		}
+
+		public boolean commentModify(BoardStaticsDTO data) {
+			String mapperId =String.format(mapper,"commentModify");
+			int res = session.update(mapperId, data);
+
 			
+			return res==1 ? true : false;//
 		}
 		
 }

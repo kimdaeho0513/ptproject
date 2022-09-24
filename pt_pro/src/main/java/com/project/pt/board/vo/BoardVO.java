@@ -12,6 +12,15 @@ public class BoardVO {
 	private String name;
 	private int btrainer;
 	private int usersCode;
+	private int userscode;
+	
+	
+	public int getUserscode() {
+		return userscode;
+	}
+	public void setUserscode(int userscode) {
+		this.userscode = userscode;
+	}
 
 	
 	
@@ -77,7 +86,7 @@ public class BoardVO {
 	public String toString() {
 		return "BoardVO [dataNum=" + dataNum + ", title=" + title + ", content=" + content + ", category=" + category
 				+ ", keyword=" + keyword + ", type=" + type + ", name=" + name + ", btrainer=" + btrainer
-				+ ", usersCode=" + usersCode + "]";
+				+ ", usersCode=" + usersCode + ", userscode=" + userscode + "]";
 	}
 	
 	
