@@ -2,8 +2,9 @@ package com.project.pt.board.vo;
 
 import java.sql.Date;
 
-public class BoardCommentVO {
+public class BoardCommentVO { 
 
+ 
 
 	private int commentNum;
 	private int dateNum;
