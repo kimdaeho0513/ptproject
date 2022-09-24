@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import com.project.pt.board.model.BoardDTO;
 import com.project.pt.board.model.BoardStaticsDTO;
 import com.project.pt.board.service.BoardService;
+import com.project.pt.board.vo.BoardCommentVO;
 import com.project.pt.board.vo.BoardVO;
 import com.project.pt.common.util.Paging;
 import com.project.pt.mem.model.MemDTO;
@@ -45,6 +47,7 @@ public class BoardContoller {
 		logger.info("CONTROLgetList(category={},page={},sd={})", category, page, session.getAttribute("userid"));
 		List datas;
 		
+		//세션
 
 		session.setAttribute("userid", "thebibi");
 		session.setAttribute("roles", "m");
@@ -92,7 +95,7 @@ public class BoardContoller {
 	@GetMapping(value = "/modify")
 	public String modify(Model model, @RequestParam(required = false) int dataNum,
 			@RequestParam(required = false) String category,
-			//@SessionAttribute("loginData")MemDTO memDto,
+			//세션@SessionAttribute("loginData")MemDTO memDto,
 			@ModelAttribute BoardVO boardVo) {
 		logger.info("CONTROLmodify(boardVo={})", boardVo);
 
@@ -109,13 +112,16 @@ public class BoardContoller {
 
 	@PostMapping(value = "/modify")
 	public String modify(Model model
-			//, @SessionAttribute("loginData") MemDTO memDto
+			//세션, @SessionAttribute("loginData") MemDTO memDto
 			, @ModelAttribute BoardVO boardVo, @RequestParam(required = false) int dataNum,
 			@RequestParam(required = false) String category) {
 		BoardDTO data = service.getDetail(dataNum);
-		logger.info("CONTROLmodify(dataNum={},VO{})", dataNum, boardVo);
+		
+		
+		logger.info("boardVo(boardVo={}", boardVo);
 
 		data.setTitle(boardVo.getTitle());
+		data.setDataNum(boardVo.getDataNum());
 		data.setContents(boardVo.getContent());
 		data.setWriter("thebibi");
 		logger.info("data(dataNum={})", data);
@@ -165,6 +171,8 @@ public class BoardContoller {
 		}else {
 			datas = service.searchKeyword(boardVo);
 		}
+		logger.info("boardVo({})",boardVo);
+		
 		model.addAttribute("category", category);
 		model.addAttribute("type", type);
 		model.addAttribute("keyword", keyword);
@@ -221,8 +229,9 @@ public class BoardContoller {
 
 	@PostMapping(value = "/add")
 	public String add(HttpServletRequest request,
-//			@SessionAttribute("loginData") MemDTO memDto,
-			@ModelAttribute BoardVO boardVo) {
+//세			@SessionAttribute("loginData") MemDTO memDto,
+			@ModelAttribute BoardVO boardVo
+			) {
 		logger.info("adddd(boardVo={})", boardVo);
 
 		HttpSession session = request.getSession();
@@ -237,13 +246,16 @@ public class BoardContoller {
 		data.setWriter("thebibi");
 		data.setCategory(boardVo.getCategory());
 
+		
+		
+		
 		if (boardVo.getBtrainer() > 0) {
 			data.setUsersCode(boardVo.getBtrainer());
 			int dataNum = service.addTag(data);
 			if (dataNum != -1) {
-				return "redirect:/board/detail?dataNum=" + dataNum;
+				return "redirect:/board/detail?category="+boardVo.getCategory()+"&dataNum=" + dataNum;
 			}
-			request.setAttribute("error", "게시글 저장 실패!");
+			request.setAttribute("error", "저장실패");
 
 			return "board/add";
 		}
@@ -251,10 +263,10 @@ public class BoardContoller {
 		int dataNum = service.add(data);
 
 		if (dataNum != -1) {
-			return "redirect:/board/detail?dataNum=" + dataNum;
+			return "redirect:/board/detail?category="+boardVo.getCategory()+"&dataNum=" + dataNum;
 		} else {
 		}
-		request.setAttribute("error", "게시글 저장 실패!");
+		request.setAttribute("error", "저장실패");
 
 		return "board/add";
 	}
@@ -269,28 +281,47 @@ public class BoardContoller {
 			) {
 		BoardStaticsDTO data = new BoardStaticsDTO();
 		BoardDTO datas = new BoardDTO();
-
-		System.out.println(datas);
 		data.setCommentContents(content);
 		data.setDataNum(dataNum);
 		data.setCommentWriter("thebibi");
-		
-		logger.info("xf(data={})", data);
-
 		boolean result = service.comment(data);
-		
 		int commentCount = service.comCnt(dataNum);
 		datas.setDataNum(dataNum);
 		datas.setRecommend(commentCount);
 		System.out.println(datas);
-		logger.info("grgr(datas={})", datas.getRecommend());
-
 		service.setComCnt(datas);
 		return "redirect:/board/detail?category=" + category + "&dataNum=" + dataNum;
 
-	}/*
-	@PostMapping(value = "/comment/modify")
+	}
+
+	@GetMapping(value = "/commentmodify", produces = "application/json; charset=utf-8")
+	@ResponseBody
 	public String commnetModify(HttpServletRequest request,
+			// @SessionAttribute("loginData") MemDTO memDto,
+			@ModelAttribute BoardCommentVO commentVo,
+			@RequestParam(required = false) int dataNum,
+			@RequestParam(required = false) String category
+			) {
+		
+		BoardStaticsDTO data = new BoardStaticsDTO();
+		BoardDTO datas = new BoardDTO();
+
+		data.setCommentContents(commentVo.getCommentContents());
+		data.setDataNum(dataNum);
+		data.setCommentNum(commentVo.getCommentNum());
+		logger.info("코멘트트트트트브이오 입니다(commentVo={})", commentVo);
+
+		
+		
+		service.commentModify(data);
+		
+		return "redirect:/board/detail?category=" + category + "&dataNum=" + dataNum;
+
+
+	}
+
+	@PostMapping(value = "/comment/delete")
+	public String commnetDelete(HttpServletRequest request,
 			// @SessionAttribute("loginData") MemDTO memDto,
 			@RequestParam String content,
 			@RequestParam(required = false) int dataNum,
@@ -301,7 +332,7 @@ public class BoardContoller {
 
 		System.out.println(datas);
 		data.setCommentContents(content);
-		data.setdataNum(dataNum);
+		//data.setdataNum(dataNum);
 		data.setCommentWriter("thebibi");
 		
 		
@@ -315,32 +346,5 @@ public class BoardContoller {
 		return "redirect:/board/detail?category=" + category + "&dataNum=" + dataNum;
 
 	}
-
-	@PostMapping(value = "/comment/delete")
-	public String commnetModify(HttpServletRequest request,
-			// @SessionAttribute("loginData") MemDTO memDto,
-			@RequestParam String content,
-			@RequestParam(required = false) int dataNum,
-			@RequestParam(required = false) String category
-			) {
-		BoardStaticsDTO data = new BoardStaticsDTO();
-		BoardDTO datas = new BoardDTO();
-
-		System.out.println(datas);
-		data.setCommentContents(content);
-		data.setdataNum(dataNum);
-		data.setCommentWriter("thebibi");
-		
-		
-		boolean result = service.comment(data);
-		
-		int commentCount = service.comCnt(dataNum);
-		datas.setDataNum(dataNum);
-		datas.setRecommend(commentCount);
-		System.out.println(datas);
-		service.setComCnt(datas);
-		return "redirect:/board/detail?category=" + category + "&dataNum=" + dataNum;
-
-	}*/
 
 }

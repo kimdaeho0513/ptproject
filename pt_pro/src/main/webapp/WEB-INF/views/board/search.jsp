@@ -61,7 +61,6 @@
 				<col class="col-2">
 				<col class="col-1">
 				<col class="col-1">
-				<col class="col-1">
 				<c:if test="${category eq 'ALL'}">
 					<col class="col-3">
 				</c:if>
@@ -86,7 +85,6 @@
 					<th>제목</th>
 					<th>작성자</th>
 					<th>조회수</th>
-					<th>추천수</th>
 					<th>작성일</th>
 					<c:if test="${category eq 'ALL'}">
 					<th>게시판위치</th></c:if>
@@ -114,7 +112,6 @@
 							</td>
 							<td onclick="location.href='${userBoard}'">${data.writer}</td>
 							<td>${data.conut}</td>
-							<td>${data.liked}</td>
 							<td>${data.writedate}</td>
 							<c:if test="${category eq 'ALL'}">
 								<td onclick="location.href='${boardsURL}${data.category}'">

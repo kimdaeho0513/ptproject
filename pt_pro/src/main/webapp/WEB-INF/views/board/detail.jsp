@@ -37,10 +37,10 @@
 			<div>
 				<p>${data.contents}</p>
 			</div>
-			<div onclick="ajaxLike(id_like, ${data.dataNum});">
+			<!--div onclick="ajaxLike(id_like, ${data.dataNum});">
 				<i class="bi bi-hand-thumbs-up text-secondary text-opacity-50"></i>
 				<label id="id_like" class="text-secondary text-opacity-75">${data.liked}</label>
-			</div>
+			</div-->
 		</div>
 		<div>
 			<c:url var="boardUrl" value="/board" />
@@ -70,6 +70,7 @@
 							</div>
 							<div class="card-body">
 								<input type="hidden" value="${comment.commentNum}">
+								<input type="hidden" value="${dataNum}">
 								<c:choose>
 									<c:when test="${comment.deleted eq 'Y'}">
 										<p class="text-muted">삭제된 댓글 입니다.</p>
@@ -136,13 +137,13 @@
 			element.parentElement.previousElementSibling.innerText = "";
 			element.parentElement.previousElementSibling.append(textarea);
 			
-			element.setAttribute("onclick", "commentUpdate(this);");
+			element.setAttribute("onclick", "location.href='commentmodify'");
 		}
 		
 		function changeText(element) {
 			element.innerText = "수정";
-			var cid = element.parentElement.parentElement.children[0].value;
-			var value = element.parentElement.previousElementSibling.children[0].value;
+			var commentNum = element.parentElement.parentElement.children[0].value;
+			var commentContents = element.parentElement.previousElementSibling.children[0].value;
 			element.parentElement.previousElementSibling.children[0].remove();
 			element.parentElement.previousElementSibling.innerText = value;
 			
@@ -156,15 +157,15 @@
 		}
 		
 		function commentUpdate(element) {
-			var cid = element.parentElement.parentElement.children[0].value;
-			var value = element.parentElement.previousElementSibling.children[0].value;
+			var commentNum = element.parentElement.parentElement.children[0].value;
+			var commentContents = element.parentElement.previousElementSibling.children[0].value;
 			
 			$.ajax({
-				url: "/comment/modify",
-				type: "post",
+				url: "/board/commentmodify",
+				type: "POST",
 				data: {
-					id: cid,
-					content: value
+					commentNum: commentNum,
+					commentContents: commentContents
 				},
 				success: function(data) {
 					element.parentElement.previousElementSibling.children[0].value = data.value
