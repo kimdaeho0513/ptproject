@@ -3,65 +3,66 @@ package com.project.pt.schedule.model;
 import java.sql.Date;
 
 public class ScheDTO {
-	private int schedule;
-	private Date sch_date;
-	private int sch_trnr;
-	private int sch_mem;
-	private String sch_join;
-	private String hidden;
-	private String deleted;
-	public int getSchedule() {
-		return schedule;
+	private int id;
+	private String title;
+	private int coachcode;
+	private String writer;
+	private int membercode;
+	private String content;
+	private Date start1;
+	private Date end1;
+	public int getId() {
+		return id;
 	}
-	public void setSchedule(int schedule) {
-		this.schedule = schedule;
+	public void setId(int id) {
+		this.id = id;
 	}
-	public Date getSch_date() {
-		return sch_date;
+	public String getTitle() {
+		return title;
 	}
-	public void setSch_date(Date sch_date) {
-		this.sch_date = sch_date;
+	public void setTitle(String title) {
+		this.title = title;
 	}
-	public int getSch_trnr() {
-		return sch_trnr;
+	public int getCoachcode() {
+		return coachcode;
 	}
-	public void setSch_trnr(int sch_trnr) {
-		this.sch_trnr = sch_trnr;
+	public void setCoachcode(int coachcode) {
+		this.coachcode = coachcode;
 	}
-	public int getSch_mem() {
-		return sch_mem;
+	public String getWriter() {
+		return writer;
 	}
-	public void setSch_mem(int sch_mem) {
-		this.sch_mem = sch_mem;
+	public void setWriter(String writer) {
+		this.writer = writer;
 	}
-	public String getSch_join() {
-		return sch_join;
+	public int getMembercode() {
+		return membercode;
 	}
-	public void setSch_join(String sch_join) {
-		this.sch_join = sch_join;
+	public void setMembercode(int membercode) {
+		this.membercode = membercode;
 	}
-	public String getHidden() {
-		return hidden;
+	public String getContent() {
+		return content;
 	}
-	public void setHidden(String hidden) {
-		this.hidden = hidden;
+	public void setContent(String content) {
+		this.content = content;
 	}
-	public String getDeleted() {
-		return deleted;
+	public Date getStart1() {
+		return start1;
 	}
-	public void setDeleted(String deleted) {
-		this.deleted = deleted;
+	public void setStart1(Date start1) {
+		this.start1 = start1;
+	}
+	public Date getEnd1() {
+		return end1;
+	}
+	public void setEnd1(Date end1) {
+		this.end1 = end1;
 	}
 	@Override
 	public String toString() {
-		return "ScheDTO [schedule=" + schedule + ", sch_date=" + sch_date + ", sch_trnr=" + sch_trnr + ", sch_mem="
-				+ sch_mem + ", sch_join=" + sch_join + ", hidden=" + hidden + ", deleted=" + deleted + "]";
+		return "ScheDTO [id=" + id + ", title=" + title + ", coachcode=" + coachcode + ", writer=" + writer
+				+ ", membercode=" + membercode + ", content=" + content + ", start1=" + start1 + ", end1=" + end1 + "]";
 	}
 	
-	
-	
-	
-	
-	
-
 }

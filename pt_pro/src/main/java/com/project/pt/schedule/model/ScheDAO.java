@@ -1,5 +1,12 @@
 package com.project.pt.schedule.model;
 
-public class ScheDAO {
+import java.util.ArrayList;
 
+import org.springframework.stereotype.Repository;
+
+import com.project.pt.schedule.vo.ScheVO;
+
+@Repository
+public interface ScheDAO {
+	public ArrayList<ScheVO> ScheList();
 }

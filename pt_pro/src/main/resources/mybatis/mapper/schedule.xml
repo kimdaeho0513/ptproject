@@ -2,9 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-  <mapper namespace="scheMapper">
-  	 <select id="selectSchedule" parameterType="scheDto">
-  	 	SELECT *
-  	 	  FROM SCHEDULE;
-  	 </select>
-  </mapper>
+<mapper namespace="ScheDao">
+	<resultMap type="ScheDto" id="scheMap">
+		<result property="start" column="start1"/>
+		<result property="end" column="end1"/>
+	</resultMap>
+	<select id="scheList" resultMap="scheMap">
+		SELECT id, title,
+		TO_char(start1, 'YYYY-MM-DD"T"HH24:MI:SS') start1,
+		TO_char(end1, 'YYYY-MM-DD"T"HH24:MI:SS') end1,
+		coachcode,
+		writer,
+		membercode,
+		content 
+		FROM CALENDAR
+	</select>
+</mapper>
