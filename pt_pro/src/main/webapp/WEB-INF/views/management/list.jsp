@@ -42,10 +42,10 @@
 		</div> 
 		<table class="table table-hover">
 			<colgroup>
-				<col width="40%" style="background: red"/>
-				<col width="25%" style="background: blue" />
-				<col width="25%" style="background: green" />
-				<col class="col-xs-3" style="background: gainsboro" />
+				<col width="40%" />
+				<col width="25%"  />
+				<col width="25%" />
+				<col class="col-xs-3"  />
 			</colgroup>
 			<thead>
 				<tr>
