@@ -40,7 +40,12 @@ public class PayController {
 		session.getAttribute("loginData");
 		logger.info("loginData({})",session.getAttribute("loginData"));
 		
-		return "pay/pay";
+		if(session.getAttribute("loginData") == null) {
+			return "login/login";
+		} else {
+			return "pay/pay";
+		}
+		
 	}
 
 	

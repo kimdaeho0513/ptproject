@@ -39,7 +39,7 @@ public class HomeController {
 
 		
 		// = request.getRequestDispather(view).forward();
-		return "home";
+		return "index";
 		
 		/*******/
 

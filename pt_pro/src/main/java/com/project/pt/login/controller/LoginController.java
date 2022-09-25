@@ -44,7 +44,7 @@ public class LoginController {
             System.out.println("실패");
             model.addAttribute("msg","로그인 실패");
         }
-        return "login/login";
+        return "index";
     }
 	@RequestMapping(value="/logout",method=RequestMethod.GET)
 	public String logout(HttpSession session) {
