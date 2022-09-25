@@ -200,6 +200,8 @@ WHERE dateNum = #{dataNum}
   AND commentNum = #{commentNum}
 </update>
 
+
+
 	
 <select	id="getTrainer" parameterType="memDto" resultType="memDto">
 Select name,USERSCODE
@@ -210,5 +212,17 @@ Where Roles = 'T'
 Select name
 From Users
 Where UsersCode = #{num}
+</select>
+<select	id="getTrainer3" parameterType="_int" resultType="memDto">
+Select s.name,s.UsersCode AS userscode
+From MEMBERS m
+join users s
+on s.UsersCode = m.MEM_PT
+Where MEM_User = #{membercode}
+</select>
+<select	id="getMember" parameterType="_int" resultType="java.lang.String">
+Select name
+From USERS
+Where userscode = #{membercode}
 </select>
 </mapper>

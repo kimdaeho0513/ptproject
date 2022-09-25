@@ -10,7 +10,7 @@
 <script type="text/javascript" src="${bs5}/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="${jQuery}/jquery-3.6.0.min.js"></script>
 <!DOCTYPE html>
-<html lang=kr'>
+<html lang="en">
   <head>
     <meta charset='utf-8' />
     <%@ include file="../module/head.jsp" %>
@@ -18,63 +18,15 @@
     <script src='static/fullcalendar/main.js'></script>
     <style>
     #calendar{
-    	width: 75%;
-    	float: right;
+    	width: 90%;
+    	margin:0 auto; 
     }
-    #timeCal{
-    	width:25%;
-    	border: 1px solid black;
-    	height: 75%;
-    	float:left;
-    }
+   
     </style>
-   <title>PT 예약 조회</title>
+    <title>회원 PT 조회</title>
   </head>
   <body>
-  	<div id="timeCal">
-  	<input id="today" class="rounded form-control-lg" type="date" name="date" ><br>
-  	 <input type="radio" id="am9" name="time" value="09:00" >9 : 00 </input>
-  	 <input type="radio" id="am10" name="time"value="10:00">10 : 00 </input>
-  	 <input type="radio" id="am11" name="time"value="11:00">11 : 00 </input>
-  	 <input type="radio" id="pm12" name="time"value="12:00">12 : 00 </input>
-  	 <input type="radio" id="pm1" name="time"value="13:00">1 : 00 </input>
-  	 <input type="radio" id="pm2" name="time"value="14:00">2 : 00 </input>
-  	 <input type="radio" id="pm3" name="time"value="15:00">3 : 00 </input>
-  	 <input type="radio" id="pm4" name="time"value="16:00">4 : 00 </input>
-  	 <input type="radio" id="pm4" name="time"value="17:00">5 : 00 </input>
-  	 <input type="radio" id="pm4" name="time"value="18:00">6 : 00 </input>
-  	 <input type="radio" id="pm4" name="time"value="19:00">7 : 00 </input>
-  	 <input type="radio" id="pm4" name="time"value="20:00">8 : 00 </input>
-  	 <button type="button" id="addSchedule">예약</button>
-  	</div>
-  	 <script>
-  	  $("#addSchedule").click(function() {
-  		  var day = $('input[name="date"]').val();
-  		  var times = $('input[name="time"]:checked').val();
-  		  console.log(day);
-  		  console.log(times);
-  		 console.log(day +" "+ times);
-  		  $.ajax({
-  			  type: "POST",
-  			  url:"./schedule/add",
-  			  data:{
-  				  "addSchedule" : day +" "+ times
-  			  },
-  			success: function(data) {
-  				console.log(data);
-				if(data == true){
-					location.reload();
-				} else {
-					alert("이미 예약된 시간입니다.");
-				}
-			}
-    		
-  			  
-  		  });
-  	  });
-  	  
-  	 </script>
-  	 
+  	
     <div id='calendar'></div>
     <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -121,7 +73,7 @@
         	  // ajax 처리로 데이터를 로딩 시킨다.
         	  $.ajax({
         		 type:"get",
-        		 url:"./schedule/data",
+        		 url:"./trschedule/data",
         		dataType:"json",
         		success: function(data) {
 					successCallback(data);
@@ -138,4 +90,3 @@
     console.log(new Date().toISOString().slice(0, 10));
     </script>
   </body>
-</html>

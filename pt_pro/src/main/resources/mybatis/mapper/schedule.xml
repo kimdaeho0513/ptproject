@@ -4,16 +4,48 @@
 
 <mapper namespace="scheMapper">
 	<resultMap type="ScheDto" id="scheMap">
-		<result property="start" column="start1"/>
-		<result property="end" column="end1"/>
+		<result property="start" column="start1" />
+		<result property="end" column="end1" />
 	</resultMap>
 	<select id="scheList" resultType="scheDto">
 		SELECT *
-		  FROM CALENDAR
+		FROM CALENDAR
 	</select>
 	<select id="userScheList" resultType="scheDto">
 		SELECT *
-		  FROM CALENDAR
-		 WHERE MEMBERCODE =#{membercode} 
+		FROM CALENDAR
+		WHERE MEMBERCODE =#{membercode}
+	</select>
+	<insert id="addScheList" parameterType="scheDto">
+		INSERT INTO CALENDAR(
+		TITLE,
+		COACHCODE,
+		MEMBERCODE,
+		START1,
+		END1
+
+		)VALUES(
+		#{name},
+		#{coachCode},
+		#{membercode},
+		#{date},
+		#{date} + (INTERVAL '1' HOUR)
+		)
+	</insert>
+	<select id="check" parameterType="java.util.HashMap"
+		resultType="_int">
+		SELECT count(ID)
+		FROM CALENDAR
+		WHERE COACHCODE = #{coachCode}
+		AND START1 = #{date}
+	</select>
+	<delete id="deleteScheList" parameterType="_int">
+		DELETE CALENDAR
+		WHERE id = #{id}
+	</delete>
+	<select id="trainerScheList" resultType="scheDto">
+		SELECT *
+		FROM CALENDAR
+		WHERE COACHCODE =#{coachcode}
 	</select>
 </mapper>

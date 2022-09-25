@@ -1,6 +1,7 @@
 package com.project.pt.schedule.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -31,7 +32,25 @@ public class ScheService {
 	}
 	
 	public List<ScheDTO> userCalenList(int membercode) {
-		logger.info("ScheService.calenList()");
+		logger.info("ScheService.userCalenList()");
 		return dao.userScheList(membercode);
 	}
+	
+	public boolean addCalenList(int membercode, Date date) {
+		logger.info("ScheService.addCalenList()");
+		
+		return dao.addScheList(membercode,date);
+	}
+
+	public boolean deleteCalenList(int id) {
+		logger.info("ScheService.addCalenList()");
+		
+		return dao.deleteScheList(id);
+	}
+	
+	public List<ScheDTO> trainerCalenList(int coachcode) {
+		logger.info("ScheService.userCalenList()");
+		return dao.trainerScheList(coachcode);
+	}
+	
 }
