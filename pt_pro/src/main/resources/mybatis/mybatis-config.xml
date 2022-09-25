@@ -14,7 +14,5 @@
 
 		<typeAlias type="com.project.pt.board.model.BoardDTO" alias="boardDto" />
 		<typeAlias type="com.project.pt.board.model.BoardStaticsDTO" alias="boardStaticsDto" />
-
-		<typeAlias type="com.project.pt.schedule.model.ScheDTO" alias="scheDto" />
 	</typeAliases>
 </configuration>
