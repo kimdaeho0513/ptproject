@@ -98,10 +98,11 @@
 			비밀번호 확인 <input class="form-control" type="password" name="pw_chk"  id="pw_chk"/><br>
 			이메일 <input class="form-control" type="email" name="email"  id="email"/><br>
 			핸드폰번호 <input class="form-control" type="text" name="phone"  id="phone"/><br>
-			생년월일 <input class="form-control" type=text name="birth"  id="birth"/><br>
+			생년월일 <input class="form-control" type="date" name="birth"  id="birth"/><br>
 			성별 <input type="radio" name="gender" value="M"  id="gender"/>남 
 			<input type="radio" name="gender" value="F"  id="gender"/>여<br>
-			<button id="submit">가입하기</button>
+			<br>
+			<button class="w-100 btn btn-lg btn-primary" id="submit">가입하기</button>
 		</form>
 	</div>
 </main>
