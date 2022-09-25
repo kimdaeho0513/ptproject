@@ -29,4 +29,13 @@ public class ScheDAO {
 		return result;
 		
 	}
+	
+	public List<ScheDTO> userScheList(int membercode) {
+		String mapperId = String.format(mapper, "userScheList");
+		List<ScheDTO> result = session.selectList(mapperId, membercode);
+		logger.info("{}",result);
+		return result;
+				
+		
+	}
 }

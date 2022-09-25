@@ -29,4 +29,9 @@ public class ScheService {
 		logger.info("ScheService.calenList()");
 		return dao.ScheList();
 	}
+	
+	public List<ScheDTO> userCalenList(int membercode) {
+		logger.info("ScheService.calenList()");
+		return dao.userScheList(membercode);
+	}
 }

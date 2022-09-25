@@ -47,13 +47,13 @@ public class ScheDTO {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Date getStart1() {
+	public Date getStart() {
 		return start1;
 	}
 	public void setStart1(Date start1) {
 		this.start1 = start1;
 	}
-	public Date getEnd1() {
+	public Date getEnd() {
 		return end1;
 	}
 	public void setEnd1(Date end1) {

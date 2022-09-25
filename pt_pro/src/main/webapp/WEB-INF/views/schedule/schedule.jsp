@@ -30,7 +30,7 @@
           select: function(arg) {
         	  console.log(arg);
 
-            var title = prompt('입력할 일정:');
+            var title = prompt(arg.start);
         // title 값이 있을때, 화면에 calendar.addEvent() json형식으로 일정을 추가
             if (title) {
               calendar.addEvent({
@@ -60,12 +60,23 @@
         	  $.ajax({
         		 type:"get",
         		 url:"./schedule/data",
-        		dataType:"json"  
+        		dataType:"json",
+        		success: function(data) {
+					successCallback(data);
+				}
+        		
         	  });
           }
       });
         calendar.render();
       });
     </script>
+    
+    <DIV>
+    
+    
+    
+    </DIV>
+    
   </body>
 </html>

@@ -8,13 +8,12 @@
 		<result property="end" column="end1"/>
 	</resultMap>
 	<select id="scheList" resultType="scheDto">
-		SELECT id, title,
-		start1,
-		end1,
-		coachcode,
-		writer,
-		membercode,
-		content 
-		FROM CALENDAR
+		SELECT *
+		  FROM CALENDAR
+	</select>
+	<select id="userScheList" resultType="scheDto">
+		SELECT *
+		  FROM CALENDAR
+		 WHERE MEMBERCODE =#{membercode} 
 	</select>
 </mapper>
