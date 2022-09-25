@@ -71,10 +71,14 @@
 							<div class="card-body">
 								<input type="hidden" value="${comment.commentNum}">
 <<<<<<< HEAD
+<<<<<<< HEAD
 								<input type="hidden" value="${dataNum}">
 =======
 								<input type="hidden" value="${data.dataNum}">
 >>>>>>> refs/remotes/origin/김대호
+=======
+								<input type="hidden" value="${dataNum}">
+>>>>>>> branch '이재윤2' of https://github.com/kimdaeho0513/ptproject.git
 								<c:choose>
 									<c:when test="${comment.deleted eq 'Y'}">
 										<p class="text-muted">삭제된 댓글 입니다.</p>
@@ -165,24 +169,34 @@
 		
 		function commentUpdate(element) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 			
 >>>>>>> refs/remotes/origin/김대호
+=======
+>>>>>>> branch '이재윤2' of https://github.com/kimdaeho0513/ptproject.git
 			var commentNum = element.parentElement.parentElement.children[0].value;
 			var commentContents = element.parentElement.previousElementSibling.children[0].value;
 			
 			$.ajax({
 <<<<<<< HEAD
+<<<<<<< HEAD
 				url: "/board/comment/modify",
 =======
 				url: "./comment/modify",
 >>>>>>> refs/remotes/origin/김대호
+=======
+				url: "/board/comment/modify",
+>>>>>>> branch '이재윤2' of https://github.com/kimdaeho0513/ptproject.git
 				type: "POST",
 				data: {
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 					dataNum: ${data.dataNum}, 
 >>>>>>> refs/remotes/origin/김대호
+=======
+>>>>>>> branch '이재윤2' of https://github.com/kimdaeho0513/ptproject.git
 					commentNum: commentNum,
 					commentContents: commentContents
 				},

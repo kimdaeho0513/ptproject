@@ -193,12 +193,18 @@ public class BoardService {
 
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
 
 =======
 	
 >>>>>>> refs/remotes/origin/김대호
+=======
+
+
+
+>>>>>>> branch '이재윤2' of https://github.com/kimdaeho0513/ptproject.git
 	public boolean commentModify(BoardStaticsDTO data) {
 		boolean result = dao.commentModify(data);
 		

@@ -163,6 +163,7 @@ public class BoardDAO {
 			int res = session.update(mapperId, data);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		public boolean deleteStaticsData(int dataNum) {
 			String mapperId =String.format(mapper,"deleteStaticsData");
 
@@ -186,8 +187,32 @@ public class BoardDAO {
 
 =======
 >>>>>>> refs/remotes/origin/김대호
+=======
+		public boolean deleteStaticsData(int dataNum) {
+			String mapperId =String.format(mapper,"deleteStaticsData");
+
+			int res = session.delete(mapperId, dataNum);
+
+			return res==1 ? true : false;//
+
+		}
+		public boolean deleteStatics(int commentNum) {
+			String mapperId =String.format(mapper,"deleteStatics");
+
+			int res = session.delete(mapperId, commentNum);
+
+			return res==1 ? true : false;//
+
+		}
+
+		public boolean commentModify(BoardStaticsDTO data) {
+			String mapperId =String.format(mapper,"commentModify");
+			int res = session.update(mapperId, data);
+
+>>>>>>> branch '이재윤2' of https://github.com/kimdaeho0513/ptproject.git
 			
 			return res==1 ? true : false;//
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 		}
@@ -209,6 +234,8 @@ public class BoardDAO {
 			return res==1 ? true : false;//
 
 >>>>>>> refs/remotes/origin/김대호
+=======
+>>>>>>> branch '이재윤2' of https://github.com/kimdaeho0513/ptproject.git
 		}
 		
 }

@@ -295,6 +295,9 @@ public class BoardContoller {
 
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> branch '이재윤2' of https://github.com/kimdaeho0513/ptproject.git
 
 	@GetMapping(value = "/commentmodify", produces = "application/json; charset=utf-8")
 	@ResponseBody
@@ -332,6 +335,31 @@ public class BoardContoller {
 	@DeleteMapping(value = "/comment/delete")
 	public String commnetModify2(HttpServletRequest request,
 >>>>>>> refs/remotes/origin/김대호
+			// @SessionAttribute("loginData") MemDTO memDto,
+			@ModelAttribute BoardCommentVO commentVo,
+			@RequestParam(required = false) int dataNum,
+			@RequestParam(required = false) String category
+			) {
+		
+		BoardStaticsDTO data = new BoardStaticsDTO();
+		BoardDTO datas = new BoardDTO();
+
+		data.setCommentContents(commentVo.getCommentContents());
+		data.setDataNum(dataNum);
+		data.setCommentNum(commentVo.getCommentNum());
+		logger.info("코멘트트트트트브이오 입니다(commentVo={})", commentVo);
+
+		
+		
+		service.commentModify(data);
+		
+		return "redirect:/board/detail?category=" + category + "&dataNum=" + dataNum;
+
+
+	}
+
+	@PostMapping(value = "/comment/delete")
+	public String commnetDelete(HttpServletRequest request,
 			// @SessionAttribute("loginData") MemDTO memDto,
 			@ModelAttribute BoardCommentVO commentVo,
 			@RequestParam(required = false) int dataNum,
