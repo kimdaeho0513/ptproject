@@ -11,44 +11,44 @@
 <%@ include file="../module/head.jsp" %>
 </head>
 <body>
-	<c:if test="${category ne 'ALL' }">
+	<c:if test="${category eq 'ALL' }">
 		<div>
 			전체 게시판 검색
 			<form action="./search" method="get">
 				<div>
 					<input type="hidden" name="category" value="ALL"> 
 					<select name="type">
-						<option value="title">제목+내용</option>
-						<option value="id">아이디</option>
-						<option value="tag">태그</option>
+						<option value="title" ${type eq 'title' ? 'selected' : '' }>제목+내용</option>
+						<option value="id" ${type eq 'id' ? 'selected' : '' }>아이디</option>
+						<option value="tag" ${type eq 'tag' ? 'selected' : '' }>태그</option>
 					</select>
 					<input type="text" name="keyword">
 					<button type="submit">전송</button>
 				</div>
 			</form>		
 		</div>
+		<div>
+			<c:url value="/board?category=" var="boardsURL" />
+			<table>
+				<tr>
+					<td onclick="location.href='${boardsURL}C'">문의</td>
+					<td onclick="location.href='${boardsURL}N'">공지</td>
+					<td onclick="location.href='${boardsURL}I'">정보</td>
+					<td onclick="location.href='${boardsURL}R'">후기</td>
+				
+				</tr>
+			</table>
+		</div>
 	</c:if> 
-	<div>
-		<c:url value="/board?category=" var="boardsURL" />
-		<table>
-			<tr>
-				<td onclick="location.href='${boardsURL}C'">문의</td>
-				<td onclick="location.href='${boardsURL}N'">공지</td>
-				<td onclick="location.href='${boardsURL}I'">정보</td>
-				<td onclick="location.href='${boardsURL}R'">후기</td>
-			
-			</tr>
-		</table>
-	</div>
 	<section>	
 		<form action="./search" method="get">			
 			<div>
 			검색
-				<select name ="type">
-					<option value="title">제목+내용</option>
-					<option value="id">아이디</option>
-					<option value="tag">태그</option>
-				</select>
+				<select name="type">
+						<option value="title" ${type eq 'title' ? 'selected' : '' }>제목+내용</option>
+						<option value="id" ${type eq 'id' ? 'selected' : '' }>아이디</option>
+						<option value="tag" ${type eq 'tag' ? 'selected' : '' }>태그</option>
+					</select>
 				<input type="hidden" name="category" value="${category}">					
 				<input type="text" name="keyword" value="${keyword}">
 				<button type ="submit">전송</button>
@@ -59,7 +59,6 @@
 				<col class="col-1">
 				<col class="col-4">
 				<col class="col-2">
-				<col class="col-1">
 				<col class="col-1">
 				<col class="col-1">
 				<c:if test="${category eq 'ALL'}">
@@ -86,7 +85,6 @@
 					<th>제목</th>
 					<th>작성자</th>
 					<th>조회수</th>
-					<th>추천수</th>
 					<th>작성일</th>
 					<c:if test="${category eq 'ALL'}">
 					<th>게시판위치</th></c:if>
@@ -114,7 +112,6 @@
 							</td>
 							<td onclick="location.href='${userBoard}'">${data.writer}</td>
 							<td>${data.conut}</td>
-							<td>${data.liked}</td>
 							<td>${data.writedate}</td>
 							<c:if test="${category eq 'ALL'}">
 								<td onclick="location.href='${boardsURL}${data.category}'">

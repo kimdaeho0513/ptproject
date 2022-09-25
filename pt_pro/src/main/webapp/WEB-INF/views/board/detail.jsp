@@ -37,16 +37,16 @@
 			<div>
 				<p>${data.contents}</p>
 			</div>
-			<div onclick="ajaxLike(id_like, ${data.dataNum});">
+			<!--div onclick="ajaxLike(id_like, ${data.dataNum});">
 				<i class="bi bi-hand-thumbs-up text-secondary text-opacity-50"></i>
 				<label id="id_like" class="text-secondary text-opacity-75">${data.liked}</label>
-			</div>
+			</div-->
 		</div>
 		<div>
 			<c:url var="boardUrl" value="/board" />
 			<form action="./delete" method="post">
 				<c:if
-					test="${(data.writer eq sessionScope.userid) or sessionScope.roles == 'A'}">
+					test="${(data.writer eq sessionScope.loginData.userid) or sessionScope.loginData.roles == 'A'}">
 					<!-- 병합시 sessionScope.roles->sessionScope.loginData.roles -->
 					<button type="button"
 						onclick="location.href='${boardUrl}/modify?category=${data.category}&dataNum=${data.dataNum}'">수정</button>
@@ -70,6 +70,7 @@
 							</div>
 							<div class="card-body">
 								<input type="hidden" value="${comment.commentNum}">
+								<input type="hidden" value="${data.dataNum}">
 								<c:choose>
 									<c:when test="${comment.deleted eq 'Y'}">
 										<p class="text-muted">삭제된 댓글 입니다.</p>
@@ -89,16 +90,19 @@
 					</div>
 				</c:forEach>
 				<div class="mb-1">
-					<form action="${boardUrl}/comment/add" method="post">
-						<input type="hidden" name="bid" value="">
-						<div class="input-group">
-							<textarea class="form-control" name="content" rows="2"></textarea>
-							<input type="hidden" name="dataNum" value="${data.dataNum}">
-							<input type="hidden" name="category" value="${category}">							
-							<button class="btn btn-outline-dark" type="button"
-								onclick="formCheck(this.form);">등록</button>
-						</div>
-					</form>
+					<c:if test="${not empty sessionScope.loginData.userid}">						
+						<form action="${boardUrl}/comment/add" method="post">
+							<input type="hidden" name="bid" value="">
+							<div class="input-group">
+								<textarea class="form-control" name="content" rows="2"></textarea>
+								<input type="hidden" name="dataNum" value="${data.dataNum}">
+								<input type="hidden" name="category" value="${category}">							
+								<button class="btn btn-outline-dark" type="button"
+									onclick="formCheck(this.form);">등록</button>
+							</div>
+						</form>
+						
+					</c:if>
 				</div>
 		</c:if>
 		</div>
@@ -122,7 +126,7 @@
 		</div>
 	</section>
 	<script type="text/javascript">
-<c:url var="boardUrl" value="/board" />
+<c:url var="boardUrl" value="./board" />
 
 		function changeEdit(element) {
 			element.innerText = "확인";
@@ -136,46 +140,48 @@
 			element.parentElement.previousElementSibling.innerText = "";
 			element.parentElement.previousElementSibling.append(textarea);
 			
-			element.setAttribute("onclick", "commentUpdate(this);");
+			element.setAttribute("onclick","commentUpdate(this)");
 		}
 		
-		function changeText(element) {
+		function changeText(element, value) {
 			element.innerText = "수정";
-			var cid = element.parentElement.parentElement.children[0].value;
-			var value = element.parentElement.previousElementSibling.children[0].value;
+			var commentNum = element.parentElement.parentElement.children[0].value;
+			var commentContents = element.parentElement.previousElementSibling.children[0].value;
 			element.parentElement.previousElementSibling.children[0].remove();
 			element.parentElement.previousElementSibling.innerText = value;
 			
 			var btnDelete = document.createElement("button");
 			btnDelete.innerText = "삭제";
 			btnDelete.setAttribute("class", "btn btn-sm btn-outline-dark");
-			btnDelete.setAttribute("onclick", "commentDelete(this, " + cid + ");");
+			btnDelete.setAttribute("onclick", "commentDelete(this, " + commentNum + ");");
 			
 			element.parentElement.append(btnDelete);
 			element.setAttribute("onclick", "changeEdit(this);");
 		}
 		
 		function commentUpdate(element) {
-			var cid = element.parentElement.parentElement.children[0].value;
-			var value = element.parentElement.previousElementSibling.children[0].value;
+			
+			var commentNum = element.parentElement.parentElement.children[0].value;
+			var commentContents = element.parentElement.previousElementSibling.children[0].value;
 			
 			$.ajax({
-				url: "/comment/modify",
-				type: "post",
+				url: "./comment/modify",
+				type: "POST",
 				data: {
-					id: cid,
-					content: value
+					dataNum: ${data.dataNum}, 
+					commentNum: commentNum,
+					commentContents: commentContents
 				},
 				success: function(data) {
 					element.parentElement.previousElementSibling.children[0].value = data.value
-					changeText(element);
+					changeText(element, data.value);
 				}
 			});
 		}
 		
 		function commentDelete(element, id) {
 			$.ajax({
-				url: "/comment/delete",
+				url: "./comment/delete",
 				type: "post",
 				data: {
 					id: id

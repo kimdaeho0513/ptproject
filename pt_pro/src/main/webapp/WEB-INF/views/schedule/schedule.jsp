@@ -1,11 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang='en'>
+<html lang=kr'>
   <head>
     <meta charset='utf-8' />
+    <%@ include file="../module/head.jsp" %>
     <link href='static/fullcalendar/main.css' rel='stylesheet' />
     <script src='static/fullcalendar/main.js'></script>
+  </head>
+  <body>
+    <div id='calendar'></div>
     <script>
 
     document.addEventListener('DOMContentLoaded', function() {
@@ -55,7 +59,7 @@
         	  // ajax 처리로 데이터를 로딩 시킨다.
         	  $.ajax({
         		 type:"get",
-        		 url:"/scheduledata",
+        		 url:"./schedule/data",
         		dataType:"json"  
         	  });
           }
@@ -63,8 +67,5 @@
         calendar.render();
       });
     </script>
-  </head>
-  <body>
-    <div id='calendar'></div>
   </body>
 </html>

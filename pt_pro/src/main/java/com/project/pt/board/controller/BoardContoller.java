@@ -1,9 +1,12 @@
 package com.project.pt.board.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.sound.midi.Patch;
 
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
@@ -11,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,6 +27,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import com.project.pt.board.model.BoardDTO;
 import com.project.pt.board.model.BoardStaticsDTO;
 import com.project.pt.board.service.BoardService;
+import com.project.pt.board.vo.BoardCommentVO;
 import com.project.pt.board.vo.BoardVO;
 import com.project.pt.common.util.Paging;
 import com.project.pt.mem.model.MemDTO;
@@ -288,12 +293,41 @@ public class BoardContoller {
 		service.setComCnt(datas);
 		return "redirect:/board/detail?category=" + category + "&dataNum=" + dataNum;
 
-	}/*
+	}
+	
+
 	@PostMapping(value = "/comment/modify")
-	public String commnetModify(HttpServletRequest request,
+	@ResponseBody
+	public Map<String, String> commnetModify(HttpServletRequest request,
+			// @SessionAttribute("loginData") MemDTO memDto,
+			@ModelAttribute BoardCommentVO commentVo,
+			@RequestParam(required = false) int dataNum,
+			@RequestParam(required = false) String category
+			) {
+		
+		BoardStaticsDTO data = new BoardStaticsDTO();
+		BoardDTO datas = new BoardDTO();
+
+		data.setCommentContents(commentVo.getCommentContents());
+		data.setDataNum(dataNum);
+		data.setCommentNum(commentVo.getCommentNum());
+		logger.info("코멘트트트트트브이오 입니다(commentVo={})", commentVo);
+
+		
+		
+		service.commentModify(data);
+		Map<String, String> resultMap = new HashMap<>();
+		resultMap.put("value", data.getCommentContents());
+		
+		return resultMap;
+
+	}
+	
+	@DeleteMapping(value = "/comment/delete")
+	public String commnetModify2(HttpServletRequest request,
 			// @SessionAttribute("loginData") MemDTO memDto,
 			@RequestParam String content,
-			@RequestParam(required = false) int dataNum,
+			@RequestParam(required = false) Integer dataNum,
 			@RequestParam(required = false) String category
 			) {
 		BoardStaticsDTO data = new BoardStaticsDTO();
@@ -301,7 +335,7 @@ public class BoardContoller {
 
 		System.out.println(datas);
 		data.setCommentContents(content);
-		data.setdataNum(dataNum);
+		//data.setdataNum(dataNum);
 		data.setCommentWriter("thebibi");
 		
 		
@@ -315,32 +349,5 @@ public class BoardContoller {
 		return "redirect:/board/detail?category=" + category + "&dataNum=" + dataNum;
 
 	}
-
-	@PostMapping(value = "/comment/delete")
-	public String commnetModify(HttpServletRequest request,
-			// @SessionAttribute("loginData") MemDTO memDto,
-			@RequestParam String content,
-			@RequestParam(required = false) int dataNum,
-			@RequestParam(required = false) String category
-			) {
-		BoardStaticsDTO data = new BoardStaticsDTO();
-		BoardDTO datas = new BoardDTO();
-
-		System.out.println(datas);
-		data.setCommentContents(content);
-		data.setdataNum(dataNum);
-		data.setCommentWriter("thebibi");
-		
-		
-		boolean result = service.comment(data);
-		
-		int commentCount = service.comCnt(dataNum);
-		datas.setDataNum(dataNum);
-		datas.setRecommend(commentCount);
-		System.out.println(datas);
-		service.setComCnt(datas);
-		return "redirect:/board/detail?category=" + category + "&dataNum=" + dataNum;
-
-	}*/
 
 }

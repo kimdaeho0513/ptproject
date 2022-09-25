@@ -103,7 +103,7 @@ INSERT INTO TOTAL_BOARD
  		 CATEGORY,
  		 b_WRITEDATE
 		 ) 
-	VALUES(#{dataNum},#{writer}, #{title}, #{contents}, #{category},SYSDATE)
+	VALUES(#{dataNum},#{writer}, #{title}, #{contents}, #{category} , SYSDATE)
 </insert>
  
  
@@ -170,7 +170,6 @@ update TOTAL_BOARD
 set recommend= #{recommend}
 WHERE b_NUM = #{dataNum}
 </update>
-
 <insert id="commentAdd" parameterType="boardStaticsDto">
 INSERT INTO comments
 (dateNum,commentContents,commentWriter)
@@ -178,15 +177,29 @@ VALUES
 (#{dataNum},#{commentContents},#{commentWriter})
 </insert>
  
- <update id="deleteData">
-	update FROM TOTAL_BOARD
-		   set deleted='y'
-	 WHERE b_NUM = #{dataNum}
+ <delete id="deleteData">
+delete TOTAL_BOARD
+ WHERE b_NUM = #{dataNum}
+</delete>
+
+<delete id="deleteStaticsData">
+delete comments
+ WHERE dateNum = #{dataNum}
+</delete>
+
+
+<delete id="deleteStatics">
+delete comments
+ WHERE commentNum = #{commentNum}
+</delete>
+
+ <update id="commentModify" parameterType="boardStaticsDto">
+update comments
+set commentContents= #{commentContents}
+WHERE dateNum = #{dataNum}
+  AND commentNum = #{commentNum}
 </update>
-  	<update id="deleteStaticsData">
-		update FROM comments
-		 WHERE commentWriter = #{commentWriter}
-	</update>
+
 	
 <select	id="getTrainer" parameterType="memDto" resultType="memDto">
 Select name,USERSCODE

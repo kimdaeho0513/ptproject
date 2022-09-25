@@ -156,10 +156,31 @@ public class BoardDAO {
 
 			return result;//
 		}
+		
+		public boolean commentModify(BoardStaticsDTO data) {
+			String mapperId =String.format(mapper,"commentModify");
+			int res = session.update(mapperId, data);
 
-		public void deleteStaticsData(int dataNum) {
-			// TODO Auto-generated method stub
 			
+			return res==1 ? true : false;//
+		}
+		
+		public boolean deleteStatics(int commentNum) {
+			String mapperId =String.format(mapper,"deleteStatics");
+
+			int res = session.delete(mapperId, commentNum);
+
+			return res==1 ? true : false;//
+
+		}
+
+		public boolean deleteStaticsData(int dataNum) {
+			String mapperId =String.format(mapper,"deleteStaticsData");
+
+			int res = session.delete(mapperId, dataNum);
+
+			return res==1 ? true : false;//
+
 		}
 		
 }
