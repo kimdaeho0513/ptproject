@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="./module/nav.jsp"%>
+<title>KH fitness</title>
 <header class="masthead">
 	<div class="container">
 		<div class="masthead-subheading">Welcome To KH fitness!</div>

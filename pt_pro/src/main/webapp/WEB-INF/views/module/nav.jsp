@@ -12,7 +12,6 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta name="description" content="" />
 <meta name="author" content="" />
-<title>Agency - Start Bootstrap Theme</title>
 <!-- Favicon-->
 <link rel="icon" type="image/x-icon" href="${base}/assets/favicon.ico" />
 <!-- Font Awesome icons (free version)-->
@@ -41,16 +40,11 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-					<li class="nav-item"><a class="nav-link"
-						href="/pt/board?category=N">공지사항</a></li>
-					<li class="nav-item"><a class="nav-link" href="#portfolio">트레이너
-							정보</a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="/pt/board?category=R">후기 게시판 </a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="/pt/board?category=I">정보공유 게시판</a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="/pt/board?category=C">문의 게시판</a></li>
+					<li class="nav-item"><a class="nav-link" href="/pt/board?category=N">공지사항</a></li>
+					<li class="nav-item"><a class="nav-link" href="#portfolio">트레이너 정보</a></li>
+					<li class="nav-item"><a class="nav-link" href="/pt/board?category=R">후기 게시판 </a></li>
+					<li class="nav-item"><a class="nav-link" href="/pt/board?category=I">정보공유 게시판</a></li>
+					<li class="nav-item"><a class="nav-link" href="/pt/board?category=C">문의 게시판</a></li>
 					<c:if test="${not empty sessionScope.loginData}">
 						<c:if test="${sessionScope.loginData.roles eq 'M'}">
 							<li class="nav-item"><a class="nav-link" href="/pt/login">pt 예약조회</a></li>
@@ -58,6 +52,9 @@
 						<c:if test="${sessionScope.loginData.roles eq 'T'}">
 							<li class="nav-item"><a class="nav-link" href="/pt/login">회원 pt조회</a></li>
 						</c:if>
+					<c:if test="${not empty sessionScope.loginData}">
+						<li class="nav-item"><a class="nav-link" href="/pt/mypage">마이페이지</a></li>
+					</c:if>
 					</c:if>
 					<li class="nav-item"><a class="nav-link" href="/pt/pay">pt 회원권 구매</a></li>
 				</ul>
