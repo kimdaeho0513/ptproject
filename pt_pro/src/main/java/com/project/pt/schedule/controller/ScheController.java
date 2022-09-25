@@ -29,6 +29,7 @@ public class ScheController {
 		
 		return "schedule/schedule";
 	}
+	
 	@GetMapping("/data")
 	public String data(Model d) {
 		logger.info("data={}");
