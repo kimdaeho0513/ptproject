@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.pt.schedule.model.ScheDAO;
+import com.project.pt.schedule.model.ScheDTO;
 import com.project.pt.schedule.vo.ScheVO;
 
 @Service
@@ -13,7 +14,11 @@ public class ScheService {
 	@Autowired(required = false)
 	private ScheDAO dao;
 	
-	public ArrayList<ScheVO> scheList(){
+	//public ArrayList<ScheVO> scheList(){
+//		return dao.ScheList();
+//	}
+
+	public ArrayList<ScheDTO> calenList() {
 		return dao.ScheList();
 	}
 }

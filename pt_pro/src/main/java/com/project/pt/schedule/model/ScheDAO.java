@@ -8,5 +8,6 @@ import com.project.pt.schedule.vo.ScheVO;
 
 @Repository
 public interface ScheDAO {
-	public ArrayList<ScheVO> ScheList();
+	//public ArrayList<ScheVO> ScheList();
+	public ArrayList<ScheDTO> ScheList();
 }

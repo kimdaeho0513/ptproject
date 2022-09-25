@@ -1,9 +1,12 @@
 package com.project.pt.board.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.sound.midi.Patch;
 
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
@@ -11,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -290,10 +294,44 @@ public class BoardContoller {
 		return "redirect:/board/detail?category=" + category + "&dataNum=" + dataNum;
 
 	}
+<<<<<<< HEAD
 
 	@GetMapping(value = "/commentmodify", produces = "application/json; charset=utf-8")
 	@ResponseBody
 	public String commnetModify(HttpServletRequest request,
+=======
+	
+
+	@PostMapping(value = "/comment/modify")
+	@ResponseBody
+	public Map<String, String> commnetModify(HttpServletRequest request,
+			// @SessionAttribute("loginData") MemDTO memDto,
+			@ModelAttribute BoardCommentVO commentVo,
+			@RequestParam(required = false) int dataNum,
+			@RequestParam(required = false) String category
+			) {
+		
+		BoardStaticsDTO data = new BoardStaticsDTO();
+		BoardDTO datas = new BoardDTO();
+
+		data.setCommentContents(commentVo.getCommentContents());
+		data.setDataNum(dataNum);
+		data.setCommentNum(commentVo.getCommentNum());
+		logger.info("코멘트트트트트브이오 입니다(commentVo={})", commentVo);
+
+		
+		
+		service.commentModify(data);
+		Map<String, String> resultMap = new HashMap<>();
+		resultMap.put("value", data.getCommentContents());
+		
+		return resultMap;
+
+	}
+	
+	@DeleteMapping(value = "/comment/delete")
+	public String commnetModify2(HttpServletRequest request,
+>>>>>>> refs/remotes/origin/김대호
 			// @SessionAttribute("loginData") MemDTO memDto,
 			@ModelAttribute BoardCommentVO commentVo,
 			@RequestParam(required = false) int dataNum,
@@ -321,7 +359,7 @@ public class BoardContoller {
 	public String commnetDelete(HttpServletRequest request,
 			// @SessionAttribute("loginData") MemDTO memDto,
 			@RequestParam String content,
-			@RequestParam(required = false) int dataNum,
+			@RequestParam(required = false) Integer dataNum,
 			@RequestParam(required = false) String category
 			) {
 		BoardStaticsDTO data = new BoardStaticsDTO();

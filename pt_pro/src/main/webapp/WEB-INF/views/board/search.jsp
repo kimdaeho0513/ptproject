@@ -18,9 +18,9 @@
 				<div>
 					<input type="hidden" name="category" value="ALL"> 
 					<select name="type">
-						<option value="title">제목+내용</option>
-						<option value="id">아이디</option>
-						<option value="tag">태그</option>
+						<option value="title" ${type eq 'title' ? 'selected' : '' }>제목+내용</option>
+						<option value="id" ${type eq 'id' ? 'selected' : '' }>아이디</option>
+						<option value="tag" ${type eq 'tag' ? 'selected' : '' }>태그</option>
 					</select>
 					<input type="text" name="keyword">
 					<button type="submit">전송</button>
@@ -44,11 +44,11 @@
 		<form action="./search" method="get">			
 			<div>
 			검색
-				<select name ="type">
-					<option value="title">제목+내용</option>
-					<option value="id">아이디</option>
-					<option value="tag">태그</option>
-				</select>
+				<select name="type">
+						<option value="title" ${type eq 'title' ? 'selected' : '' }>제목+내용</option>
+						<option value="id" ${type eq 'id' ? 'selected' : '' }>아이디</option>
+						<option value="tag" ${type eq 'tag' ? 'selected' : '' }>태그</option>
+					</select>
 				<input type="hidden" name="category" value="${category}">					
 				<input type="text" name="keyword" value="${keyword}">
 				<button type ="submit">전송</button>

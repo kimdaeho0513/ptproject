@@ -70,7 +70,11 @@
 							</div>
 							<div class="card-body">
 								<input type="hidden" value="${comment.commentNum}">
+<<<<<<< HEAD
 								<input type="hidden" value="${dataNum}">
+=======
+								<input type="hidden" value="${data.dataNum}">
+>>>>>>> refs/remotes/origin/김대호
 								<c:choose>
 									<c:when test="${comment.deleted eq 'Y'}">
 										<p class="text-muted">삭제된 댓글 입니다.</p>
@@ -126,7 +130,7 @@
 		</div>
 	</section>
 	<script type="text/javascript">
-<c:url var="boardUrl" value="/board" />
+<c:url var="boardUrl" value="./board" />
 
 		function changeEdit(element) {
 			element.innerText = "확인";
@@ -143,7 +147,7 @@
 			element.setAttribute("onclick","commentUpdate(this)");
 		}
 		
-		function changeText(element) {
+		function changeText(element, value) {
 			element.innerText = "수정";
 			var commentNum = element.parentElement.parentElement.children[0].value;
 			var commentContents = element.parentElement.previousElementSibling.children[0].value;
@@ -153,33 +157,45 @@
 			var btnDelete = document.createElement("button");
 			btnDelete.innerText = "삭제";
 			btnDelete.setAttribute("class", "btn btn-sm btn-outline-dark");
-			btnDelete.setAttribute("onclick", "commentDelete(this, " + cid + ");");
+			btnDelete.setAttribute("onclick", "commentDelete(this, " + commentNum + ");");
 			
 			element.parentElement.append(btnDelete);
 			element.setAttribute("onclick", "changeEdit(this);");
 		}
 		
 		function commentUpdate(element) {
+<<<<<<< HEAD
+=======
+			
+>>>>>>> refs/remotes/origin/김대호
 			var commentNum = element.parentElement.parentElement.children[0].value;
 			var commentContents = element.parentElement.previousElementSibling.children[0].value;
 			
 			$.ajax({
+<<<<<<< HEAD
 				url: "/board/comment/modify",
+=======
+				url: "./comment/modify",
+>>>>>>> refs/remotes/origin/김대호
 				type: "POST",
 				data: {
+<<<<<<< HEAD
+=======
+					dataNum: ${data.dataNum}, 
+>>>>>>> refs/remotes/origin/김대호
 					commentNum: commentNum,
 					commentContents: commentContents
 				},
 				success: function(data) {
 					element.parentElement.previousElementSibling.children[0].value = data.value
-					changeText(element);
+					changeText(element, data.value);
 				}
 			});
 		}
 		
 		function commentDelete(element, id) {
 			$.ajax({
-				url: "/comment/delete",
+				url: "./comment/delete",
 				type: "post",
 				data: {
 					id: id

@@ -112,7 +112,7 @@ public class BoardService {
 	
 	
 	
-	
+
 	public int add(BoardDTO data) {
 		int seq = dao.getNextSeq();
 		logger.info("seq(seq={})",seq);
@@ -128,6 +128,7 @@ public class BoardService {
 		}
 		return -1;
 	}
+
 	
 	
 	
@@ -191,9 +192,13 @@ public class BoardService {
 		
 
 	}
+<<<<<<< HEAD
 
 
 
+=======
+	
+>>>>>>> refs/remotes/origin/김대호
 	public boolean commentModify(BoardStaticsDTO data) {
 		boolean result = dao.commentModify(data);
 		

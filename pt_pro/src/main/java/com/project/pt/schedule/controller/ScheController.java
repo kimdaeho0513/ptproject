@@ -17,16 +17,23 @@ import com.project.pt.schedule.service.ScheService;
 @Controller
 @RequestMapping("/schedule")
 public class ScheController {
-	@Autowired(required = false)
+	private static final Logger logger = LoggerFactory.getLogger(ScheController.class);
+
+	
+	@Autowired
 	private ScheService service;
 
-	@GetMapping("/schedulelist")
+	@GetMapping
 	public String list() {
+		logger.info("list={}");
+		
 		return "schedule/schedule";
 	}
-	@GetMapping("/scheduledata")
+	@GetMapping("/data")
 	public String data(Model d) {
-		d.addAttribute("list", service.scheList());
+		logger.info("data={}");
+
+		d.addAttribute("list", service.calenList());
 		return "pageJsonReport";
 	}
 }

@@ -196,7 +196,11 @@ delete comments
  <update id="commentModify" parameterType="boardStaticsDto">
 update comments
 set commentContents= #{commentContents}
+<<<<<<< HEAD
 WHERE dateNum = #{dateNum}
+=======
+WHERE dateNum = #{dataNum}
+>>>>>>> refs/remotes/origin/김대호
   AND commentNum = #{commentNum}
 </update>
 
