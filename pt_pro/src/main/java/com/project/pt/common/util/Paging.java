@@ -90,9 +90,9 @@ public class Paging {
 	}
 	
 
-	public Object getPageData(Search search) {
-		return pageData;
-	}
+//	public Object getPageData(Search search) {
+//		return pageData;
+//	}
 	
 	public boolean hasNextPage() {
 		return this.pageNumberList.contains(this.nextPageNumber);
@@ -101,7 +101,7 @@ public class Paging {
 	public boolean hasPrevPage() {
 		return this.pageNumberList.contains(this.prevPageNumber);
 	}
-
+ 
 
 
 
@@ -109,7 +109,7 @@ public class Paging {
 	public String toString() {
 		return "Paging [offset=" + offset + ", limit=" + limit + ", currentPageNumber=" + currentPageNumber
 				+ ", nextPageNumber=" + nextPageNumber + ", prevPageNumber=" + prevPageNumber + ", pageNumberList="
-				+ pageNumberList + ", pageData=" + pageData + ", keyword=" + keyword + "]";
+				+ pageNumberList + ", pageData=" + pageData + "]";
 	}
 
 

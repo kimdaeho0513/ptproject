@@ -14,26 +14,23 @@
 <head>
 	<meta charset="UTF-8">
 	<title>전체 회원 조회 게시판</title>
-
+<%@ include file="../module/head.jsp" %>
 </head>
 <body>
 	<h1>회원 조회</h1>
-	<section class="container">
-		<div class="mb-1">
-			<c:url var="managementSearchUrl" value="/management/search" />
-			<form name="form2" action="${managementSearchUrl}" method="get">
-			<div class="row g-1">
-					<div class="col-3">
-						<div class="input-group">
-							<input class="form-control" type="text" name="keyword" id="keyword" value="${keyword}">
-							<button class="btn btn-secondary" name="btnSearch" value="search" type="submit">조회</button>
+	<section class="container" >
+		<div class="mb-1" >
+			<c:url var="managementUrl" value="/management" />
+			<form name="form2" >
+				<div class="row g-1" >
+					<div class="col-3" >
+						<div class="input-group" >
+							<input class="form-control" type="text" name="search" value="${param.search}" >
+							<button class="btn btn-secondary"  id="btnSearch">조회</button>
 						</div>
 					</div>
-				</form>
-			<c:url var="managementUrl" value="/management" />
-			<form action="${managementUrl}" method="get">
 					<div class="col-1">
-						<select class="form-select" onchange="location.href='${managementUrl}?pageCount=' + this.value">
+						<select id = "countSelect" class="form-select">
 							<option value="5" ${sessionScope.pageCount == 5 ? 'selected' : ''}>5 개</option>
 							<option value="10" ${sessionScope.pageCount == 10 ? 'selected' : ''}>10 개</option>
 							<option value="15" ${sessionScope.pageCount == 15 ? 'selected' : ''}>15 개</option>
@@ -42,21 +39,19 @@
 					</div>
 				</div>
 			</form>
-		</div>
-		
+		</div> 
 		<table class="table table-hover">
 			<colgroup>
-				<col class="col-1">
-				<col class="col-auto">
-				<col class="col-2">
-				<col class="col-1">
-				<col class="col-1">
-				<col class="col-2">
+				<col width="40%" />
+				<col width="25%"  />
+				<col width="25%" />
+				<col class="col-xs-3"  />
 			</colgroup>
 			<thead>
 				<tr>
-					<th>회원이름</th>
+					<th>회원번호</th>
 					<th>아이디</th>
+					<th>회원이름</th>
 					<th>전화번호</th>
 				</tr>
 			</thead>
@@ -67,8 +62,9 @@
 							<c:param name="mngNum">${data.mngNum}</c:param>
 						</c:url>
 						<tr onclick="location.href='${managementDetailUrl}'">
-							<td>${data.mngName}</td>
+							<td>${data.mngNum}</td>
 							<td>${data.mngId}</td>
+							<td>${data.mngName}</td>
 							<td>${data.mngPhone}</td>
 						</tr>
 					</c:forEach>
@@ -80,30 +76,71 @@
 				<ul class="pagination justify-content-center">
 					<c:if test="${pageData.hasPrevPage()}">
 						<li class="page-item">
-							<a class="page-link" href="${managementUrl}?page=${pageData.prevPageNumber}">Prev</a>
+							<a class="page-link" id="prevPaging" >Prev</a>
 						</li>
 					</c:if>
 					<c:forEach items="${pageData.getPageNumberList(pageData.currentPageNumber - 2, pageData.currentPageNumber + 2)}" var="num">
-						<li class="page-item ${pageData.currentPageNumber eq num ? 'active' : ''}">
-							<a class="page-link" href="${managementUrl}?page=${num}">${num}</a>
-						</li>
+						<c:choose>	
+							<c:when test="${not empty param.search}">
+								<c:url var="managementPageUrl" value="/management">
+									<c:param name="pageCount">${pageCount}</c:param>
+									<c:param name="search">${param.search}</c:param>
+								</c:url>
+								<li class="page-item ${pageData.currentPageNumber eq num ? 'active' : ''}">
+									<a class="page-link" href="${managementPageUrl}&page=${num}" >${num}</a>
+								</li>
+							</c:when>
+							<c:otherwise>
+								<li class="page-item ${pageData.currentPageNumber eq num ? 'active' : ''}">
+									<a class="page-link" href="${managementUrl}?page=${num}" >${num}</a>
+								</li>
+							</c:otherwise>
+						</c:choose>	
 					</c:forEach>
 					<c:if test="${pageData.hasNextPage()}">
 						<li class="page-item">
-							<a class="page-link" href="${managementUrl}?page=${pageData.nextPageNumber}">Next</a>
+							<a class="page-link" id="nextPaging">Next</a>
 						</li>
 					</c:if>
 				</ul>
 			</div>
 		</nav>
 	</section>
-	<script>   		
+	<script>   	
+	
 	$(function(){
+		
+		// id 는 샵 $("#btnSearch") <input id = btnSearch />
+		// name 는 샵 $("[name=btnSearch]") <input id = btnSearch />
+		
+		var page = "${page}";
+		
 		$("#btnSearch").click(function(){
-			document.form2.action ="${path}/pt/management/search";
+			var searchVal = $("[name=search]").val();
+			document.form2.action ="${path}/pt/management?search=" + searchVal;
 			document.form2.submit();
 		});
-	});
+		
+		$("#countSelect").on("change",function(){
+			var pageCount = $(this).val();
+			var searchVal = $("[name=search]").val();
+			location.href='${managementUrl}?pageCount=' + pageCount + '&search=' +searchVal + '&page=' + 1 ;
+		})
+		
+		$("#nextPaging").click(function(){
+			var pageCount = $(this).val();
+			var searchVal = $("[name=search]").val();
+			location.href='${managementUrl}?pageCount=' + pageCount + '&search=' +searchVal + '&page=' + ${pageData.nextPageNumber}; 
+		});
+		
+		
+		$("#prevPaging").click(function(){
+			var pageCount = $(this).val();
+			var searchVal = $("[name=search]").val();
+			location.href='${managementUrl}?pageCount=' + pageCount + '&search=' +searchVal + '&page=' + ${pageData.prevPageNumber}; 
+		});
+		
+	}); 
 	</script>
 </body>
 </html>
