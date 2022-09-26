@@ -14,7 +14,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>전체 회원 조회 게시판</title>
-
+<%@ include file="../module/head.jsp" %>
 </head>
 <body>
 	<h1>회원 조회</h1>

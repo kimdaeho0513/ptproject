@@ -17,6 +17,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>회원상세페이지</title>
+	<%@ include file="../module/head.jsp" %>
 </head>
 <body>
 		<form name="form1" class="container"  method="post" accept-charset="utf-8">
