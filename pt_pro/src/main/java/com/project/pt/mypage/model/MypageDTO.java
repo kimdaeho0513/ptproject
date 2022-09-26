@@ -124,9 +124,12 @@ public class MypageDTO {
 
 	@Override
 	public String toString() {
-		return "MypageDTO [userscode=" + userscode + ", userid=" + userid + ", password=" + pw + ", name=" + name
-				+ ", birth=" + birth + ", phone=" + phone + ", email=" + email + ", gender=" + gender + ", roles="
-				+ roles + ", hidden=" + hidden + ", deleted=" + deleted + ", datelog=" + datelog + ",deletedate=" + deletedate + "]";
+		return "MypageDTO [userscode=" + userscode + ", userid=" + userid + ", pw=" + pw + ", name=" + name + ", birth="
+				+ birth + ", phone=" + phone + ", email=" + email + ", gender=" + gender + ", roles=" + roles
+				+ ", hidden=" + hidden + ", deleted=" + deleted + ", datelog=" + datelog + ", deletedate=" + deletedate
+				+ "]";
 	}
 	
+
+
 }

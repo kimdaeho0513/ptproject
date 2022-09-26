@@ -14,6 +14,7 @@ public class MemDTO {
 	private String roles;
 	private String hidden;
 	private String deleted;
+	private int ptcount;
 	public int getUserscode() {
 		return userscode;
 	}
@@ -79,6 +80,13 @@ public class MemDTO {
 	}
 	public void setDeleted(String deleted) {
 		this.deleted = deleted;
+	}
+	
+	public int getPtcount() {
+		return ptcount;
+	}
+	public void setPtcount(int ptcount) {
+		this.ptcount = ptcount;
 	}
 	@Override
 	public String toString() {

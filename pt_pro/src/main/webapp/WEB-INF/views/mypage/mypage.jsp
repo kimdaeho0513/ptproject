@@ -43,25 +43,27 @@ input[type="date"]{
 <form name="form1" method="post" accept-charset="utf-8">
 <div class="md-4">
 	<label>아이디</label><br>
-	<input class="rounded form-control-lg" type="text" name="userid" value="${sessionScope.loginData.userid}" readonly><br><br>
+	<input class="rounded form-control-lg" type="text" name="userid" value="${sessionScope.loginData.userid}" readonly><br>
 	<label>비밀번호</label><br>
-	<input class="rounded form-control-lg" type="text" name="pw" value="${sessionScope.loginData.pw}"><br><br>
+	<input class="rounded form-control-lg" type="text" name="pw" value="${sessionScope.loginData.pw}"><br>
 	<label>이름</label><br>
-	<input class="rounded form-control-lg" type="text" name="name" value="${sessionScope.loginData.name}"><br><br>
+	<input class="rounded form-control-lg" type="text" name="name" value="${sessionScope.loginData.name}"><br>
 	<label>생일</label><br>
-	<input class="rounded form-control-lg" type="date" name="birth" value="<fmt:formatDate value="${sessionScope.loginData.birth}" pattern="yyyy-MM-dd"/>"><br><br>
+	<input class="rounded form-control-lg" type="date" name="birth" value="<fmt:formatDate value="${sessionScope.loginData.birth}" pattern="yyyy-MM-dd"/>"><br>
 	<label>휴대폰 번호</label><br>
-	<input class="rounded form-control-lg" type="text" name="phone" value="${sessionScope.loginData.phone}"><br><br>
+	<input class="rounded form-control-lg" type="text" name="phone" value="${sessionScope.loginData.phone}"><br>
 	<label>이메일</label><br>
-	<input class="rounded form-control-lg" type="text" name="email" value="${sessionScope.loginData.email}"><br><br>
+	<input class="rounded form-control-lg" type="text" name="email" value="${sessionScope.loginData.email}"><br>
 	<label>성별</label><br>
-	<input class="rounded form-control-lg" type="text" name="gender" value="${sessionScope.loginData.gender}"><br><br>
+	<input class="rounded form-control-lg" type="text" name="gender" value="${sessionScope.loginData.gender}"><br>
+
+<%-- 	<label>pt 남은 횟수</label><br>
+	<input class="rounded form-control-lg" type="text" name="ptcount" value="${sessionScope.loginData.ptcount}" readonly><br> --%>
 	
 	<!-- <input class="btn btn-danger" style="float:right" type="submit" value="삭제" formaction="./delete">
 	<input class="btn btn-primary" style="float:right" type="submit" value="수정" formaction="./update"> -->
-	<button type="submit" value="수정" id="btnUpdate"></button>
-	<button type="submit" value="삭제" id="btnDelete"></button>
-</div>
+	<input class="btn btn-primary" type="submit" value="수정" id="btnUpdate">
+	<input class="btn btn-danger" type="submit" value="삭제" id="btnDelete">
 </form>
 </div>
 </div>
@@ -70,7 +72,7 @@ input[type="date"]{
 			$("#btnUpdate").click(function(){
 				//확인 대화상자
 				if(confirm("수정하시겠습니까?")){
-					document.form1.action ="${path}/pt/mypage/update";
+					document.form1.action ="./update";
 					document.form1.submit();
 				}else {//취소시
 					return false;
@@ -81,7 +83,7 @@ input[type="date"]{
 			$("#btnDelete").click(function(){
 			//확인 대화상자
 			if(confirm("탈퇴하시겠습니까?")){
-				document.form1.action ="${path}/pt/mypage/delete";
+				document.form1.action ="./delete";
 				document.form1.submit();
 				}else {//취소시
 					return false;

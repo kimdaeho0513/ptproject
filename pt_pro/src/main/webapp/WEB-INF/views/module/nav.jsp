@@ -46,8 +46,10 @@
 							<li class="nav-item"><a class="nav-link" href="/pt/mypage">마이페이지</a></li>
 						</c:if>
 						<c:if test="${sessionScope.loginData.roles eq 'M'}">
-
 							<li class="nav-item"><a class="nav-link" href="/pt/pay">pt 회원권 구매</a></li>
+						</c:if>
+						<c:if test="${sessionScope.loginData.roles eq 'A'}">
+							<li class="nav-item"><a class="nav-link" href="/pt/management">회원 정보</a></li>
 						</c:if>
 					</c:if>
 				</ul>

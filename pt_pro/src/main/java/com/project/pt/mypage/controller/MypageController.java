@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,7 +37,7 @@ public class MypageController {
 		return "mypage/mypage";
 	}
 	
-	@RequestMapping(value="/update",method=RequestMethod.GET)
+	@PostMapping(value="/update")
 	public String update(MypageDTO MD, HttpSession session) {
 		logger.info("Update({},{},{},{},{},{})",MD.getPw(),MD.getName(),
 				MD.getBirth(),MD.getPhone(),MD.getEmail(),MD.getGender());
@@ -48,9 +49,9 @@ public class MypageController {
 		}else {
 			System.out.println("실패");
 		}
-		return "redirect:/";
+		return "mypage/mypage";
 	}
-	@RequestMapping(value="/delete",method=RequestMethod.GET)
+	@PostMapping(value="/delete")
 	public String delete(MypageDTO MD, HttpSession session) {
 		System.out.println(MD);
 		boolean result = service.delete(session,MD);
@@ -60,6 +61,6 @@ public class MypageController {
 		}else {
 			System.out.println("실패");
 		}
-		return "redirect:/";
+		return "mypage/mypage";
 	}
 }

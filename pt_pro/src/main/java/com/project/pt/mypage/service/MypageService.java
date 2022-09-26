@@ -16,12 +16,15 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.project.pt.mypage.model.MypageDAO;
 import com.project.pt.mypage.model.MypageDTO;
+import com.project.pt.pay.model.PayDAO;
+import com.project.pt.pay.model.PayDTO;
 
 @Service
 public class MypageService {
 	private static final Logger logger = LoggerFactory.getLogger(MypageService.class);
 	@Autowired
 	private MypageDAO dao;
+	private PayDAO pdao;
 
 	public List<MypageDTO> getAll() {
 		List<MypageDTO> datas = dao.selectAll();
@@ -60,4 +63,5 @@ public class MypageService {
 			return false;
 		}
 	}
+
 }

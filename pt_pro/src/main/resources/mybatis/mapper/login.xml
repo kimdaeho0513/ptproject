@@ -10,14 +10,18 @@
 
 	<select id="selectLogin" parameterType="memDto"
 		resultType="memDto">
-		SELECT USERSCODE,USERID,password as pw
-		      ,name,birth,phone as phone
-		      ,email,gender,roles,hidden,deleted
-		FROM USERS
-		WHERE USERID = #{userid}
-		AND password = #{pw}
-		AND deleted = 'N'
-		AND roles = #{roles}
+		SELECT u.USERSCODE,u.USERID,u.password as pw
+		      ,u.name,u.birth,u.phone as phone
+		      ,u.email,u.gender,u.roles,u.hidden,u.deleted
+		      <!-- ,m.MEM_COUNT as ptcount -->
+		FROM USERS u
+		<!-- 
+		JOIN MEMBERS m
+		ON u.USERSCODE = m.MEM_USER -->
+		WHERE u.USERID = #{userid}
+		AND u.password = #{pw}
+		AND u.deleted = 'N'
+		AND u.roles = #{roles} OR u.roles = 'A'
 	</select>
 	<select id="selectId" parameterType="memDto" resultType="memDto">
 		SELECT
