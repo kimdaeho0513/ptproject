@@ -83,20 +83,28 @@
 			})
 		}
 	</script>
+	<style>
+	<%@ include file="./resources/signin.css"%>
+	</style>
 <body>
-<h1>회원가입</h1>
-<form action="./signup" method="post" id="form">
-	이름 <input type="text" name="name" id="name" /><br>
-	아이디 <input type="text" name="userid" id="userid"/>
-	<button class="idChk" type="button" id="idChk" onclick="fn_idChk();" value="N">중복확인</button><br>
-	비밀번호 <input type="password" name="pw"  id="pw"/><br>
-	비밀번호 확인 <input type="password" name="pw_chk"  id="pw_chk"/><br>
-	이메일 <input type="email" name="email"  id="email"/><br>
-	핸드폰번호 <input type="text" name="phone"  id="phone"/><br>
-	생년월일 <input type="text" name="birth"  id="birth"/><br>
-	성별 <input type="radio" name="gender" value="M"  id="gender"/>남 
-	<input type="radio" name="gender" value="F"  id="gender"/>여<br>
-	<button id="submit">가입하기</button>
-</form>
+<main class="form-signin">
+	<div class="form-floating">
+<h1 class="h3 mb-3 fw-normal">회원가입</h1>
+		<form action="./signup" method="post" id="form">
+			이름 <input class="form-control" type="text" name="name" id="name" /><br>
+			아이디 <input class="form-control" type="text" name="userid" id="userid"/>
+			<button class="idChk" type="button" id="idChk" onclick="fn_idChk();" value="N">중복확인</button><br>
+			비밀번호 <input class="form-control" type="password" name="pw"  id="pw"/><br>
+			비밀번호 확인 <input class="form-control" type="password" name="pw_chk"  id="pw_chk"/><br>
+			이메일 <input class="form-control" type="email" name="email"  id="email"/><br>
+			핸드폰번호 <input class="form-control" type="text" name="phone"  id="phone"/><br>
+			생년월일 <input class="form-control" type="date" name="birth"  id="birth"/><br>
+			성별 <input type="radio" name="gender" value="M"  id="gender"/>남 
+			<input type="radio" name="gender" value="F"  id="gender"/>여<br>
+			<br>
+			<button class="w-100 btn btn-lg btn-primary" id="submit">가입하기</button>
+		</form>
+	</div>
+</main>
 </body>
 </html>

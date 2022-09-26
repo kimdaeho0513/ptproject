@@ -36,6 +36,8 @@
 
 <body class="text-center">
 	<main class="form-signin">
+<section>
+	
 		<c:if test="${empty sessionScope.loginData}">
 			<h1 class="h3 mb-3 fw-normal">로그인</h1>
 			<form action="./login" method="post">
@@ -66,6 +68,7 @@
 	
 			<br><a href="./logout">로그아웃</a>
 		</c:if>
+	</section>
 	</main>
 </body>
 </html>
