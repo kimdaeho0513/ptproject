@@ -12,7 +12,7 @@
 <style>
 .body{
 	background-color: black;
- 	background-image: url("../assets/img/header-bg.jpg");
+ 	background-image: url("./pay/assets/img/header-bg.jpg");
 }
 .form-center {
  	color: white;
