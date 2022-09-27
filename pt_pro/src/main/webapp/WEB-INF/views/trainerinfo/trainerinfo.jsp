@@ -8,6 +8,8 @@
 <title>트레이너 정보</title>
 </head>
 <body class="body">
-
+<div>
+	
+</div>
 </body>
 </html>
