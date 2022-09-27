@@ -4,10 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<%@ include file="../module/nav.jsp"%>
 </head>
-<body>
-<div style="text-align:center;margin: 200px 0px;">
+<body class="body">
+<div style="text-align:center;margin: 200px 0px; color:white;">
 회원가입을 완료하였습니다.<br>
 <a href="./login">로그인</a>
 </div>

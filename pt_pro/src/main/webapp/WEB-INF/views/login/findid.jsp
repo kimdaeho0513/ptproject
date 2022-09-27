@@ -7,12 +7,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<%@ include file="../module/nav.jsp"%>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
 
 <title>아이디 찾기</title>
 <%@ include file="./resources/login_header.jsp"%>
 <style>
 <%@ include file="./resources/signin.css"%>
+.h3{
+	color:white;
+}
 </style>
 <script type="text/javascript">
 		$(document).ready(function(){
@@ -37,7 +41,7 @@
 		})
 </script>
 </head>
-	<body class="text-center">
+	<body class="body text-center">
 		<main class="form-signin">
 			<h1 class="h3 mb-3 fw-normal">아이디 찾기</h1>
 			<form action="./findid" method="post">
@@ -51,7 +55,7 @@
 			    </div>
 			    <div class="mb-3">
 			    </div>
-				<button class="w-100 btn btn-lg btn-primary" type="submit" id="submit">확인</button>
+				<button class="w-100 btn btn-lg btn-warning" type="submit" id="submit">확인</button>
 			</form>
 		</main>
 	</body>

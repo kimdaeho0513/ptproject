@@ -6,6 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<%@ include file="../module/nav.jsp"%>
 <meta charset="UTF-8">
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
 
@@ -13,6 +14,10 @@
 <%@ include file="./resources/login_header.jsp"%>
 <style>
 <%@ include file="./resources/signin.css"%>
+.mb-3 {
+	color:white;
+	font-size:20px;
+}
 </style>
 <script type="text/javascript">
 		$(document).ready(function(){
@@ -31,7 +36,7 @@
 		})
 </script>
 </head>
-	<body class="text-center">
+	<body class="body text-center">
 		<main class="form-signin">
 			<form method="post" action="./cert">
 				<div class="mb-3">
@@ -42,7 +47,7 @@
 			    </div>
 				<div class="mb-3">
 				</div>
-				<button class="w-100 btn btn-lg btn-primary" type="submit" id="submit">확인</button>
+				<button class="w-100 btn btn-lg btn-warning" type="submit" id="submit">확인</button>
 			</form>
 		</main>
 	</body>

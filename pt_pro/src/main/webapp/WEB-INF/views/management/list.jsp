@@ -3,23 +3,24 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<c:url var="bs5" value="/static/bs5" />
-<c:url var="jQuery" value="/static/js" />
-<link rel="stylesheet" type="text/css" href="${bs5}/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-<script type="text/javascript" src="${bs5}/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="${jQuery}/jquery-3.6.0.min.js"></script>
+
+<%@ include file="../module/nav.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
 	<title>전체 회원 조회 게시판</title>
-<%@ include file="../module/head.jsp" %>
+<style>
+	.body, .table{
+		color:white;
+	}
+</style>
 </head>
-<body>
-	<h1>회원 조회</h1>
+<body class="body">
+	
 	<section class="container" >
 		<div class="mb-1" >
+		<h1>회원 조회</h1>
 			<c:url var="managementUrl" value="/management" />
 			<form name="form2" >
 				<div class="row g-1" >

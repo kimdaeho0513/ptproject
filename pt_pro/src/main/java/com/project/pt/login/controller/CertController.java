@@ -31,8 +31,10 @@ private static final Logger logger = LoggerFactory.getLogger(CertController.clas
 		
 		SimpleMailMessage message = new SimpleMailMessage();
 		
+		System.out.println("From: " + message.getFrom());
+		
 		MemDTO data = (MemDTO) session.getAttribute("findPw");
-		System.out.println(data.getEmail());
+		System.out.println("8888888:"+data.getEmail());
 		
 		System.out.println();
 		String auth = service.getAuthCode();
@@ -44,10 +46,9 @@ private static final Logger logger = LoggerFactory.getLogger(CertController.clas
 		
 		String[] to = {sender};
 		message.setTo(to);
-		
+		message.setFrom("tst76655@gmail.com");
 		message.setSubject("인증코드입니다_pt");
 		message.setText(context);
-		
 		javaMailSender.send(message);
 		
 		System.out.println(session.getAttribute("findPw"));

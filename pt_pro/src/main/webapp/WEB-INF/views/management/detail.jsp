@@ -6,22 +6,28 @@
 <%@ page isELIgnored="false" %>
 <% request.setCharacterEncoding("UTF-8");
 %>
-<c:url var="bs5" value="/static/bs5" />
-<c:url var="jQuery" value="/static/js" />
-<link rel="stylesheet" type="text/css" href="${bs5}/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-<script type="text/javascript" src="${bs5}/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="${jQuery}/jquery-3.6.0.min.js"></script>
+<%@ include file="../module/nav.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
 	<title>회원상세페이지</title>
-	<%@ include file="../module/head.jsp" %>
+	<style>
+		.body{
+			color:white;
+		}
+		.test{
+			padding-top:100px;
+		}
+		input[type=text] { 
+ 			border-radius:10px;
+		}
+	</style>
+	
 </head>
-<body>
+<body class="body">
 		<form name="form1" class="container"  method="post" accept-charset="utf-8">
-		<div class="row justify-content-center" >
+		<div class="row justify-content-center test" >
 			<input hidden type="text" id="mngNum" name="mngNum" value="${All.mngNum}">
 			<div class="row justify-content-center" style="width:400px;font-size:20px;" >
 				<label>아이디</label>
@@ -51,8 +57,8 @@
 					</select><hr>
 				</c:if>
 				 <div class="row justify-content-evenly align-items-center my-row">
-					<input class="col-sm-5 my-col" type="submit" value="수정" id="btnUpdate"></button>
-					<input class="col-sm-5 my-col" type="submit" value="삭제" id="btnDelete"></button>
+					<input class="col-sm-5 my-col btn btn-primary" type="submit" value="수정" id="btnUpdate"></button>
+					<input class="col-sm-5 my-col btn btn-danger" type="submit" value="삭제" id="btnDelete"></button>
 				</div>
 			</div>
 		</div>	

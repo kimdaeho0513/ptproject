@@ -60,7 +60,7 @@
 			      </label>
 			    </div>
 			    <br>
-			    <button class="w-100 btn btn-lg btn-primary" type="submit" id="submit">로그인</button>
+			    <button class="w-100 btn btn-lg btn-warning" type="submit" id="submit">로그인</button>
 			    <br>
 				
 			</form>

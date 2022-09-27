@@ -10,6 +10,7 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
 
 <title>로그인</title>
+<%@ include file="../module/nav.jsp"%>
 <%@ include file="./resources/login_header.jsp"%>
 <style>
 <%@ include file="./resources/signin.css"%>
@@ -31,7 +32,7 @@
 		})
 </script>
 </head>
-<body class="text-center">
+<body class="body text-center">
 	<main class="form-signin">
 		<h1 class="h3 mb-3 fw-normal">비밀번호 변경</h1>
 		<form action="./resetpw" method="post">
@@ -44,7 +45,7 @@
 		      <label for="floatingPassword">비밀번호 확인</label>
 		    </div>
 		    <div class="mb-3"></div>
-			<button class="w-100 btn btn-lg btn-primary" type="submit" id="submit">확인</button>
+			<button class="w-100 btn btn-lg btn-warning" type="submit" id="submit">확인</button>
 				    
 			<input type="hidden" name="id" value="${sessionScope.findPw.userid}"/>
 

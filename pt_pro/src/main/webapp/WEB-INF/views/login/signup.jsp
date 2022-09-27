@@ -5,7 +5,20 @@
 	<head>
 		<%@ include file="./resources/importfile.jsp"%>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+		<%@ include file="../module/nav.jsp"%>
 		<title>회원가입</title>
+		<style>
+			.h3, #form {
+				color:white;
+				margin-left: auto;
+			  	margin-right: auto;
+			}
+			.gender1{
+				text-align:center;
+				font-size:20px;
+			}
+		</style>
+		
 	</head>
 	<script type="text/javascript">
 		$(document).ready(function(){
@@ -86,23 +99,25 @@
 	<style>
 	<%@ include file="./resources/signin.css"%>
 	</style>
-<body>
+<body class="body">
 <main class="form-signin">
 	<div class="form-floating">
 <h1 class="h3 mb-3 fw-normal">회원가입</h1>
 		<form action="./signup" method="post" id="form">
 			이름 <input class="form-control" type="text" name="name" id="name" /><br>
 			아이디 <input class="form-control" type="text" name="userid" id="userid"/>
-			<button class="idChk" type="button" id="idChk" onclick="fn_idChk();" value="N">중복확인</button><br>
+			<button class="idChk btn btn-warning" style="float:right" type="button" id="idChk" onclick="fn_idChk();" value="N">중복확인</button><br>
 			비밀번호 <input class="form-control" type="password" name="pw"  id="pw"/><br>
 			비밀번호 확인 <input class="form-control" type="password" name="pw_chk"  id="pw_chk"/><br>
 			이메일 <input class="form-control" type="email" name="email"  id="email"/><br>
 			핸드폰번호 <input class="form-control" type="text" name="phone"  id="phone"/><br>
 			생년월일 <input class="form-control" type="date" name="birth"  id="birth"/><br>
+			<div class="gender1">
 			성별 <input type="radio" name="gender" value="M"  id="gender"/>남 
 			<input type="radio" name="gender" value="F"  id="gender"/>여<br>
+			</div>
 			<br>
-			<button class="w-100 btn btn-lg btn-primary" id="submit">가입하기</button>
+			<button class="w-100 btn btn-lg btn-warning" id="submit">가입하기</button>
 		</form>
 	</div>
 </main>

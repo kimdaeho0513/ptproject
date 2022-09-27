@@ -9,15 +9,15 @@
 
 	<context:property-placeholder location="classpath:/email.properties"/>
 	<bean id="emailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-		<property name="host" value="${email.smtp.host}"></property>
-		<property name="port" value="${email.smtp.port}"></property>
-		<property name="username" value="${email.smtp.username}"></property>
-		<property name="password" value="${email.smtp.password}"></property>
+		<property name="host" value="smtp.gmail.com"></property>
+		<property name="port" value="587"></property>
+		<property name="username" value="tst76655@gmail.com"></property>
+		<property name="password" value="roapqgoxblejoelg"></property>
 		<property name="javaMailProperties">
 			<props>
-				<prop key="mail.smtp.auth">${email.smtp.auth}</prop>
-				<prop key="mail.smtp.starttls.enable">${email.smtp.starttls.enable}</prop>
-				<prop key="mail.smtp.ssl.protocols">${email.smtp.ssl.protocols}</prop>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.smtp.ssl.protocols">TLSv1.2</prop>
 			</props>
 		</property>
 	

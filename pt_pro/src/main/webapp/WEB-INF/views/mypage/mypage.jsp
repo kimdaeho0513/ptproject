@@ -67,7 +67,7 @@ input[type="date"]{
 	<input class="btn btn-primary" style="float:right" type="submit" value="수정" formaction="./update"> -->
 	
 	<input class="btn btn-danger" style="float:right" type="submit" value="탈퇴" id="btnDelete">
-	<input class="btn btn-primary" style="float:right" type="submit" value="수정" id="btnUpdate">
+	<input class="btn btn-warning" style="float:right" type="submit" value="수정" id="btnUpdate">
 </form>
 </div>
 </div>

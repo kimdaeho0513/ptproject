@@ -6,11 +6,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+<%@ include file="../module/nav.jsp"%>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 </head>
-<body>
-<div style="text-align:center;margin: 200px 0px;">
+<body class="body">
+<div style="text-align:center;margin: 200px 0px; color:white; font-size:25px;">
 	<c:if test="${not empty sessionScope.findId}">
 		${sessionScope.findId.name}님의 아이디는 ${sessionScope.findId.userid} 입니다.
 
