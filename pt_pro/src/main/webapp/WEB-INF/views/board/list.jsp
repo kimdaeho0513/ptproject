@@ -7,28 +7,42 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<%@ include file="../module/head.jsp"%>
+<title>게시판</title>
+<%@ include file="../module/nav.jsp"%>
 
+<style>
+
+.mb-1{
+	color: white;
+}
+.table{
+	color: white;
+}
+</style>
 </head>
-<body>
-	<c:if test="${category eq 'ALL' }">	
-		<div>
+<body class="body">
+<section class="container">
+	<div class="mb-1">
+		<c:if test="${category eq 'ALL' }">	
 			<form action="./board/search" method="get">
-				<div>			전체 게시판 검색
-				
-					<input type="hidden" name="category" value="ALL"> 
-					<select name="type">
-						<option value="title">제목+내용</option>
-						<option value="id">아이디</option>
-						<option value="tag">태그</option>
-					</select>
-					<input type="text" name="keyword">
-					<button type="submit">전송</button>
-				</div>
-			</form>
-		
-		</div>
+				<div class="row g-1">
+					<h1>전체 게시판 검색</h1>
+					<div class="col-3">
+						<input type="hidden" name="category" value="ALL"> 
+							<select name="type" class="form-select">
+								<option value="title">제목+내용</option>
+								<option value="id">아이디</option>
+								<option value="tag">태그</option>
+							</select>
+						</div>	
+						<div class="input-group">	
+							<input type="text" name="keyword">
+							<button class="btn btn-secondary" type="submit">검색</button>
+						</div>	
+					</div>
+				</form>
+			</div>
+			
 		<div>
 			<c:url value="/board?category=" var="boardsURL" />
 			<table>
@@ -37,25 +51,32 @@
 					<td onclick="location.href='${boardsURL}N'">공지</td>
 					<td onclick="location.href='${boardsURL}I'">정보</td>
 					<td onclick="location.href='${boardsURL}R'">후기</td>
-				
 				</tr>
 			</table>
 		</div>
 	</c:if>
-	<section>
+	<div class="mb-1">
 		<form action="./board/search" method="get">
-			<div>
-			게시판 내 검색
-				<input type="hidden" name="category" value="${category}"> 
-				<select name="type">
-					<option value="title">제목+내용</option>
-					<option value="id">아이디</option>
-					<option value="tag">태그</option>
-				</select>
-				<input type="text" name="keyword">
-				<button type="submit">전송</button>
-			</div>
-		</form>
+			<h1>게시판 내 검색</h1>
+				<div class="row g-1" >
+					<div class="col-1" >
+						<input type="hidden" name="category" value="${category}"> 
+						<select name="type" class="form-select" >
+							<option value="id">아이디</option>
+							<option value="tag">태그</option>
+							<option value="title">제목+내용</option>
+						</select>
+					</div>
+						<div class="col-3">
+							<div class="input-group">
+					<input class="form-control" type="text" name="keyword">
+					<button class="btn btn-secondary" type="submit">검색</button>
+						</div>
+					</div>
+				</div>
+				
+				
+				<!--  전체리뷰게시판 전부 주석처리 
 		<c:choose>
 				<c:when test="${category eq 'R'}">
 					<table>
@@ -73,20 +94,22 @@
 								
 						</c:if>
 					</table>
-				</c:when>
-				<c:otherwise>
-					&nbsp;
-				</c:otherwise>
-			</c:choose>
-	<section>
-			<article>
-		<table>
+					</c:when>
+					<c:otherwise>
+						&nbsp;
+					</c:otherwise>
+				</c:choose>
+				-->
+			</form>
+		</div>
+		<table class="table table-hover">
 			<colgroup>
 				<col class="col-1">
 				<col class="col-4">
 				<col class="col-2">
-				<col class="col-1">				
-				<col class="col-3">
+				<col class="col-1">
+				<col class="col-1">
+				
 			</colgroup>
 			<thead>
 				<tr>
@@ -123,51 +146,27 @@
 				</tr>
 			</c:forEach>
 				
-				<tr>
-					<td>
-						<c:choose>
-							<c:when test="${category ne 'N' or sessionScope.loginData.roles eq'A'}">
-								<form action="./board/add" method="get">
-									<div>
-										<c:url var="boardUrl" value="./board"/>
-										<c:if test="${not empty sessionScope.loginData.userid}">	
-											<button class="btn btn-secondary" type="submit" onclick="location.href='${boardUrl}/add'"><input type="hidden" name="category" value="${category}">추가</button>
-										</c:if>
-									</div>
-								</form>
-							</c:when>
-						</c:choose>
-					</td> 
-				</tr>
-			</article>
 			</tbody>
 		</table>
-	</section>
+		<div class="row g-1">
+				<div class="col-1">	
+					<c:choose>
+						<c:when test="${category ne 'N' or sessionScope.loginData.roles eq'A'}">
+							<form action="./board/add" method="get">
+								<div>
+									<c:url var="boardUrl" value="./board"/>
+									<c:if test="${not empty sessionScope.loginData.userid}">	
+										<button class="btn btn-secondary" type="submit" onclick="location.href='${boardUrl}/add'"><input type="hidden" name="category" value="${category}">추가</button>
+									</c:if>
+								</div>
+							</form>
+						</c:when>
+					</c:choose>
+				</div>
+			</div>
 		<aside>
-			<c:choose>
-				<c:when test="${category eq 'R'}">
-					<table>
-						<c:if test="${not empty Tdata}">
-							<tr>	
-								<td onclick="location.href='${boardsURL}R'">선택취소</td>
-								<c:forEach items="${Tdata}" var="Tdata">							
-									<c:url var="boardTranerUrl" value="/board">
-										<c:param name="category">${category}</c:param>
-										<c:param name="usersCode">${Tdata.userscode}</c:param>
-									</c:url>
-									<td onclick="location.href='${boardTranerUrl}'">${Tdata.name}</td>
-								</c:forEach>								
-							</tr>
-								
-						</c:if>
-					</table>
-				</c:when>
-				<c:otherwise>
-					&nbsp;
-				</c:otherwise>
-			</c:choose>
+			
 		</aside>
-	</section>	
 	<nav>
 		<div>
 			<ul class="pagination justify-content-center">
@@ -283,5 +282,6 @@
 			</ul>
 		</div>
 	</nav>
+	</section>
 </body>
 </html>

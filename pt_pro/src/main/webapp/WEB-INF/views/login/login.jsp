@@ -7,6 +7,10 @@
 <%@ include file="./resources/login_header.jsp"%>
 <style>
 <%@ include file="./resources/signin.css"%>
+
+.h3, .radio, .mt-5, a{
+	color:white;
+}
 </style>
 <script type="text/javascript">
 		$(document).ready(function(){
@@ -34,7 +38,7 @@
 		})
 </script>
 
-<body class="text-center">
+<body class="body text-center">
 	<main class="form-signin">
 <section>
 	
@@ -55,8 +59,9 @@
 			        <input type="radio" value="T" name="role"> trainer <input type="radio" value="M" name="role"> member
 			      </label>
 			    </div>
+			    <br>
 			    <button class="w-100 btn btn-lg btn-primary" type="submit" id="submit">로그인</button>
-			    <p class="mt-5 mb-3 text-muted">&copy; 2017–2022</p>
+			    <br>
 				
 			</form>
 			<a href="./findid">아이디 찾기</a> | 

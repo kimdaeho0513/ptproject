@@ -21,7 +21,7 @@
 		WHERE u.USERID = #{userid}
 		AND u.password = #{pw}
 		AND u.deleted = 'N'
-		AND u.roles = #{roles} OR u.roles = 'A'
+		AND u.roles = #{roles}
 	</select>
 	<select id="selectId" parameterType="memDto" resultType="memDto">
 		SELECT

@@ -31,7 +31,7 @@
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
 					<li class="nav-item"><a class="nav-link" href="/pt/board?category=N">공지사항</a></li>
-					<li class="nav-item"><a class="nav-link" href="#portfolio">트레이너 정보</a></li>
+					<li class="nav-item"><a class="nav-link" href="/pt/trainerinfo">트레이너 정보</a></li>
 					<li class="nav-item"><a class="nav-link" href="/pt/board?category=R">후기 게시판 </a></li>
 					<li class="nav-item"><a class="nav-link" href="/pt/board?category=I">정보공유 게시판</a></li>
 					<li class="nav-item"><a class="nav-link" href="/pt/board?category=C">문의 게시판</a></li>

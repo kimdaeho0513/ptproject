@@ -24,7 +24,6 @@ input[type="date"]{
 	width:100%;
 }
 .body{
-	background-color: #191919;
  	padding-top:100px;
  	color:white;
 }
@@ -33,6 +32,10 @@ input[type="date"]{
  	width: 300px;
   	margin-left: auto;
   	margin-right: auto;
+}
+.md-4 {
+	font-weight : bold;
+	font-size : 20px;
 }
 </style>
 </head>
@@ -55,15 +58,16 @@ input[type="date"]{
 	<label>이메일</label><br>
 	<input class="rounded form-control-lg" type="text" name="email" value="${sessionScope.loginData.email}"><br>
 	<label>성별</label><br>
-	<input class="rounded form-control-lg" type="text" name="gender" value="${sessionScope.loginData.gender}"><br>
+	<input class="rounded form-control-lg" type="text" name="gender" value="${sessionScope.loginData.gender}"><br><br>
 
 <%-- 	<label>pt 남은 횟수</label><br>
 	<input class="rounded form-control-lg" type="text" name="ptcount" value="${sessionScope.loginData.ptcount}" readonly><br> --%>
 	
 	<!-- <input class="btn btn-danger" style="float:right" type="submit" value="삭제" formaction="./delete">
 	<input class="btn btn-primary" style="float:right" type="submit" value="수정" formaction="./update"> -->
-	<input class="btn btn-primary" type="submit" value="수정" id="btnUpdate">
-	<input class="btn btn-danger" type="submit" value="삭제" id="btnDelete">
+	
+	<input class="btn btn-danger" style="float:right" type="submit" value="탈퇴" id="btnDelete">
+	<input class="btn btn-primary" style="float:right" type="submit" value="수정" id="btnUpdate">
 </form>
 </div>
 </div>

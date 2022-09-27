@@ -1,14 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<%@ include file="../module/head.jsp"%>
-
+<%@ include file="../module/nav.jsp"%>
+<style>
+.container{
+	color:white;
+}
+.card{
+	color: black;
+}
+.btn{
+	background-color: white;
+}
+</style>
 </head>
-<body>
+<body class="body">
 	<section class="container">
 		<div>
 			<div>
@@ -34,10 +47,6 @@
 			<div>
 				<p>${data.contents}</p>
 			</div>
-			<!--div onclick="ajaxLike(id_like, ${data.dataNum});">
-				<i class="bi bi-hand-thumbs-up text-secondary text-opacity-50"></i>
-				<label id="id_like" class="text-secondary text-opacity-75">${data.liked}</label>
-			</div-->
 		</div>
 		<div>
 			<c:url var="boardUrl" value="/board" />
@@ -76,12 +85,16 @@
 										<p class="card-text">${comment.commentContents}</p>
 									</c:otherwise>
 								</c:choose>
-								<div class="text-end">
-									<button class="btn btn-sm btn-outline-dark" type="button"
-										onclick="changeEdit(this);">수정</button>
-									<button class="btn btn-sm btn-outline-dark" type="button"
-										onclick="commentDelete(this, ${comment.commentNum})">삭제</button>
-								</div>
+								<c:if
+									test="${(data.writer eq sessionScope.loginData.userid) or sessionScope.loginData.roles == 'A'
+									       or (comment.commentWriter eq sessionScope.loginData.userid)}">
+									<div class="text-end">
+										<button class="btn btn-sm btn-outline-dark" type="button"
+											onclick="changeEdit(this);">수정</button>
+										<button class="btn btn-sm btn-outline-dark" type="button"
+											onclick="commentDelete(this, ${comment.commentNum})">삭제</button>
+									</div>
+								</c:if>
 							</div>
 						</div>
 					</div>
@@ -181,7 +194,7 @@
 				url: "./comment/delete",
 				type: "post",
 				data: {
-					id: id
+					commentNum: id
 				},
 				success: function(data) {
 					if(data.code === "success") {
@@ -199,7 +212,7 @@
 		}
 		function deleteBoard(dataNum) {
 			$.ajax({
-				url: "${boardUrl}/delete",
+				url: "./delete",
 				type: "post",
 				data: {
 					dataNum: dataNum
@@ -208,7 +221,7 @@
 				success: function(data) {
 					if(data.code === "success") {
 						alert("삭제 완료");						
-							location.href = "${boardUrl}?category=${category}";
+							location.href = ".${boardUrl}?category=${category}";
 					} else if(data.code === "permissionError") {
 						alert("권한이 오류");
 					} else if(data.code === "notExists") {

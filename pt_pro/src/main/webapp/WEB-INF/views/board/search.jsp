@@ -1,14 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<%@ include file="../module/head.jsp" %>
+<%@ include file="../module/nav.jsp" %>
+
+<style>
+
+.mb-1{
+	color: white;
+}
+.table{
+	color: white;
+}
+</style>
 </head>
-<body>
-	<c:if test="${category eq 'ALL' }">
+<body class="body">
+	<%-- 111<c:if test="${category eq 'ALL' }">
 		<div>
 			전체 게시판 검색
 			<form action="./search" method="get">
@@ -36,22 +49,30 @@
 				</tr>
 			</table>
 		</div>
-	</c:if> 
-	<section>	
-		<form action="./search" method="get">			
-			<div>
-			검색
-				<select name="type">
-						<option value="title" ${type eq 'title' ? 'selected' : '' }>제목+내용</option>
-						<option value="id" ${type eq 'id' ? 'selected' : '' }>아이디</option>
-						<option value="tag" ${type eq 'tag' ? 'selected' : '' }>태그</option>
-					</select>
-				<input type="hidden" name="category" value="${category}">					
-				<input type="text" name="keyword" value="${keyword}">
-				<button type ="submit">전송</button>
-			</div>
-		</form>
-		<table>
+	</c:if> 111 --%>
+	<section class="container">
+		<div class="mb-1">
+			<form action="./search" method="get">		
+			<h1>검색</h1>	
+				<div class="row g-1">
+					<div class="col-1">
+						<select name="type" class="form-select">
+								<option value="title" ${type eq 'title' ? 'selected' : '' }>제목+내용</option>
+								<option value="id" ${type eq 'id' ? 'selected' : '' }>아이디</option>
+								<option value="tag" ${type eq 'tag' ? 'selected' : '' }>태그</option>
+						</select>
+					</div>	
+					<div class="col-3">
+					<div class="input-group">
+						<input type="hidden" name="category" value="${category}">					
+						<input class="form-control" type="text" name="keyword" value="${keyword}">
+						<button class="btn btn-secondary" type ="submit">전송</button>
+						</div>
+					</div>		
+				</div>	
+			</form>
+		</div>
+		<table class="table table-hover">
 			<colgroup>
 				<col class="col-1">
 				<col class="col-4">
@@ -63,7 +84,7 @@
 				</c:if>
 			</colgroup>
 			<thead> 
-				<tr>
+			<%-- 	<tr>
 					<td colspan="6">
 						<div>    
 							<c:choose>  
@@ -76,7 +97,7 @@
 							</c:choose>		
 						</div>
 					</td>
-				</tr>
+				</tr> --%>
 				<tr>
 					<th>&nbsp;</th>
 					<th>제목</th>
@@ -134,7 +155,7 @@
 			</tbody>
 		</table>
 		<nav>
-		<div>
+		<div class="row g-1">
 			<ul class="pagination justify-content-center">
 				<c:if test="${pageData.hasPrevPage()}">
 					<c:url var="boardPagingUrl" value="/board/search">
@@ -263,4 +284,4 @@
 		</div>
 	</nav>
 	</section>
-</body>
+</body> 

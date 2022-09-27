@@ -5,35 +5,39 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link href="/pt/static/base/css/styles.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript"
 	src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <style>
-.body{
-	background-color: black;
- 	background-image: url("./pay/assets/img/header-bg.jpg");
-}
 .form-center {
  	color: white;
  	width: 300px;
   	margin-left: auto;
   	margin-right: auto;
+	text-align:center;
+  	padding-top: 10%;
 }
+.text {
+	font-size:25px;
+	font-weight:bold;
+}
+
 
 </style>
 <title>PT 결제창</title>
 <body class="body">
-<section class="form-center">
-	<h1 class="form-subject">회원권</h1>
-	<ul>
-		<li><input type="radio" id="10" name="pt" value="50000">10회 5 만원</li><br>
-		<li><input type="radio" id="20" name="pt" value="90000">20회 9 만원</li><br>
-		<li><input type="radio" id="30" name="pt" value="130000">30회 13 만원</li><br>
-		<li><input type="radio" id="50" name="pt" value="200000">50회 20 만원</li>
-	</ul>
-	<button type="button" id="btn-kakaopay">카카오페이 결제</button>
-</section>
+<div class="form-center">
+	<h1 class="form-subject">회원권</h1><br>
+	<div class="text">
+		<input type="radio" id="10" name="pt" value="50000"> 10회 5 만원<br><br>
+		<input type="radio" id="20" name="pt" value="90000"> 20회 9 만원<br><br>
+		<input type="radio" id="30" name="pt" value="130000"> 30회 13 만원<br><br>
+		<input type="radio" id="50" name="pt" value="200000"> 50회 20 만원<br><br>
+	</div>
+	<button class="btn btn-warning" type="button" id="btn-kakaopay">카카오페이 결제</button>
+</div>
 	<script>
 		$("#btn-kakaopay").click(function () {
 			var IMP = window.IMP;

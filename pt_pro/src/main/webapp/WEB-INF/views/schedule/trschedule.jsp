@@ -12,20 +12,21 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+  <%@ include file="../module/nav.jsp"%>
     <meta charset='utf-8' />
-    <%@ include file="../module/head.jsp" %>
     <link href='static/fullcalendar/main.css' rel='stylesheet' />
     <script src='static/fullcalendar/main.js'></script>
     <style>
     #calendar{
-    	width: 90%;
+    	width: 70%;
     	margin:0 auto; 
+		background-color: white;
+		margin-top: 100px;
     }
-   
     </style>
     <title>회원 PT 조회</title>
   </head>
-  <body>
+  <body class="body">
   	
     <div id='calendar'></div>
     <script>
