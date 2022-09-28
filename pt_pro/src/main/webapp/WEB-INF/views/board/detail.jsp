@@ -19,8 +19,9 @@
 }
 .btn{
 	background-color: white;
+	color:black;
 }
-.modal-title{
+.modal-title, .modal-body{
 	color:black;
 }
 </style>
