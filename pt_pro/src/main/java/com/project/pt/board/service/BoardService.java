@@ -198,4 +198,10 @@ public class BoardService {
 		
 		return result;
 	}
+	
+	public void commentDelete(int dataNum) {
+
+		dao.deleteStaticsData(dataNum);
+
+		}
 }

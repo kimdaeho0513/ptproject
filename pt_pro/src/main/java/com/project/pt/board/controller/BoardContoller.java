@@ -50,10 +50,6 @@ public class BoardContoller {
 		logger.info("CONTROLgetList(category={},page={},sd={})", category, page, session.getAttribute("userid"));
 		List datas;
 		
-
-		session.setAttribute("userid", "thebibi");
-		session.setAttribute("roles", "m");
-		
 		MemDTO tDataName = new MemDTO();
 		
 		if (category.equals("R")) {
@@ -182,34 +178,34 @@ public class BoardContoller {
 	}
 
 	@PostMapping(value = "/delete", produces = "application/json; charset=utf-8")
-	@ResponseBody
-	public String delete(//@SessionAttribute("loginData") MemDTO memDto,
-			@RequestParam int dataNum) {
-		BoardDTO data = service.getDetail(dataNum);
+    @ResponseBody
+    public String delete(//@SessionAttribute("loginData") MemDTO memDto,
+            @RequestParam int dataNum) {
+        BoardDTO data = service.getDetail(dataNum);
 
-		JSONObject json = new JSONObject();
+        JSONObject json = new JSONObject();
 
-		if (data == null) {
-			json.put("code", "notExists");
-			json.put("message", "이미 삭제 된 데이터 입니다.");
-		} else {
-			if (true) {
-				boolean result = service.delete(dataNum);
-				if (result) {
-					json.put("code", "success");
-					json.put("message", "삭제 완료");
-				} else {
-					json.put("code", "fail");
-					json.put("message", "삭제 중 문제발생");
-				}
-			} else { // 관리자,글작성자 외
-				json.put("code", "permissionError");
-				json.put("message", "삭제권한이 없습니다.");
-			}
-		}
+        if (data == null) {
+            json.put("code", "notExists");
+            json.put("message", "이미 삭제 된 데이터 입니다.");
+        } else {
+            if (true) {
+                boolean result = service.delete(dataNum);
+                if (result) {
+                    json.put("code", "success");
+                    json.put("message", "삭제 완료");
+                } else {
+                    json.put("code", "fail");
+                    json.put("message", "삭제 중 문제발생");
+                }
+            } else { // 관리자,글작성자 외
+                json.put("code", "permissionError");
+                json.put("message", "삭제권한이 없습니다.");
+            }
+        }
 
-		return json.toJSONString();
-	}
+        return json.toJSONString();
+    }
 
 	@GetMapping(value = "/add")
 	public String add(Model model, @RequestParam String category) {
@@ -266,88 +262,78 @@ public class BoardContoller {
 	
 
 	@PostMapping(value = "/comment/add")
-	public String commnet(HttpServletRequest request,
-			//@SessionAttribute("loginData") MemDTO memDto,
-			@RequestParam String content,
-			@RequestParam(required = false) int dataNum,
-			@RequestParam(required = false) String category
-			) {
-		BoardStaticsDTO data = new BoardStaticsDTO();
-		BoardDTO datas = new BoardDTO();
+    public String commnet(HttpServletRequest request,
+            @SessionAttribute("loginData") MemDTO memDto,
+            @RequestParam String content,
+            @RequestParam(required = false) int dataNum,
+            @RequestParam(required = false) String category
+            ) {
+        BoardStaticsDTO data = new BoardStaticsDTO();
+        BoardDTO datas = new BoardDTO();
 
-		System.out.println(datas);
-		data.setCommentContents(content);
-		data.setDataNum(dataNum);
-		data.setCommentWriter("thebibi");
-		
-		logger.info("xf(data={})", data);
+        System.out.println(datas);
+        data.setCommentContents(content);
+        data.setDataNum(dataNum);
+        data.setCommentWriter(memDto.getUserid());
 
-		boolean result = service.comment(data);
-		
-		int commentCount = service.comCnt(dataNum);
-		datas.setDataNum(dataNum);
-		datas.setRecommend(commentCount);
-		System.out.println(datas);
-		logger.info("grgr(datas={})", datas.getRecommend());
+        logger.info("xf(data={})", data);
 
-		service.setComCnt(datas);
-		return "redirect:/board/detail?category=" + category + "&dataNum=" + dataNum;
+        boolean result = service.comment(data);
 
-	}
+        int commentCount = service.comCnt(dataNum);
+        datas.setDataNum(dataNum);
+        datas.setRecommend(commentCount);
+        System.out.println(datas);
+        logger.info("grgr(datas={})", datas.getRecommend());
+
+        service.setComCnt(datas);
+        return "redirect:/board/detail?category=" + category + "&dataNum=" + dataNum;
+
+    }
 	
 
 	@PostMapping(value = "/comment/modify")
+    @ResponseBody
+    public Map<String, String> commnetModify(HttpServletRequest request,
+            @SessionAttribute("loginData") MemDTO memDto,
+            @ModelAttribute BoardCommentVO commentVo,
+            @RequestParam(required = false) int dataNum,
+            @RequestParam(required = false) String category
+            ) {
+
+        BoardStaticsDTO data = new BoardStaticsDTO();
+        BoardDTO datas = new BoardDTO();
+
+        data.setCommentContents(commentVo.getCommentContents());
+        data.setDataNum(dataNum);
+        data.setCommentNum(commentVo.getCommentNum());
+        logger.info("코멘트트트트트브이오 입니다(commentVo={})", commentVo);
+
+
+
+        service.commentModify(data);
+        Map<String, String> resultMap = new HashMap<>();
+        resultMap.put("value", data.getCommentContents());
+
+        return resultMap;
+
+    }
+	
+	@PostMapping(value = "/comment/delete")
 	@ResponseBody
-	public Map<String, String> commnetModify(HttpServletRequest request,
-			// @SessionAttribute("loginData") MemDTO memDto,
+	public String commnetDelete(HttpServletRequest request,
+			@SessionAttribute("loginData") MemDTO memDto,
 			@ModelAttribute BoardCommentVO commentVo,
 			@RequestParam(required = false) int dataNum,
 			@RequestParam(required = false) String category
 			) {
 		
-		BoardStaticsDTO data = new BoardStaticsDTO();
-		BoardDTO datas = new BoardDTO();
-
-		data.setCommentContents(commentVo.getCommentContents());
-		data.setDataNum(dataNum);
-		data.setCommentNum(commentVo.getCommentNum());
-		logger.info("코멘트트트트트브이오 입니다(commentVo={})", commentVo);
-
+		service.commentDelete(commentVo.getCommentNum());
+		service.comCnt(dataNum);
 		
-		
-		service.commentModify(data);
-		Map<String, String> resultMap = new HashMap<>();
-		resultMap.put("value", data.getCommentContents());
-		
-		return resultMap;
-
-	}
-	
-	@DeleteMapping(value = "/comment/delete")
-	public String commnetModify2(HttpServletRequest request,
-			// @SessionAttribute("loginData") MemDTO memDto,
-			@RequestParam String content,
-			@RequestParam(required = false) Integer dataNum,
-			@RequestParam(required = false) String category
-			) {
-		BoardStaticsDTO data = new BoardStaticsDTO();
-		BoardDTO datas = new BoardDTO();
-
-		System.out.println(datas);
-		data.setCommentContents(content);
-		//data.setdataNum(dataNum);
-		data.setCommentWriter("thebibi");
-		
-		
-		boolean result = service.comment(data);
-		
-		int commentCount = service.comCnt(dataNum);
-		datas.setDataNum(dataNum);
-		datas.setRecommend(commentCount);
-		System.out.println(datas);
-		service.setComCnt(datas);
 		return "redirect:/board/detail?category=" + category + "&dataNum=" + dataNum;
 
 	}
+
 
 }

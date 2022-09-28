@@ -61,6 +61,6 @@ public class MypageController {
 		}else {
 			System.out.println("실패");
 		}
-		return "mypage/mypage";
+		return "/index";
 	}
 }

@@ -9,6 +9,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <%@ include file="../module/nav.jsp"%>
+
 <style>
 .container{
 	color:white;
@@ -18,6 +19,9 @@
 }
 .btn{
 	background-color: white;
+}
+.modal-title{
+	color:black;
 }
 </style>
 </head>
