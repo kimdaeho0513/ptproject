@@ -274,8 +274,8 @@ public class BoardContoller {
         System.out.println(datas);
         data.setCommentContents(content);
         data.setDataNum(dataNum);
-        data.setCommentWriter(memDto.getUserid());
-
+		data.setCommentWriter(memDto.getUserid());
+		 
         logger.info("xf(data={})", data);
 
         boolean result = service.comment(data);

@@ -42,7 +42,7 @@ public class MypageService {
 		boolean result = dao.updateData(MD);
 		if (result) {
 			System.out.println("회원정보 수정완료");
-			session.setAttribute("loginData", MD);
+			/* session.setAttribute("loginData", MD); */
 			return true;
 		} else {
 			System.out.println("회원정보 수정실패");
