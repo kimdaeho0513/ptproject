@@ -110,7 +110,7 @@ public class BoardContoller {
 
 	@PostMapping(value = "/modify")
 	public String modify(Model model
-			//, @SessionAttribute("loginData") MemDTO memDto
+			, @SessionAttribute("loginData") MemDTO memDto
 			, @ModelAttribute BoardVO boardVo, @RequestParam(required = false) int dataNum,
 			@RequestParam(required = false) String category) {
 		BoardDTO data = service.getDetail(dataNum);
@@ -118,7 +118,7 @@ public class BoardContoller {
 
 		data.setTitle(boardVo.getTitle());
 		data.setContents(boardVo.getContent());
-		data.setWriter("thebibi");
+		data.setWriter(memDto.getUserid());
 		logger.info("data(dataNum={})", data);
 
 		if (category.equals("R")) {
@@ -222,7 +222,7 @@ public class BoardContoller {
 
 	@PostMapping(value = "/add")
 	public String add(HttpServletRequest request,
-//			@SessionAttribute("loginData") MemDTO memDto,
+			@SessionAttribute("loginData") MemDTO memDto,
 			@ModelAttribute BoardVO boardVo) {
 		logger.info("adddd(boardVo={})", boardVo);
 
@@ -235,7 +235,7 @@ public class BoardContoller {
 		data.setContents(boardVo.getContent());
 		//data.setWriter(memDto.getId());
 
-		data.setWriter("thebibi");
+		data.setWriter(memDto.getUserid());
 		data.setCategory(boardVo.getCategory());
 
 		if (boardVo.getBtrainer() > 0) {
