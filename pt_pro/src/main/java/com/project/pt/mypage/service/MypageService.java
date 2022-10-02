@@ -24,15 +24,14 @@ public class MypageService {
 	private static final Logger logger = LoggerFactory.getLogger(MypageService.class);
 	@Autowired
 	private MypageDAO dao;
-	private PayDAO pdao;
 
-	public List<MypageDTO> getAll() {
-		List<MypageDTO> datas = dao.selectAll();
-		return datas;
+	public MypageDTO getData(int usercode) {
+		MypageDTO data = dao.selectData(usercode);
+		return data;
 	}
-
-	public MypageDTO getData() {
-		MypageDTO data = dao.selectData();
+	public MypageDTO getPtdata(int usercode) {
+		MypageDTO data = dao.selectPtdata(usercode);
+		System.out.println(usercode);
 		return data;
 	}
 

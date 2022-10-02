@@ -6,7 +6,7 @@ public class MypageDTO {
 
 	private int userscode;
 	private String userid;
-	private String pw;
+	private String password;
 	private String name;
 	private Date birth;
 	private String phone;
@@ -17,7 +17,8 @@ public class MypageDTO {
 	private String deleted;
 	private Date datelog;
 	private Date deletedate;
-	
+	private String coachname;
+	private int ptcount;
 	public int getUserscode() {
 		return userscode;
 	}
@@ -34,12 +35,12 @@ public class MypageDTO {
 		this.userid = userid;
 	}
 
-	public String getPw() {
-		return pw;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setPw(String pw) {
-		this.pw = pw;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getName() {
@@ -122,13 +123,30 @@ public class MypageDTO {
 		this.deletedate = deletedate;
 	}
 
+	public String getCoachname() {
+		return coachname;
+	}
+
+	public void setCoachname(String coachname) {
+		this.coachname = coachname;
+	}
+
+	public int getPtcount() {
+		return ptcount;
+	}
+
+	public void setPtcount(int ptcount) {
+		this.ptcount = ptcount;
+	}
+
 	@Override
 	public String toString() {
-		return "MypageDTO [userscode=" + userscode + ", userid=" + userid + ", pw=" + pw + ", name=" + name + ", birth="
-				+ birth + ", phone=" + phone + ", email=" + email + ", gender=" + gender + ", roles=" + roles
-				+ ", hidden=" + hidden + ", deleted=" + deleted + ", datelog=" + datelog + ", deletedate=" + deletedate
-				+ "]";
+		return "MypageDTO [userscode=" + userscode + ", userid=" + userid + ", password=" + password + ", name=" + name
+				+ ", birth=" + birth + ", phone=" + phone + ", email=" + email + ", gender=" + gender + ", roles="
+				+ roles + ", hidden=" + hidden + ", deleted=" + deleted + ", datelog=" + datelog + ", deletedate="
+				+ deletedate + ", coachname=" + coachname + ", ptcount=" + ptcount + "]";
 	}
+
 	
 
 

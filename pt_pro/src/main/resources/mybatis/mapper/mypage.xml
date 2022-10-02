@@ -4,12 +4,37 @@
   
 <mapper namespace="mypageMapper">
 	<select id="selectData" resultType="MypageDto">
-		SELECT * FROM USERS 
-		WHERE USERID = #{userid}
+		SELECT u.USERSCODE AS userscode 
+			 , u.USERID AS userid
+			 , u.PASSWORD AS password
+			 , u.NAME AS name
+			 , u.BIRTH AS birth
+			 , u.PHONE AS phone
+			 , u.EMAIL AS email
+			 , u.GENDER AS gender
+			 , u.ROLES AS roles
+			 , u.HIDDEN AS hidden
+			 , u.DELETEDATE AS deletedate
+			 , u.DELETED AS deleted
+			 , u.DATELOG AS datelog
+			 , m.MEM_COUNT AS memcount
+			 , m.MEM_PT	AS mempt
+			 , m.MEM_USER  AS memuser
+			 FROM USERS u 
+			 FULL JOIN MEMBERS m 
+			 ON u.USERSCODE = m.MEM_USER
+			 WHERE USERSCODE = #{mngNum}
+	</select>
+	<select	id="selectPtdata" parameterType="_int" resultType="MypageDto">
+		Select s.name AS coachname, m.MEM_COUNT AS ptcount
+		From MEMBERS m
+		join users s
+		on s.UsersCode = m.MEM_PT
+		Where MEM_User = #{membercode}
 	</select>
 	<update id="updateData" parameterType="MypageDto">
 	UPDATE USERS
-		   SET PASSWORD = #{pw}
+		   SET PASSWORD = #{password}
 		     , NAME = #{name}
 		     , BIRTH = #{birth}
 		     , phone = #{phone}

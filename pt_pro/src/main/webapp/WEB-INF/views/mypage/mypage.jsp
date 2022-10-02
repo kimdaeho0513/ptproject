@@ -46,26 +46,26 @@ input[type="date"]{
 <form name="form1" method="post" accept-charset="utf-8">
 <div class="md-4">
 	<label>아이디</label><br>
-	<input class="rounded form-control-lg" type="text" name="userid" value="${sessionScope.loginData.userid}" readonly><br>
+	<input class="rounded form-control-lg" type="text" name="userid" value="${data.userid}" readonly><br>
 	<label>비밀번호</label><br>
-	<input class="rounded form-control-lg" type="text" name="pw" value="${sessionScope.loginData.pw}"><br>
+	<input class="rounded form-control-lg" type="text" name="pw" value="${data.password}"><br>
 	<label>이름</label><br>
-	<input class="rounded form-control-lg" type="text" name="name" value="${sessionScope.loginData.name}"><br>
+	<input class="rounded form-control-lg" type="text" name="name" value="${data.name}"><br>
 	<label>생일</label><br>
-	<input class="rounded form-control-lg" type="date" name="birth" value="<fmt:formatDate value="${sessionScope.loginData.birth}" pattern="yyyy-MM-dd"/>"><br>
+	<input class="rounded form-control-lg" type="date" name="birth" value="<fmt:formatDate value="${data.birth}" pattern="yyyy-MM-dd"/>"><br>
 	<label>휴대폰 번호</label><br>
-	<input class="rounded form-control-lg" type="text" name="phone" value="${sessionScope.loginData.phone}"><br>
+	<input class="rounded form-control-lg" type="text" name="phone" value="${data.phone}"><br>
 	<label>이메일</label><br>
-	<input class="rounded form-control-lg" type="text" name="email" value="${sessionScope.loginData.email}"><br>
+	<input class="rounded form-control-lg" type="text" name="email" value="${data.email}"><br>
 	<label>성별</label><br>
-	<input class="rounded form-control-lg" type="text" name="gender" value="${sessionScope.loginData.gender}"><br><br>
-
-<%-- 	<label>pt 남은 횟수</label><br>
-	<input class="rounded form-control-lg" type="text" name="ptcount" value="${sessionScope.loginData.ptcount}" readonly><br> --%>
-	
-	<!-- <input class="btn btn-danger" style="float:right" type="submit" value="삭제" formaction="./delete">
-	<input class="btn btn-primary" style="float:right" type="submit" value="수정" formaction="./update"> -->
-	
+	<input class="rounded form-control-lg" type="text" name="gender" value="${data.gender}"><br>
+	<c:if test="${data.roles == 'M'}">
+		<label>담당 트레이너</label><br>
+		<input class="rounded form-control-lg" type="text" name="pttrnr" value="${ptdata.coachname}"><br>
+		<label>PT 남은 횟수</label><br>
+		<input class="rounded form-control-lg" type="text" name="ptcount" value="${ptdata.ptcount}"><br>
+	</c:if>
+	<br>
 	<input class="btn btn-danger" style="float:right" type="submit" value="탈퇴" id="btnDelete">
 	<input class="btn btn-warning" style="float:right" type="submit" value="수정" id="btnUpdate">
 </form>

@@ -14,14 +14,15 @@ public class MypageDAO {
 	
 	private String mapper = "mypageMapper.%s";
 	
-	public List<MypageDTO> selectAll() {
-		String mapperId = String.format(mapper, "selectAll");
-		List<MypageDTO> res = session.selectList(mapperId);
+
+	public MypageDTO selectData(int usercode) {
+		String mapperId = String.format(mapper, "selectData");
+		MypageDTO res = session.selectOne(mapperId, usercode);
 		return res;
 	}
-	public MypageDTO selectData() {
-		String mapperId = String.format(mapper, "selectData");
-		MypageDTO res = session.selectOne(mapperId);
+	public MypageDTO selectPtdata(int usercode) {
+		String mapperId = String.format(mapper, "selectPtdata");
+		MypageDTO res = session.selectOne(mapperId, usercode);
 		return res;
 	}
 	public boolean insertData(MypageDTO data) {
