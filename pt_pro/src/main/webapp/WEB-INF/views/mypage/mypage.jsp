@@ -61,9 +61,9 @@ input[type="date"]{
 	<input class="rounded form-control-lg" type="text" name="gender" value="${data.gender}"><br>
 	<c:if test="${data.roles == 'M'}">
 		<label>담당 트레이너</label><br>
-		<input class="rounded form-control-lg" type="text" name="pttrnr" value="${ptdata.coachname}"><br>
+		<input class="rounded form-control-lg" type="text" name="pttrnr" value="${ptdata.coachname}" readonly><br>
 		<label>PT 남은 횟수</label><br>
-		<input class="rounded form-control-lg" type="text" name="ptcount" value="${ptdata.ptcount}"><br>
+		<input class="rounded form-control-lg" type="text" name="ptcount" value="${ptdata.ptcount}" readonly><br>
 	</c:if>
 	<br>
 	<input class="btn btn-danger" style="float:right" type="submit" value="탈퇴" id="btnDelete">
